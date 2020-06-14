@@ -7,9 +7,19 @@ router.get('/', (req, res, nxt) =>{
     });
 });
 
+// Posting a new product
 router.post('/', (req, res, nxt) =>{
-    res.status(200).json({
-        message: 'post request'
+
+    // req (request) now has body attribute 
+    // because of body parser
+    const product = {
+        name: req.body.name,
+        price: req.body.price            
+    }; 
+
+    res.status(201).json({
+        message: 'post request',
+        product : product
     });
 });
 

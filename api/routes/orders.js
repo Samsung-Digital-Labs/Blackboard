@@ -8,8 +8,15 @@ router.get('/', (req, res, nxt) => {
 });
 
 router.post('/', (req, res, nxt) => {
+    // body attribute because of body-parser
+    const order = {
+        name: req.body.name,
+        price: req.body.quantity            
+    }; 
+
     res.status(201).json({
-        message: "Order Placed"
+        message: "Order Placed",
+        order: order
     });
 });
 
