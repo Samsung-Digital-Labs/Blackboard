@@ -4,6 +4,15 @@ const app = express();
 const bodyparser = require('body-parser');
 const productRoute = require ('./api/routes/products');
 const orderRoute = require ('./api/routes/orders')
+const mongoose = require ('mongoose');
+
+mongoose.connect(
+    'mongodb+srv://aadhar:NBhKqjWVJ1zn4Ajq@cluster0-uwdpi.mongodb.net/test?retryWrites=true&w=majority',
+    {
+        useMongoClient: true
+    }
+)
+
 
 // For logging requests to terminal using morgan
 // All incoming requests
@@ -12,6 +21,20 @@ app.use (morgan('dev'));
 // Parsing the requests
 app.use(bodyparser.urlencoded({extended: false}));
 app.use (bodyparser.json());
+
+// Handling cors error
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    if (req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+        return res.status(200).json({});
+    }
+    next();
+  });
 
 // Routes 
 app.use('/products', productRoute);
