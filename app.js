@@ -6,12 +6,7 @@ const productRoute = require ('./api/routes/products');
 const orderRoute = require ('./api/routes/orders')
 const mongoose = require ('mongoose');
 
-mongoose.connect(
-    'mongodb+srv://aadhar:NBhKqjWVJ1zn4Ajq@cluster0-uwdpi.mongodb.net/test?retryWrites=true&w=majority',
-    {
-        useMongoClient: true
-    }
-)
+mongoose.connect('mongodb+srv://aadhar:NBhKqjWVJ1zn4Ajq@cluster0-uwdpi.mongodb.net/test?retryWrites=true&w=majority')
 
 
 // For logging requests to terminal using morgan
