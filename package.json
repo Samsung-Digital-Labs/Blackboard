@@ -1,0 +1,22 @@
+{
+  "name": "restful-api",
+  "version": "1.0.0",
+  "description": "A nodeJS restful api project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AadharT/RESTful-API.git"
+  },
+  "author": "Aadhar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AadharT/RESTful-API/issues"
+  },
+  "homepage": "https://github.com/AadharT/RESTful-API#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
