@@ -7,7 +7,11 @@ const userRoute = require("./api/routes/users");
 const mongoose = require("mongoose");
 
 mongoose.connect(
-  "mongodb+srv://aadhar:NBhKqjWVJ1zn4Ajq@cluster0-uwdpi.mongodb.net/test?retryWrites=true&w=majority"
+  "mongodb+srv://aadhar:NBhKqjWVJ1zn4Ajq@cluster0-uwdpi.mongodb.net/test?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
 );
 
 // For logging requests to terminal using morgan
