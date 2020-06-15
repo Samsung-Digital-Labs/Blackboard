@@ -86,6 +86,10 @@ const Menu: React.FC<{ loadUser: any }> = (props) => {
     props.loadUser(false);
   };
 
+  if(location.pathname==='/' || location.pathname==='/login' || location.pathname==='/signup'){
+    return null;
+  }
+  
   return (
     <IonMenu contentId="main" type="overlay" color="dark">
       <IonContent color="dark">

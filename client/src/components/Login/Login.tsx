@@ -69,7 +69,7 @@ class Login extends Component<Props, State> {
     // console.log("user logged in",this.props.isUserLoggedIn);
 
     if (this.props.isUserLoggedIn) {
-      return <Redirect to="/page/classroom"></Redirect>;
+      return <Redirect to="/page/classrooms"></Redirect>;
     } else {
       return (
         <div className="ion-text-center">
