@@ -19,11 +19,9 @@ import { people, personAdd } from "ionicons/icons";
 
 import { connect } from "react-redux";
 
-
 const Welcome: React.FC<{ isUserLoggedIn: boolean; history: any }> = (
   props
 ) => {
-  
   if (props.isUserLoggedIn) {
     return <Redirect to="/pages/classroom"></Redirect>;
   }
@@ -31,7 +29,7 @@ const Welcome: React.FC<{ isUserLoggedIn: boolean; history: any }> = (
     <IonApp>
       <IonContent>
         <div className="ion-text-center">
-          <img src="./assets/logo.png" alt="not found"></img>
+            <img src = "./assets/logo.png" alt="not found"></img>
           <IonTitle>
             <h3>An all in one teaching solution</h3>
           </IonTitle>
