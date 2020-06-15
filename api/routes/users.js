@@ -13,7 +13,7 @@ router.post('/signup', (req, res, nxt) => {
     User.find({email: req.body.email})
     .exec()
     .then(user => {
-        if (user) {
+        if (user.length >= 1) {
             return res.status(409).json({error: "User Already Exists"})
         }
         else {
@@ -46,6 +46,18 @@ router.post('/signup', (req, res, nxt) => {
     })
     .catch(err => {
         res.status(500).json ({error: 'Problem connecting to server'})
+    });
+});
+
+router.delete('/:userID', (req, res, nxt) => {
+    User.remove({_id : req.param.userID})
+    .exec()
+    .then(result => {
+        res.status(200).json({message: "User Deleted"});
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
     });
 });
 
