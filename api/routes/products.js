@@ -19,7 +19,7 @@ router.post('/', (req, res, nxt) =>{
         name: req.body.name,
         price: req.body.price            
     }); 
-
+    // Save the product
     product.save();
 
     res.status(201).json({
@@ -30,6 +30,9 @@ router.post('/', (req, res, nxt) =>{
 
 router.get('/:ID', (req, res, nxt) =>{
     const id = req.params.ID; 
+    // Find the product in 
+    // database using the ID
+    // from the get request
     Product.findById(id)
     .exec()
     .then(doc => {
