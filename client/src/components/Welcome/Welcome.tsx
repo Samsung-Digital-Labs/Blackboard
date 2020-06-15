@@ -19,11 +19,13 @@ import { people, personAdd } from "ionicons/icons";
 
 import { connect } from "react-redux";
 
+
 const Welcome: React.FC<{ isUserLoggedIn: boolean; history: any }> = (
   props
 ) => {
+  
   if (props.isUserLoggedIn) {
-    return <Redirect to="/home"></Redirect>;
+    return <Redirect to="/pages/classroom"></Redirect>;
   }
   return (
     <IonApp>
