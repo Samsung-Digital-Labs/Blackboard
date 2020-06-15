@@ -12,6 +12,7 @@ import {
 
 import * as actions from "../../actions/actions";
 import { Redirect, Link } from "react-router-dom";
+import axios from "axios";
 
 interface Props {
   history: any;
@@ -40,15 +41,25 @@ class Login extends Component<Props, State> {
     };
 
     // api request
+    axios.post("/users/login", user).then(
+      (response) => {
+        this.props.loadUser(true);
+        // console.log(response);
+      },
+      (error) => {
+        window.alert("Wrong Credentials");
+        // console.log(error);
+      }
+    );
 
-    if (true) {
-      this.props.loadUser(true);
+    // if (true) {
+    //   this.props.loadUser(true);
 
-      // console.log(JSON.parse(JSON.stringify(this.props)))
-      // this.props.history.push("/home");
-    } else {
-      window.alert("wrong credentials!");
-    }
+    //   // console.log(JSON.parse(JSON.stringify(this.props)))
+    //   // this.props.history.push("/home");
+    // } else {
+    //   window.alert("wrong credentials!");
+    // }
   };
 
   render() {
@@ -58,7 +69,7 @@ class Login extends Component<Props, State> {
     // console.log("user logged in",this.props.isUserLoggedIn);
 
     if (this.props.isUserLoggedIn) {
-      return <Redirect to="/home"></Redirect>;
+      return <Redirect to="/page/classroom"></Redirect>;
     } else {
       return (
         <div className="ion-text-center">

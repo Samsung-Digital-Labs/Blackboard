@@ -12,6 +12,7 @@ import {
 import * as actions from "../../actions/actions";
 import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
+import axios from "axios"
 
 interface Props {
   history: any;
@@ -47,17 +48,26 @@ class Signup extends Component<Props, State> {
     // console.log("user is",user);
 
     // api request
-    if (true) {
+    axios.post('/users/signup', user)
+    .then((response) => {
+      // console.log(response);
       this.props.loadUser(true);
-    } else {
-      window.alert("error");
-    }
+    }, (error) => {
+      // console.log(error);
+      window.alert("Invalid email address");
+    });
+
+    // if (true) {
+    //   this.props.loadUser(true);
+    // } else {
+    //   window.alert("error");
+    // }
   };
 
   render() {
     // console.log("isUserLoggedIn",this.props.isUserLoggedIn);
     if (this.props.isUserLoggedIn) {
-      return <Redirect to="/home"></Redirect>;
+      return <Redirect to="/page/classroom"></Redirect>;
     } else {
       return (
         <div className="ion-text-center">
