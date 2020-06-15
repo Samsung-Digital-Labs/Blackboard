@@ -2,8 +2,11 @@ const express = require ('express');
 const morgan = require ('morgan');
 const app = express();
 const bodyparser = require('body-parser');
+
 const productRoute = require ('./api/routes/products');
-const orderRoute = require ('./api/routes/orders')
+const orderRoute = require ('./api/routes/orders');
+const userRoute = require ('./api/routes/users');
+
 const mongoose = require ('mongoose');
 
 mongoose.connect('mongodb+srv://aadhar:NBhKqjWVJ1zn4Ajq@cluster0-uwdpi.mongodb.net/test?retryWrites=true&w=majority')
@@ -32,6 +35,7 @@ app.use((req, res, next) => {
   });
 
 // Routes 
+app.use ('/users', userRoute);
 app.use('/products', productRoute);
 app.use ('/orders', orderRoute);
 
