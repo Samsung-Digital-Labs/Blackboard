@@ -2,6 +2,7 @@ const express = require ('express');
 const mongoose = require ('mongoose');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const User = require ('./../models/user');
 
@@ -66,8 +67,18 @@ router.post ('/login', (req, res, nxt) => {
                 });
             }
             if (result) {
+
+                const token = jwt.sign({
+                        email : user[0].email,
+                        userID: user[0]._id
+                    }, 
+                    "secretkey",
+                    {expiresIn: "1h"}
+                );
+                
                 return res.status(200).json ({
-                    message : "User logged in"
+                    message : "User logged in",
+                    token : token
                 });
             } else {
                 return res.status(401).json ({
