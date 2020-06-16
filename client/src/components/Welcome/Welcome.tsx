@@ -24,8 +24,8 @@ import './Welcome.css'
 const Welcome: React.FC<{ isUserLoggedIn: boolean; history: any }> = (
   props
 ) => {
-  if (props.isUserLoggedIn) {
-    return <Redirect to="/pages/classroom"></Redirect>;
+  if (localStorage.getItem('auth_token') !== null) {
+    return <Redirect to="/page/classrooms"></Redirect>;
   }
   return (
     <IonApp>

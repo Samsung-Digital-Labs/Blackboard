@@ -12,7 +12,7 @@ import {
 import * as actions from "../../actions/actions";
 import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 
 interface Props {
   history: any;
@@ -45,29 +45,32 @@ class Signup extends Component<Props, State> {
       email: this.state.email,
       password: this.state.password,
     };
-    // console.log("user is",user);
 
-    // api request
-    axios.post('/users/signup', user)
-    .then((response) => {
-      // console.log(response);
-      this.props.loadUser(true);
-    }, (error) => {
-      // console.log(error);
-      window.alert("Invalid email address");
-    });
-
-    // if (true) {
-    //   this.props.loadUser(true);
-    // } else {
-    //   window.alert("error");
-    // }
+    // API post request to create an account
+    axios.post("/users/signup", user).then(
+      (response) => {
+        // API request to login once the account is created
+        axios.post("/users/login", user).then(
+          (response: any) => {
+            // Store the JWT token in local storage
+            localStorage.setItem("auth_token", response.data.token);
+            this.props.loadUser(true);
+          },
+          (error) => {
+            window.alert("Wrong Credentials");
+          }
+        );
+      },
+      (error) => {
+        window.alert("Invalid email address");
+      }
+    );
   };
 
   render() {
     // console.log("isUserLoggedIn",this.props.isUserLoggedIn);
-    if (this.props.isUserLoggedIn) {
-      return <Redirect to="/page/classroom"></Redirect>;
+    if (localStorage.getItem("auth_token") !== null) {
+      return <Redirect to="/page/classrooms"></Redirect>;
     } else {
       return (
         <div className="ion-text-center">
