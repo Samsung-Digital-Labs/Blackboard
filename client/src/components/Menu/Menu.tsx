@@ -74,6 +74,12 @@ const appPages: AppPage[] = [
     iosIcon: handRightOutline,
     mdIcon: handRight,
   },
+  {
+    title: "Logout",
+    url: "/logout",
+    iosIcon: handRightOutline,
+    mdIcon: handRight,
+  }
 ];
 
 // Labels TODO
@@ -83,7 +89,8 @@ const Menu: React.FC<{ loadUser: any }> = (props) => {
   const location = useLocation();
 
   const logout = () => {
-    props.loadUser(false);
+    localStorage.removeItem('auth_token');
+    // props.loadUser(false);
   };
 
   if (
