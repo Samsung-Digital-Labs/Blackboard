@@ -55,6 +55,7 @@ class Signup extends Component<Props, State> {
             // Store the JWT token in local storage
             localStorage.setItem("auth_token", response.data.token);
             localStorage.setItem("user_email", response.data.email);
+            window.location.reload(false);
             // this.props.loadUser(true);
           },
           (error) => {
