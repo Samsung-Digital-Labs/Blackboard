@@ -22,6 +22,7 @@ router.post("/signup", (req, res, nxt) => {
           } else {
             const user = new User({
               _id: new mongoose.Types.ObjectId(),
+              name: req.body.name,
               email: req.body.email,
               password: hash,
             });
@@ -75,6 +76,7 @@ router.post("/login", (req, res, nxt) => {
 
           return res.status(200).json({
             message: "User logged in",
+            email: user[0].email,
             token: token,
           });
         } else {

@@ -45,6 +45,7 @@ class Login extends Component<Props, State> {
       (response: any) => {
         // Store the JWT token in local storage
         localStorage.setItem('auth_token', response.data.token);
+        localStorage.setItem('user_email', response.data.email);
         this.props.loadUser(true);
       },
       (error) => {

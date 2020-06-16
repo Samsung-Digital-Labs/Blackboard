@@ -80,10 +80,15 @@ const appPages: AppPage[] = [
 const labels = ["LABEL1", "LABEL2", "LABEL3", "LABEL4", "LABEL5", "Reminders"];
 
 const Menu: React.FC<{ loadUser: any }> = (props) => {
+ 
   const location = useLocation();
-
+  
+  // User email to display on menu
+  const user_email = localStorage.getItem('user_email');
+ 
   const logout = () => {
     localStorage.removeItem('auth_token');
+    localStorage.removeItem('user_email');
     window.location.reload(false);
   };
 
@@ -100,7 +105,7 @@ const Menu: React.FC<{ loadUser: any }> = (props) => {
       <IonContent color="dark">
         <IonList id="inbox-list" color="dark">
           <IonListHeader color="dark">BlackBoard</IonListHeader>
-          <IonNote color="dark">user@somewhere.com</IonNote>
+          <IonNote color="dark">{user_email}</IonNote>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
