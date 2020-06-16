@@ -61,7 +61,7 @@ const Welcome: React.FC<{ isUserLoggedIn: boolean; history: any }> = (
                 <Link to="/signup" className="noUnderline">
                   <IonButton
                     color="light"
-                    size="small"
+                    size="large"
                     expand="full"
                     fill="clear"
                   >
