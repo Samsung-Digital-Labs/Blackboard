@@ -6,19 +6,26 @@ import Welcome from "../Welcome/Welcome";
 import Page from "../../pages/Page";
 import Login from "../Login/Login";
 import Signup from "../Signup/Signup";
+import { IonReactRouter } from "@ionic/react-router";
+import { IonSplitPane, IonRouterOutlet } from "@ionic/react";
+import Menu from "../Menu/Menu";
+import PrivateRoute from "./PrivateRoute";
 
 const Routes: React.FC = () => {
   return (
-    
-    <Switch>
-      <Route path="/signup" component={Signup} exact />
-      <Route path="/login" component={Login} exact />
-      <Route path="/" component={Welcome} exact />
-      {/* <Route path="/logout" component={Welcome} exact /> */}
-
-      {/* <Redirect from="/logout" to="/" exact /> */}
-      <Route path="/page/:name" component={Page} exact />
-    </Switch>
+    <IonReactRouter>
+      <IonSplitPane contentId="main">
+        <Menu />
+        <IonRouterOutlet id="main">
+          <Switch>
+            <Route path="/" component={Welcome} exact />
+            <Route path="/signup" component={Signup} exact />
+            <Route path="/login" component={Login} exact />
+            <PrivateRoute path="/page/:name" component={Page} exact />
+          </Switch>
+        </IonRouterOutlet>
+      </IonSplitPane>
+    </IonReactRouter>
   );
 };
 

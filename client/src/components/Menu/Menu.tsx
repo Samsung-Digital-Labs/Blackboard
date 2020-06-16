@@ -11,7 +11,7 @@ import {
 } from "@ionic/react";
 
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import {
   bookmarkOutline,
   paperPlaneOutline,
@@ -74,13 +74,7 @@ const appPages: AppPage[] = [
     iosIcon: handRightOutline,
     mdIcon: handRight,
   },
-  {
-    title: "Logout",
-    url: "/logout",
-    iosIcon: handRightOutline,
-    mdIcon: handRight,
-  }
-];
+ ];
 
 // Labels TODO
 const labels = ["LABEL1", "LABEL2", "LABEL3", "LABEL4", "LABEL5", "Reminders"];
@@ -90,7 +84,7 @@ const Menu: React.FC<{ loadUser: any }> = (props) => {
 
   const logout = () => {
     localStorage.removeItem('auth_token');
-    // props.loadUser(false);
+    window.location.reload(false);
   };
 
   if (

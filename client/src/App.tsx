@@ -1,8 +1,5 @@
-import Menu from "./components/Menu/Menu";
 import React from "react";
-import { IonApp, IonRouterOutlet, IonSplitPane } from "@ionic/react";
-import { IonReactRouter } from "@ionic/react-router";
-
+import { IonApp } from "@ionic/react";
 import Routes from "./components/Routes/Routes";
 
 /* Core CSS required for Ionic components to work properly */
@@ -29,14 +26,7 @@ import "./App.css";
 const App: React.FC = () => {
   return (
     <IonApp>
-      <IonReactRouter>
-        <IonSplitPane contentId="main">
-          <Menu />
-          <IonRouterOutlet id="main">
-            <Routes />
-          </IonRouterOutlet>
-        </IonSplitPane>
-      </IonReactRouter>
+      <Routes />
     </IonApp>
   );
 };
