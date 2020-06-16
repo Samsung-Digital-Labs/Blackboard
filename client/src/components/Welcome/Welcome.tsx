@@ -19,6 +19,8 @@ import { people, personAdd } from "ionicons/icons";
 
 import { connect } from "react-redux";
 
+import './Welcome.css'
+
 const Welcome: React.FC<{ isUserLoggedIn: boolean; history: any }> = (
   props
 ) => {
@@ -29,9 +31,9 @@ const Welcome: React.FC<{ isUserLoggedIn: boolean; history: any }> = (
     <IonApp>
       <IonContent>
         <div className="ion-text-center">
-            <img src = "./assets/logo.png" alt="not found"></img>
+            <img className = "responsive" src = "./assets/logo.png" alt="not found"></img>
           <IonTitle>
-            <h3>An all in one teaching solution</h3>
+            <h3  className = "tagline">An all in one teaching solution</h3>
           </IonTitle>
         </div>
       </IonContent>
@@ -59,7 +61,7 @@ const Welcome: React.FC<{ isUserLoggedIn: boolean; history: any }> = (
                 <Link to="/signup" className="noUnderline">
                   <IonButton
                     color="light"
-                    size="large"
+                    size="small"
                     expand="full"
                     fill="clear"
                   >

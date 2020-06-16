@@ -1,0 +1,9 @@
+.responsive {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+  }
+
+  .tagline {
+      font-size: 4vw;
+  }
