@@ -3,7 +3,7 @@ const morgan = require("morgan");
 const app = express();
 const bodyparser = require("body-parser");
 const userRoute = require("./api/routes/users");
-
+const path = require ('path');
 const mongoose = require("mongoose");
 
 mongoose.connect(
@@ -35,6 +35,17 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production')
+{
+    app.use(express.static('client/build'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
+
 
 // Routes
 app.use("/users", userRoute);
