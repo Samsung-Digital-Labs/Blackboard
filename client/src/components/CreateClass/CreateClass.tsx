@@ -23,8 +23,16 @@ class CreateClass extends Component<Props,State>{
     }
 
     create=()=>{
+        const object={
+            className:this.state.className,
+            subject:this.state.subject,
+            description:this.state.description,
+            email:window.localStorage.getItem('user_email')
+        }
+        // console.log("object is",object);
 
         // api request
+
         if(true){
             // no error in creating class
             // redirect user

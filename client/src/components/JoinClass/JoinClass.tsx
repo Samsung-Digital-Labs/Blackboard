@@ -20,6 +20,12 @@ class JoinClass extends Component<Props,State>{
     }
 
     join=()=>{
+        const object={
+            email:window.localStorage.getItem('user_email'),
+            classID:this.state.classID
+        }
+        // console.log("object is",object);
+
         // api request
         
         if(true){
