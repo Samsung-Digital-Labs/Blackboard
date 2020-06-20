@@ -98,7 +98,7 @@ class Login extends Component<Props, State> {
           </IonButton>
           <br></br>
           <p>
-            Don't have an account? <Link to="/signup">Sign Up</Link>
+            Don't have an account? <Link to="/signup" className="noUnderline">Sign Up</Link>
           </p>
         </div>
       );

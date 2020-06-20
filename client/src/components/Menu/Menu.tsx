@@ -27,6 +27,8 @@ import {
   chatboxEllipses,
   chatboxEllipsesOutline,
   colorFill,
+  addCircle,
+  addCircleOutline,
 } from "ionicons/icons";
 import "./Menu.css";
 
@@ -52,9 +54,15 @@ const appPages: AppPage[] = [
   },
   {
     title: "Join",
-    url: "/page/join",
+    url: "/join",
     iosIcon: paperPlaneOutline,
     mdIcon: paperPlane,
+  },
+  {
+    title: "Create",
+    url: "/create",
+    iosIcon: addCircleOutline,
+    mdIcon: addCircle,
   },
   {
     title: "Assignments",
