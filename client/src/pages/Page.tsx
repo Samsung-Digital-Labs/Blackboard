@@ -29,7 +29,7 @@ const Page: React.FC = () => {
 
       {/* Contains the actual content */}
       <IonContent>
-        {/* Just for IOS support adding condense header*/}
+        {/* Just for IOS support adding condense header */}
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">{name}</IonTitle>

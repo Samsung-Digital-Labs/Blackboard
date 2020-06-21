@@ -1,5 +1,15 @@
 import React from "react";
 import "./ExploreContainer.css";
+// import { IonReactRouter } from "@ionic/react-router/dist/types/ReactRouter";
+// import { IonSplitPane, IonRouterOutlet } from "@ionic/react";
+// import { Switch, Route } from "react-router";
+import JoinClass from "../JoinClass/JoinClass"
+
+
+import { Route, Switch} from "react-router-dom";
+import { IonReactRouter } from "@ionic/react-router";
+import { IonSplitPane, IonRouterOutlet } from "@ionic/react";
+
 
 interface ContainerProps {
   name: string;
@@ -7,9 +17,16 @@ interface ContainerProps {
 
 const ExploreContainer: React.FC<ContainerProps> = ({ name }) => {
   return (
-    <div className="container">
-      <strong>{name}</strong>
-    </div>
+    <IonReactRouter>
+      <IonSplitPane contentId="main">
+        <IonRouterOutlet id="main">
+          <Switch>
+            <Route path = "/page/join" component = {JoinClass}></Route>
+            <Route path = "/page/create" ></Route>
+          </Switch>
+        </IonRouterOutlet>
+      </IonSplitPane>
+    </IonReactRouter>
   );
 };
 

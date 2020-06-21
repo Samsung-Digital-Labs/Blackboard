@@ -60,13 +60,13 @@ const appPages: AppPage[] = [
   },
   {
     title: "Join",
-    url: "/join",
+    url: "/page/join",
     iosIcon: paperPlaneOutline,
     mdIcon: paperPlane,
   },
   {
     title: "Create",
-    url: "/create",
+    url: "/page/create",
     iosIcon: addCircleOutline,
     mdIcon: addCircle,
   },
