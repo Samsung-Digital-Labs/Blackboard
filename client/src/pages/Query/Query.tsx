@@ -1,99 +1,74 @@
 import React, { Component } from 'react';
-import { IonItem, IonLabel, IonInput, IonTextarea, IonGrid, IonCol, IonRow, IonButton } from '@ionic/react';
+import { IonItem, IonLabel, IonInput, IonGrid, IonCol, IonRow, IonButton } from '@ionic/react';
 import { Link } from 'react-router-dom';
+
+interface State{
+    classID:string
+};
 
 interface Props{
     history:any
 };
 
-interface State{
-    className:string,
-    subject:string,
-    description:string
-}
-
-class CreateClass extends Component<Props,State>{
-    constructor(props:Props){
+class Query extends Component<Props,State>{
+    constructor(props:Props)
+    {
         super(props);
         this.state={
-            className:'',
-            subject:'',
-            description:''
+            classID:''
         }
     }
 
-    create=()=>{
+    join=()=>{
         const object={
-            className:this.state.className,
-            subject:this.state.subject,
-            description:this.state.description,
-            email:window.localStorage.getItem('user_email')
+            email:window.localStorage.getItem('user_email'),
+            classID:this.state.classID
         }
         // console.log("object is",object);
 
         // api request
-
+        
         if(true){
-            // no error in creating class
+            // no error in joining class
             // redirect user
             this.props.history.push("/page/classrooms");
         }
         else{
-            // error in creating class
-            window.alert("error in creating class");
+            // error in joining class
+            window.alert("error joining class");
         }
     }
 
-    render(){
-        // console.log("className is "+this.state.className);
-        // console.log("subject is "+this.state.subject);
-        // console.log("description is "+this.state.description);
 
+    render(){
+        // console.log("classID is "+this.state.classID);
         return(
             <div className="ion-text-center">
-                <h1>Create Class</h1>
+                <h1>Join Class</h1>
                 <br></br>
                 <IonGrid>
                     <IonRow className="ion-justify-content-center">
                         <IonCol sizeXs="12" sizeMd="6">
                             <IonItem>
-                                <IonLabel position="floating">Class Name</IonLabel>
-                                <IonInput onIonChange={(e) => { this.setState({className:e.detail.value!}) }}></IonInput>
-                            </IonItem>
-                        </IonCol>
-                    </IonRow>
-                    <br></br>
-                    <IonRow className="ion-justify-content-center">
-                        <IonCol sizeXs="12" sizeMd="6">
-                            <IonItem>
-                                <IonLabel position="floating">Subject</IonLabel>
-                                <IonInput onIonChange={(e) => { this.setState({subject:e.detail.value!}) }}></IonInput>
-                            </IonItem>
-                        </IonCol>
-                    </IonRow>
-                    <br></br>
-                    <IonRow className="ion-justify-content-center">
-                        <IonCol sizeXs="12" sizeMd="6">
-                            <IonItem>
-                                <IonTextarea placeholder="Enter class Description" onIonChange={(e) => { this.setState({description:e.detail.value!}) }}></IonTextarea>
+                                <IonLabel position="floating">Class ID</IonLabel>
+                                <IonInput value={this.state.classID} onIonChange={(e) => {this.setState({classID:e.detail.value!})} }> </IonInput>
                             </IonItem>
                         </IonCol>
                     </IonRow>
                     <br></br>
                     <IonRow className="ion-justify-content-center">
                         <IonCol sizeXs="12" sizeMd="3">
-                            <IonButton size="large" expand="full" onClick={this.create}>
-                                Create
+                            <IonButton size="large" expand="full" onClick={this.join}>
+                                Join
                             </IonButton>
                         </IonCol>
                     </IonRow>
                 </IonGrid>
-                
                 <br></br>
-                <p>Want to join an existing class? <Link to="/join" className="noUnderline">Join Here</Link></p>
+                <p>Want to create a new class? <Link to="/create" className="noUnderline">Create Here</Link></p>
             </div>
         );
     }
 }
 
-export default CreateClass;
+export default Query;

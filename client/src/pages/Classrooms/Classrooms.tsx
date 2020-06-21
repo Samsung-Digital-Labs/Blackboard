@@ -12,7 +12,7 @@ interface State{
     description:string
 }
 
-class CreateClass extends Component<Props,State>{
+class Classrooms extends Component<Props,State>{
     constructor(props:Props){
         super(props);
         this.state={
@@ -51,49 +51,10 @@ class CreateClass extends Component<Props,State>{
 
         return(
             <div className="ion-text-center">
-                <h1>Create Class</h1>
-                <br></br>
-                <IonGrid>
-                    <IonRow className="ion-justify-content-center">
-                        <IonCol sizeXs="12" sizeMd="6">
-                            <IonItem>
-                                <IonLabel position="floating">Class Name</IonLabel>
-                                <IonInput onIonChange={(e) => { this.setState({className:e.detail.value!}) }}></IonInput>
-                            </IonItem>
-                        </IonCol>
-                    </IonRow>
-                    <br></br>
-                    <IonRow className="ion-justify-content-center">
-                        <IonCol sizeXs="12" sizeMd="6">
-                            <IonItem>
-                                <IonLabel position="floating">Subject</IonLabel>
-                                <IonInput onIonChange={(e) => { this.setState({subject:e.detail.value!}) }}></IonInput>
-                            </IonItem>
-                        </IonCol>
-                    </IonRow>
-                    <br></br>
-                    <IonRow className="ion-justify-content-center">
-                        <IonCol sizeXs="12" sizeMd="6">
-                            <IonItem>
-                                <IonTextarea placeholder="Enter class Description" onIonChange={(e) => { this.setState({description:e.detail.value!}) }}></IonTextarea>
-                            </IonItem>
-                        </IonCol>
-                    </IonRow>
-                    <br></br>
-                    <IonRow className="ion-justify-content-center">
-                        <IonCol sizeXs="12" sizeMd="3">
-                            <IonButton size="large" expand="full" onClick={this.create}>
-                                Create
-                            </IonButton>
-                        </IonCol>
-                    </IonRow>
-                </IonGrid>
-                
-                <br></br>
-                <p>Want to join an existing class? <Link to="/join" className="noUnderline">Join Here</Link></p>
+                Here we will have class rooms
             </div>
         );
     }
 }
 
-export default CreateClass;
+export default Classrooms;
