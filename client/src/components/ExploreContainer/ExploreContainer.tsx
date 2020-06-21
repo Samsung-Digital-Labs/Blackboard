@@ -9,6 +9,7 @@ import JoinClass from "../JoinClass/JoinClass"
 import { Route, Switch} from "react-router-dom";
 import { IonReactRouter } from "@ionic/react-router";
 import { IonSplitPane, IonRouterOutlet } from "@ionic/react";
+import CreateClass from "../CreateClass/CreateClass";
 
 
 interface ContainerProps {
@@ -22,7 +23,7 @@ const ExploreContainer: React.FC<ContainerProps> = ({ name }) => {
         <IonRouterOutlet id="main">
           <Switch>
             <Route path = "/page/join" component = {JoinClass}></Route>
-            <Route path = "/page/create" ></Route>
+            <Route path = "/page/create" component = {CreateClass} ></Route>
           </Switch>
         </IonRouterOutlet>
       </IonSplitPane>

@@ -106,7 +106,7 @@ class Login extends Component<Props, State> {
 }
 const mapStateToProps = (state: any) => {
   return {
-    isUserLoggedIn: state.loadUserReducer.isUserLoggedIn,
+    isUserLoggedIn: state.userReducer.isUserLoggedIn,
   };
 };
 
