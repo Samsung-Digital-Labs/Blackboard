@@ -156,7 +156,7 @@ class Signup extends Component<Props, State> {
 
 const mapStateToProps = (state: any) => {
   return {
-    isUserLoggedIn: state.loadUserReducer.isUserLoggedIn,
+    isUserLoggedIn: state.userReducer.isUserLoggedIn,
   };
 };
 
