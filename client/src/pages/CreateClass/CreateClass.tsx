@@ -90,7 +90,7 @@ class CreateClass extends Component<Props,State>{
                 </IonGrid>
                 
                 <br></br>
-                <p>Want to join an existing class? <Link to="/join" className="noUnderline">Join Here</Link></p>
+                <p>Want to join an existing class? <Link to="/page/join" className="noUnderline">Join Here</Link></p>
             </div>
         );
     }

@@ -65,7 +65,7 @@ class JoinClass extends Component<Props,State>{
                     </IonRow>
                 </IonGrid>
                 <br></br>
-                <p>Want to create a new class? <Link to="/create" className="noUnderline">Create Here</Link></p>
+                <p>Want to create a new class? <Link to="/page/create" className="noUnderline">Create Here</Link></p>
             </div>
         );
     }
