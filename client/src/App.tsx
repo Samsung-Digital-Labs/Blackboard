@@ -1,5 +1,5 @@
 import React from "react";
-import { IonApp } from "@ionic/react";
+import { IonApp, IonSplitPane, IonRouterOutlet } from "@ionic/react";
 import Routes from "./components/Routes/Routes";
 
 /* Core CSS required for Ionic components to work properly */
@@ -22,17 +22,44 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 
 import "./App.css";
+// Redux imports
+import { connect } from "react-redux";
+import {
+  loadUser,
+  setName,
+  toggleDarkMode,
+} from "./data/users/actions/actions";
 
-const App: React.FC = () => {
+const App: React.FC<{
+  user: any;
+}> = (props) => {
+  // const App: React.FC<{ user: any }> = (props) => {
   return (
-    <IonApp
-      className={`${
-        localStorage.getItem("dark_mode") === "yes" ? "dark-theme" : ""
-      }`}
-    >
+    <IonApp className={`${props.user.darkMode ? "dark-theme" : ""}`}>
       <Routes />
     </IonApp>
   );
 };
 
-export default App;
+const mapStateToProps = (state: any) => {
+  return {
+    user: state.userReducer,
+  };
+};
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    loadUser: (isUserLoggedIn: boolean) => {
+      dispatch(loadUser(isUserLoggedIn));
+    },
+    setName: (name: string) => {
+      dispatch(setName(name));
+    },
+    toggleDarkMode: (darkMode: boolean) => {
+      dispatch(toggleDarkMode(darkMode));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+// export default App;

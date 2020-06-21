@@ -34,13 +34,13 @@ import {
 import "./Menu.css";
 
 // Redux imports
-import { connect, ConnectedProps } from "react-redux";
+import { connect } from "react-redux";
 import {
   loadUser,
   setName,
   toggleDarkMode,
 } from "../../data/users/actions/actions";
-import userReducer from "../../data/users/reducers/userReducer"
+
 // Abstract class/interface for
 // information about each page
 interface AppPage {
@@ -122,7 +122,7 @@ const Menu: React.FC<{
       <IonContent>  
         <IonList id="inbox-list">
           <IonListHeader>BlackBoard</IonListHeader>
-          <IonNote>user_email</IonNote>
+          <IonNote>{props.user.name}</IonNote>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
