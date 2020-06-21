@@ -34,13 +34,13 @@ import {
 import "./Menu.css";
 
 // Redux imports
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import {
   loadUser,
   setName,
   toggleDarkMode,
 } from "../../data/users/actions/actions";
-
+import userReducer from "../../data/users/reducers/userReducer"
 // Abstract class/interface for
 // information about each page
 interface AppPage {
@@ -94,10 +94,9 @@ const appPages: AppPage[] = [
 const labels = ["LABEL1", "LABEL2", "LABEL3", "LABEL4", "LABEL5", "Reminders"];
 
 const Menu: React.FC<{
-  loadUser: any;
-  user: any;
-  darkMode: any;
-  toggleDarkMode: any;
+  loadUser: any,
+  user: any,
+  toggleDarkMode: any
 }> = (props) => {
   const location = useLocation();
 
@@ -120,10 +119,10 @@ const Menu: React.FC<{
 
   return (
     <IonMenu contentId="main" type="overlay">
-      <IonContent>
+      <IonContent>  
         <IonList id="inbox-list">
           <IonListHeader>BlackBoard</IonListHeader>
-          <IonNote>{props.user}</IonNote>
+          <IonNote>user_email</IonNote>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
@@ -157,8 +156,8 @@ const Menu: React.FC<{
             <IonIcon slot="start" icon={moonOutline}></IonIcon>
             <IonLabel>Dark Mode</IonLabel>
             <IonToggle
-              checked={props.darkMode}
-              onClick={() => props.toggleDarkMode(props.darkMode)}
+              checked={props.user.darkMode}
+              onClick={() => props.toggleDarkMode(!props.user.darkMode)}
             />
           </IonItem>
         </IonList>
@@ -177,10 +176,10 @@ const Menu: React.FC<{
   );
 };
 
+
 const mapStateToProps = (state: any) => {
   return {
     user: state.userReducer,
-    darkMode: state.darkMode,
   };
 };
 
@@ -192,8 +191,8 @@ const mapDispatchToProps = (dispatch: any) => {
     setName: (name: string) => {
       dispatch(setName(name));
     },
-    toggleDarkMode: (DarkMode: boolean) => {
-      dispatch(toggleDarkMode(DarkMode));
+    toggleDarkMode: (darkMode: boolean) => {
+      dispatch(toggleDarkMode(darkMode));
     },
   };
 };

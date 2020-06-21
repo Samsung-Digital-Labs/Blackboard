@@ -80,7 +80,7 @@ const Welcome: React.FC<{ isUserLoggedIn: boolean; history: any }> = (
 
 const mapStateToProps = (state: any) => {
   return {
-    isUserLoggedIn: state.loadUserReducer.isUserLoggedIn,
+    isUserLoggedIn: state.userReducer.isUserLoggedIn,
   };
 };
 

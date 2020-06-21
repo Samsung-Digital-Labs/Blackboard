@@ -10,7 +10,7 @@ import {
   IonCol,
 } from "@ionic/react";
 
-import * as actions from "../../actions/actions";
+import * as actions from "../../data/users/actions/actions";
 import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
 

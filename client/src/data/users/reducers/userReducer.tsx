@@ -1,6 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
 
-const loadUserReducer = (
+const userReducer = (
   state = {
     userName: "",
     darkMode: false,
@@ -29,4 +29,4 @@ const loadUserReducer = (
   }
 };
 
-export default loadUserReducer;
+export default userReducer;

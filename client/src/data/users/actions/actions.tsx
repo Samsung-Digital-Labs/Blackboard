@@ -18,11 +18,11 @@ export function setName(name: string) {
   };
 }
 
-export function toggleDarkMode(DarkMode: boolean) {
+export function toggleDarkMode(darkMode: boolean) {
   return {
     type: actionTypes.DARK_MODE,
     payload: {
-      DarkMode: DarkMode,
+      darkMode: darkMode,
     },
   };
 }
