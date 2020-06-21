@@ -19,7 +19,7 @@ const Page: React.FC = () => {
     <IonPage>
       {/* Header and menu button */}
       <IonHeader>
-        <IonToolbar color="dark">
+        <IonToolbar>
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>

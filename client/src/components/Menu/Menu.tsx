@@ -11,7 +11,7 @@ import {
 } from "@ionic/react";
 
 import React from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   bookmarkOutline,
   paperPlaneOutline,
@@ -82,21 +82,20 @@ const appPages: AppPage[] = [
     iosIcon: handRightOutline,
     mdIcon: handRight,
   },
- ];
+];
 
 // Labels TODO
 const labels = ["LABEL1", "LABEL2", "LABEL3", "LABEL4", "LABEL5", "Reminders"];
 
 const Menu: React.FC<{ loadUser: any }> = (props) => {
- 
   const location = useLocation();
-  
+
   // User email to display on menu
-  const user_email = localStorage.getItem('user_email');
- 
+  const user_email = localStorage.getItem("user_email");
+
   const logout = () => {
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('user_email');
+    localStorage.removeItem("auth_token");
+    localStorage.removeItem("user_email");
     window.location.reload(false);
   };
 
@@ -109,16 +108,16 @@ const Menu: React.FC<{ loadUser: any }> = (props) => {
   }
 
   return (
-    <IonMenu contentId="main" type="overlay" color="dark">
-      <IonContent color="dark">
-        <IonList id="inbox-list" color="dark">
-          <IonListHeader color="dark">BlackBoard</IonListHeader>
-          <IonNote color="dark">{user_email}</IonNote>
+    <IonMenu contentId="main" type="overlay">
+      <IonContent>
+        <IonList id="inbox-list">
+          <IonListHeader>BlackBoard</IonListHeader>
+          <IonNote>{user_email}</IonNote>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
                 <IonItem
-                  color="dark"
+                  
                   className={
                     location.pathname === appPage.url ? "selected" : ""
                   }
@@ -139,7 +138,7 @@ const Menu: React.FC<{ loadUser: any }> = (props) => {
           })}
 
           <IonMenuToggle autoHide={false}>
-            <IonItem color="dark" className="pointer" onClick={logout}>
+            <IonItem className="pointer" onClick={logout}>
               <IonIcon slot="start" ios={logOutOutline} md={logOut} />
               <IonLabel>Logout</IonLabel>
             </IonItem>
@@ -147,9 +146,9 @@ const Menu: React.FC<{ loadUser: any }> = (props) => {
         </IonList>
 
         <IonList id="labels-list">
-          <IonListHeader color="dark">Labels</IonListHeader>
+          <IonListHeader>Labels</IonListHeader>
           {labels.map((label, index) => (
-            <IonItem color="dark" lines="none" key={index}>
+            <IonItem lines="none" key={index}>
               <IonIcon slot="start" icon={bookmarkOutline} />
               <IonLabel>{label}</IonLabel>
             </IonItem>
