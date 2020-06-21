@@ -25,7 +25,11 @@ import "./App.css";
 
 const App: React.FC = () => {
   return (
-    <IonApp  className={`${darkMode ? 'dark-theme' : ''}`}>
+    <IonApp
+      className={`${
+        localStorage.getItem("dark_mode") === "yes" ? "dark-theme" : ""
+      }`}
+    >
       <Routes />
     </IonApp>
   );

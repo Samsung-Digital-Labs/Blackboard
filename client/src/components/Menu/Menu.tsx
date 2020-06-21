@@ -8,6 +8,7 @@ import {
   IonMenu,
   IonMenuToggle,
   IonNote,
+  IonToggle,
 } from "@ionic/react";
 
 import React from "react";
@@ -26,14 +27,19 @@ import {
   paperPlane,
   chatboxEllipses,
   chatboxEllipsesOutline,
-  colorFill,
   addCircle,
   addCircleOutline,
+  moonOutline,
 } from "ionicons/icons";
 import "./Menu.css";
 
+// Redux imports
 import { connect } from "react-redux";
-import * as actions from "../../actions/actions";
+import {
+  loadUser,
+  setName,
+  toggleDarkMode,
+} from "../../data/users/actions/actions";
 
 // Abstract class/interface for
 // information about each page
@@ -87,7 +93,12 @@ const appPages: AppPage[] = [
 // Labels TODO
 const labels = ["LABEL1", "LABEL2", "LABEL3", "LABEL4", "LABEL5", "Reminders"];
 
-const Menu: React.FC<{ loadUser: any }> = (props) => {
+const Menu: React.FC<{
+  loadUser: any;
+  user: any;
+  darkMode: any;
+  toggleDarkMode: any;
+}> = (props) => {
   const location = useLocation();
 
   // User email to display on menu
@@ -112,12 +123,11 @@ const Menu: React.FC<{ loadUser: any }> = (props) => {
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>BlackBoard</IonListHeader>
-          <IonNote>{user_email}</IonNote>
+          <IonNote>{props.user}</IonNote>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
                 <IonItem
-                  
                   className={
                     location.pathname === appPage.url ? "selected" : ""
                   }
@@ -143,6 +153,14 @@ const Menu: React.FC<{ loadUser: any }> = (props) => {
               <IonLabel>Logout</IonLabel>
             </IonItem>
           </IonMenuToggle>
+          <IonItem>
+            <IonIcon slot="start" icon={moonOutline}></IonIcon>
+            <IonLabel>Dark Mode</IonLabel>
+            <IonToggle
+              checked={props.darkMode}
+              onClick={() => props.toggleDarkMode(props.darkMode)}
+            />
+          </IonItem>
         </IonList>
 
         <IonList id="labels-list">
@@ -159,12 +177,25 @@ const Menu: React.FC<{ loadUser: any }> = (props) => {
   );
 };
 
+const mapStateToProps = (state: any) => {
+  return {
+    user: state.userReducer,
+    darkMode: state.darkMode,
+  };
+};
+
 const mapDispatchToProps = (dispatch: any) => {
   return {
     loadUser: (isUserLoggedIn: boolean) => {
-      dispatch(actions.loadUser(isUserLoggedIn));
+      dispatch(loadUser(isUserLoggedIn));
+    },
+    setName: (name: string) => {
+      dispatch(setName(name));
+    },
+    toggleDarkMode: (DarkMode: boolean) => {
+      dispatch(toggleDarkMode(DarkMode));
     },
   };
 };
 
-export default connect(null, mapDispatchToProps)(Menu);
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);
