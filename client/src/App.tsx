@@ -25,7 +25,7 @@ import "./App.css";
 
 const App: React.FC = () => {
   return (
-    <IonApp>
+    <IonApp className = "dark-theme">
       <Routes />
     </IonApp>
   );

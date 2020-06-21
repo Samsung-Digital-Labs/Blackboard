@@ -39,7 +39,6 @@ class Login extends Component<Props, State> {
       email: this.state.email,
       password: this.state.password,
     };
-
     // API request
     axios.post("/users/login", user).then(
       (response: any) => {
