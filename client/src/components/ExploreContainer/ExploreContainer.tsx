@@ -22,8 +22,11 @@ const ExploreContainer: React.FC<ContainerProps> = ({ name }) => {
       <IonSplitPane contentId="main">
         <IonRouterOutlet id="main">
           <Switch>
-            <Route path = "/page/join" component = {JoinClass}></Route>
-            <Route path = "/page/create" component = {CreateClass} ></Route>
+            <Route path = "/page/join" component = {JoinClass} exact></Route>
+            <Route path = "/page/create" component = {CreateClass} exact></Route>
+            <Route path = "/page/classrooms" component = {Classroom} exact></Route>
+            <Route path = "/page/assignments" component = {Assignments} exact></Route>
+            <Route path = "/page/query" component = {Query} exact></Route>
           </Switch>
         </IonRouterOutlet>
       </IonSplitPane>
