@@ -17,6 +17,7 @@ import {
 import ClassroomItem from "./ClassroomItem";
 import "./Classrooms.scss";
 import React, { Component, FC, useState, useRef } from "react";
+import ClassroomFab from "./ClassroomFab";
 
 var classrooms = [
   {
@@ -296,6 +297,8 @@ const Classrooms: React.FC = () => {
           </IonRow>
         </IonGrid>
       )}
+
+      <ClassroomFab />
     </IonContent>
   );
 };
