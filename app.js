@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const app = express();
 const bodyparser = require("body-parser");
 const userRoute = require("./api/routes/users");
+const classroomRoutes = require("./api/routes/classrooms");
 
 const mongoose = require("mongoose");
 
@@ -38,6 +39,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use("/users", userRoute);
+app.use("/classrooms", classroomRoutes);
 
 // If request did not match any API
 app.use((req, res, nxt) => {
