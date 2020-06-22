@@ -8,8 +8,11 @@ import {
   IonGrid,
   IonRow,
   IonCol,
+  IonPage,
+  IonContent,
 } from "@ionic/react";
 
+import "./login.scss";
 import * as actions from "../../data/users/actions/actions";
 import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
@@ -34,17 +37,20 @@ class Login extends Component<Props, State> {
     };
   }
 
-  login = () => {
+  login = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     const user = {
       email: this.state.email,
       password: this.state.password,
     };
+
     // API request
     axios.post("/users/login", user).then(
       (response: any) => {
         // Store the JWT token in local storage
-        localStorage.setItem('auth_token', response.data.token);
-        localStorage.setItem('user_email', response.data.email);
+        localStorage.setItem("auth_token", response.data.token);
+        localStorage.setItem("user_email", response.data.email);
         this.props.loadUser(true);
       },
       (error) => {
@@ -58,48 +64,56 @@ class Login extends Component<Props, State> {
       return <Redirect to="/page/classrooms"></Redirect>;
     } else {
       return (
-        <div className="ion-text-center">
-          <h1>Login</h1>
-          <br></br>
-          <IonGrid>
-            <IonRow>
-              <IonCol size="12">
-                <IonItem>
-                  <IonLabel position="floating">Email</IonLabel>
-                  <IonInput
-                    type="email"
-                    value={this.state.email}
-                    onIonChange={(e) => {
-                      this.setState({ email: e.detail.value! });
-                    }}
-                  ></IonInput>
-                </IonItem>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <IonCol size="12">
-                <IonItem>
-                  <IonLabel position="floating">Password</IonLabel>
-                  <IonInput
-                    type="password"
-                    value={this.state.password}
-                    onIonChange={(e) => {
-                      this.setState({ password: e.detail.value! });
-                    }}
-                  ></IonInput>
-                </IonItem>
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-          <br></br>
-          <IonButton size="large" expand="full" onClick={this.login}>
-            Login
-          </IonButton>
-          <br></br>
-          <p>
-            Don't have an account? <Link to="/signup" className="noUnderline">Sign Up</Link>
-          </p>
-        </div>
+        <IonPage>
+          <IonContent>
+            <div className="ion-text-center">
+              <div className="login-logo">
+                <img src="assets/img/logo.png" alt="Blackboard logo" />
+              </div>
+              {/* <h1>Login</h1>
+          <br></br> */}
+              <IonGrid>
+                <IonRow>
+                  <IonCol size="12">
+                    <IonItem>
+                      <IonLabel position="floating">Email</IonLabel>
+                      <IonInput
+                        type="email"
+                        value={this.state.email}
+                        onIonChange={(e) => {
+                          this.setState({ email: e.detail.value! });
+                        }}
+                      ></IonInput>
+                    </IonItem>
+                  </IonCol>
+                </IonRow>
+                <IonRow>
+                  <IonCol size="12">
+                    <IonItem>
+                      <IonLabel position="floating">Password</IonLabel>
+                      <IonInput
+                        type="password"
+                        value={this.state.password}
+                        onIonChange={(e) => {
+                          this.setState({ password: e.detail.value! });
+                        }}
+                      ></IonInput>
+                    </IonItem>
+                  </IonCol>
+                </IonRow>
+              </IonGrid>
+              <IonButton expand="block" onClick={this.login}>
+                Login
+              </IonButton>
+              <p>
+                Don't have an account?{" "}
+                <Link to="/signup" className="noUnderline">
+                  Sign Up
+                </Link>
+              </p>
+            </div>
+          </IonContent>
+        </IonPage>
       );
     }
   }

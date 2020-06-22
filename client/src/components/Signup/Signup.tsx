@@ -8,6 +8,8 @@ import {
   IonGrid,
   IonRow,
   IonCol,
+  IonPage,
+  IonContent,
 } from "@ionic/react";
 import * as actions from "../../data/users/actions/actions";
 import { Redirect } from "react-router";
@@ -75,80 +77,83 @@ class Signup extends Component<Props, State> {
       return <Redirect to="/page/classrooms"></Redirect>;
     } else {
       return (
-        <div className="ion-text-center">
-          <h1>Sign Up</h1>
-          <br></br>
-          <IonGrid>
-            <IonRow>
-              <IonCol sizeSm="6" sizeXs="12">
-                <IonItem>
-                  <IonLabel position="floating">First Name</IonLabel>
-                  <IonInput
-                    value={this.state.firstName}
-                    onIonChange={(e) => {
-                      this.setState({ firstName: e.detail.value! });
-                    }}
-                  ></IonInput>
-                </IonItem>
-              </IonCol>
-              <IonCol sizeSm="6" sizeXs="12">
-                <IonItem>
-                  <IonLabel position="floating">Last Name</IonLabel>
-                  <IonInput
-                    value={this.state.lastName}
-                    onIonChange={(e) => {
-                      this.setState({ lastName: e.detail.value! });
-                    }}
-                  ></IonInput>
-                </IonItem>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <IonCol>
-                <IonItem>
-                  <IonLabel position="floating">Email</IonLabel>
-                  <IonInput
-                    type="email"
-                    value={this.state.email}
-                    onIonChange={(e) => {
-                      this.setState({ email: e.detail.value! });
-                    }}
-                  ></IonInput>
-                </IonItem>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <IonCol>
-                <IonItem>
-                  <IonLabel position="floating">Password</IonLabel>
-                  <IonInput
-                    type="password"
-                    value={this.state.password}
-                    onIonChange={(e) => {
-                      this.setState({ password: e.detail.value! });
-                    }}
-                  ></IonInput>
-                </IonItem>
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-          <br></br>
-          <IonButton
-            color="dark"
-            expand="full"
-            size="large"
-            onClick={this.signup}
-          >
-            Sign Up
-          </IonButton>
-          <br></br>
-          <p>
-            Already have an account?{" "}
-            <Link to="/login" className="noUnderline">
-              Login
-            </Link>
-          </p>
-        </div>
+        <IonPage>
+          <IonContent>
+            <div className="ion-text-center">
+              <h1>Sign up for free today!</h1>
+              <br></br>
+              <IonGrid>
+                <IonRow>
+                  <IonCol sizeSm="6" sizeXs="12">
+                    <IonItem>
+                      <IonLabel position="floating">First Name</IonLabel>
+                      <IonInput
+                        value={this.state.firstName}
+                        onIonChange={(e) => {
+                          this.setState({ firstName: e.detail.value! });
+                        }}
+                      ></IonInput>
+                    </IonItem>
+                  </IonCol>
+                  <IonCol sizeSm="6" sizeXs="12">
+                    <IonItem>
+                      <IonLabel position="floating">Last Name</IonLabel>
+                      <IonInput
+                        value={this.state.lastName}
+                        onIonChange={(e) => {
+                          this.setState({ lastName: e.detail.value! });
+                        }}
+                      ></IonInput>
+                    </IonItem>
+                  </IonCol>
+                </IonRow>
+                <IonRow>
+                  <IonCol>
+                    <IonItem>
+                      <IonLabel position="floating">Email</IonLabel>
+                      <IonInput
+                        type="email"
+                        value={this.state.email}
+                        onIonChange={(e) => {
+                          this.setState({ email: e.detail.value! });
+                        }}
+                      ></IonInput>
+                    </IonItem>
+                  </IonCol>
+                </IonRow>
+                <IonRow>
+                  <IonCol>
+                    <IonItem>
+                      <IonLabel position="floating">Password</IonLabel>
+                      <IonInput
+                        type="password"
+                        value={this.state.password}
+                        onIonChange={(e) => {
+                          this.setState({ password: e.detail.value! });
+                        }}
+                      ></IonInput>
+                    </IonItem>
+                  </IonCol>
+                </IonRow>
+              </IonGrid>
+              <br></br>
+              <IonButton
+                expand="block"
+                fill = "outline"
+                onClick={this.signup}
+              >
+                Sign Up
+              </IonButton>
+              <br></br>
+              <p>
+                Already have an account?{" "}
+                <Link to="/login" className="noUnderline">
+                  Login
+                </Link>
+              </p>
+            </div>
+          </IonContent>
+        </IonPage>
       );
     }
   }
