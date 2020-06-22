@@ -3,18 +3,22 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonPage,
-  IonButtons,
-  IonMenuButton,
   IonGrid,
   IonRow,
   IonCol,
+  IonSegment,
+  IonSegmentButton,
+  IonIcon,
+  IonLabel,
+  IonRefresher,
+  IonRefresherContent,
+  IonToast,
 } from "@ionic/react";
 import ClassroomItem from "./ClassroomItem";
 import "./Classrooms.scss";
-import React, { Component } from "react";
+import React, { Component, FC, useState, useRef } from "react";
 
-const classrooms = [
+var classrooms = [
   {
     name: "Burt Bear",
     profilePic: "/assets/img/speakers/bear.jpg",
@@ -184,32 +188,116 @@ const classrooms = [
     id: "13",
   },
 ];
-class Classrooms extends Component {
-  render() {
-    // console.log("className is "+this.state.className);
-    // console.log("subject is "+this.state.subject);
-    // console.log("description is "+this.state.description);
 
-    return (
-      <IonContent fullscreen={true} id="classroom-list">
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Speakers</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+var myClassrooms = [
+  {
+    name: "Ted Turtle",
+    profilePic: "/assets/img/speakers/turtle.jpg",
+    instagram: "ionicframework",
+    twitter: "ionicframework",
+    about:
+      "Ted is a Turtle. Ted's interests include butterflies, skiing, and cupcakes.",
+    title: "Software Engineer",
+    location: "Everywhere",
+    email: "ted@example.com",
+    phone: "+1-541-754-3010",
+    id: "13",
+  },
+];
+var enrolledClassrooms = [
+  {
+    name: "Burt Bear",
+    profilePic: "/assets/img/speakers/bear.jpg",
+    instagram: "ionicframework",
+    twitter: "ionicframework",
+    about:
+      "Burt is a Bear. Burt's interests include poetry, dashing space heroes, and lions.",
+    title: "Software Engineer",
+    location: "Everywhere",
+    email: "burt@example.com",
+    phone: "+1-541-754-3010",
+    id: "1",
+  },
+  {
+    name: "Charlie Cheetah",
+    profilePic: "/assets/img/speakers/cheetah.jpg",
+    instagram: "ionicframework",
+    twitter: "ionicframework",
+    about:
+      "Charlie is a Cheetah. Charlie's interests include country music, plush animals, pyrotechnics, and skeletons.",
+    title: "Software Engineer",
+    location: "Everywhere",
+    email: "charlie@example.com",
+    phone: "+1-541-754-3010",
+    id: "2",
+  },
+];
 
+const Classrooms: React.FC = () => {
+  const [segment, setSegment] = useState<"enrolled" | "my">("enrolled");
+  const ionRefresherRef = useRef<HTMLIonRefresherElement>(null);
+  const [showCompleteToast, setShowCompleteToast] = useState(false);
+
+  const doRefresh = () => {
+    enrolledClassrooms = classrooms;
+    setTimeout(() => {
+      ionRefresherRef.current!.complete();
+      setShowCompleteToast(true);
+    }, 2500);
+  };
+
+  return (
+    <IonContent fullscreen={true} id="classroom-list">
+      <IonSegment
+        value={segment}
+        onIonChange={(e) => setSegment(e.detail.value as any)}
+      >
+        <IonSegmentButton value="enrolled">
+          <IonLabel>Enrolled</IonLabel>
+        </IonSegmentButton>
+        <IonSegmentButton value="my">
+          <IonLabel>My Rooms</IonLabel>
+        </IonSegmentButton>
+      </IonSegment>
+
+      <IonRefresher slot="fixed" ref={ionRefresherRef} onIonRefresh={doRefresh}>
+        <IonRefresherContent />
+      </IonRefresher>
+
+      <IonToast
+        isOpen={showCompleteToast}
+        message="Refresh complete"
+        duration={2000}
+        onDidDismiss={() => setShowCompleteToast(false)}
+      />
+
+      {/* Print enrolled classrooms if segment matches */}
+      {segment === "enrolled" && (
         <IonGrid fixed>
           <IonRow>
-            {classrooms.map((classroom) => (
+            {enrolledClassrooms.map((classroom) => (
               <IonCol size="12" size-md="6" key={classroom.id}>
                 <ClassroomItem key={classroom.id} classroom={classroom} />
               </IonCol>
             ))}
           </IonRow>
         </IonGrid>
-      </IonContent>
-    );
-  }
-}
+      )}
+
+      {/* Print my classrooms if segment matches */}
+      {segment === "my" && (
+        <IonGrid fixed>
+          <IonRow>
+            {myClassrooms.map((classroom) => (
+              <IonCol size="12" size-md="6" key={classroom.id}>
+                <ClassroomItem key={classroom.id} classroom={classroom} />
+              </IonCol>
+            ))}
+          </IonRow>
+        </IonGrid>
+      )}
+    </IonContent>
+  );
+};
 
 export default Classrooms;
