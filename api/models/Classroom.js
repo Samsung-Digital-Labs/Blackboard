@@ -18,6 +18,7 @@ const classroomSchema=new Schema({
         type:String,
         required:true
     },
+    enrolledStudents:[]
 });
 
 

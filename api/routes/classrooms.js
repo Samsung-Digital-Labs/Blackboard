@@ -17,7 +17,7 @@ router.post('/create',(req,res)=>{
         user.find({email:req.body.email})
         .then(users=>{
             const currUser=users[0];
-            currUser.createdClassrooms.push({classroomID: data._id});
+            currUser.createdClassrooms.push(data._id);
 
             currUser.save()
             .then(()=>{
@@ -60,8 +60,8 @@ router.post('/join',(req,res)=>{
             else{
                 const currUser = users[0];
                 for(let i=0;i<currUser.joinedClassrooms.length;i++){
-                    const joinedClassroom = currUser.joinedClassrooms[i];
-                    if(joinedClassroom.classroomID == req.body.classroomID)
+                    const joinedClassroomID = currUser.joinedClassrooms[i];
+                    if(joinedClassroomID == req.body.classroomID)
                     {
                         return res.status(409).json({
                             error:"already joined"
@@ -70,20 +70,31 @@ router.post('/join',(req,res)=>{
                 }
 
                 for(let i=0;i<currUser.createdClassrooms.length;i++){
-                    const createdClassroom = currUser.createdClassrooms[i];
-                    if(createdClassroom.classroomID == req.body.classroomID)
+                    const createdClassroomID = currUser.createdClassrooms[i];
+                    if(createdClassroomID == req.body.classroomID)
                     {
                         return res.status(409).json({
                             error:"already joined"
                         })
                     }
                 }
-                currUser.joinedClassrooms.push({classroomID:req.body.classroomID});
+                currUser.joinedClassrooms.push(data[0]._id);
                 
                 currUser.save()
                 .then(()=>{
-                    return res.status(200).json({
-                        message:"classroom joined"
+                    const currClassroom=data[0];
+                    currClassroom.enrolledStudents.push(currUser.email)
+                    
+                    currClassroom.save()
+                    .then(()=>{
+                        return res.status(200).json({
+                            message:"classroom joined"
+                        })
+                    })
+                    .catch(err=>{
+                        return res.status(500).json({
+                            error:err
+                        })
                     })
                 })
                 .catch(err=>{
