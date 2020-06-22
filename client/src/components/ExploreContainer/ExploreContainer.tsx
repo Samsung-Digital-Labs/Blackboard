@@ -1,29 +1,27 @@
 import React from "react";
 import "./ExploreContainer.css";
-import {IonRouterOutlet } from "@ionic/react";
+import { IonRouterOutlet } from "@ionic/react";
 import { Switch, Route } from "react-router";
 import JoinClassroom from "../../pages/JoinClassroom/JoinClassroom";
 import CreateClassroom from "../../pages/CreateClassroom/CreateClassroom";
 import Assignments from "../../pages/Assignments/Assignments";
 import Query from "../../pages/Query/Query";
-
+import Classrooms from "../../pages/Classrooms/Classrooms";
 interface ContainerProps {
   name: string;
 }
 
 const ExploreContainer: React.FC<ContainerProps> = ({ name }) => {
   return (
-      <IonRouterOutlet id="main">
-        <Switch>
-          <Route path="/page/join" component={JoinClassroom} exact />
-          <Route path="/page/create" component={CreateClassroom} exact />
-          <Route path="/page/assignments" component={Assignments} exact />
-          <Route path="/page/query" component={Query} exact />
-          {/* <Route path="/page/join" component={JoinClass} exact /> */}
-
-
-        </Switch>
-      </IonRouterOutlet>
+    <IonRouterOutlet id="main">
+      <Switch>
+        <Route exact path="/page/join" component={JoinClassroom} />
+        <Route exact path="/page/classrooms" component={Classrooms} />
+        <Route exact path="/page/create" component={CreateClassroom} />
+        <Route exact path="/page/assignments" component={Assignments} />
+        <Route exact path="/page/queries" component={Query} />
+      </Switch>
+    </IonRouterOutlet>
   );
 };
 

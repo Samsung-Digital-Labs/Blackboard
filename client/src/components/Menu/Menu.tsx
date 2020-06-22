@@ -30,6 +30,8 @@ import {
   addCircle,
   addCircleOutline,
   moonOutline,
+  personOutline,
+  person,
 } from "ionicons/icons";
 import "./Menu.css";
 
@@ -94,9 +96,9 @@ const appPages: AppPage[] = [
 const labels = ["LABEL1", "LABEL2", "LABEL3", "LABEL4", "LABEL5", "Reminders"];
 
 const Menu: React.FC<{
-  loadUser: any,
-  user: any,
-  toggleDarkMode: any
+  loadUser: any;
+  user: any;
+  toggleDarkMode: any;
 }> = (props) => {
   const location = useLocation();
 
@@ -119,7 +121,7 @@ const Menu: React.FC<{
 
   return (
     <IonMenu contentId="main" type="overlay">
-      <IonContent>  
+      <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>BlackBoard</IonListHeader>
           <IonNote>{props.user.name}</IonNote>
@@ -145,14 +147,18 @@ const Menu: React.FC<{
               </IonMenuToggle>
             );
           })}
-
-          <IonMenuToggle autoHide={false}>
-            <IonItem className="pointer" onClick={logout}>
-              <IonIcon slot="start" ios={logOutOutline} md={logOut} />
-              <IonLabel>Logout</IonLabel>
-            </IonItem>
-          </IonMenuToggle>
-          <IonItem>
+        </IonList>
+        <IonList id="labels-list">
+          <IonListHeader>Account</IonListHeader>
+          <IonItem lines="none" detail={false} routerLink = "/page/account">
+            <IonIcon slot="start" ios={personOutline} md={person} />
+            <IonLabel>Account</IonLabel>
+          </IonItem>
+          <IonItem lines="none" detail={false} onClick={logout}>
+            <IonIcon slot="start" ios={logOutOutline} md={logOut} />
+            <IonLabel>Logout</IonLabel>
+          </IonItem>
+          <IonItem lines="none">
             <IonIcon slot="start" icon={moonOutline}></IonIcon>
             <IonLabel>Dark Mode</IonLabel>
             <IonToggle
@@ -162,7 +168,7 @@ const Menu: React.FC<{
           </IonItem>
         </IonList>
 
-        <IonList id="labels-list">
+        {/* <IonList id="labels-list">
           <IonListHeader>Labels</IonListHeader>
           {labels.map((label, index) => (
             <IonItem lines="none" key={index}>
@@ -170,12 +176,11 @@ const Menu: React.FC<{
               <IonLabel>{label}</IonLabel>
             </IonItem>
           ))}
-        </IonList>
+        </IonList> */}
       </IonContent>
     </IonMenu>
   );
 };
-
 
 const mapStateToProps = (state: any) => {
   return {
