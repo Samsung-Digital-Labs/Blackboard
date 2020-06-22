@@ -1,57 +1,56 @@
 import React, { Component } from 'react';
 import { IonItem, IonLabel, IonInput, IonGrid, IonCol, IonRow, IonButton } from '@ionic/react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 interface State{
-    classID:string
+    classroomID:string
 };
 
 interface Props{
     history:any
 };
 
-class JoinClass extends Component<Props,State>{
+class JoinClassroom extends Component<Props,State>{
     constructor(props:Props)
     {
         super(props);
         this.state={
-            classID:''
+            classroomID:''
         }
     }
 
     join=()=>{
         const object={
             email:window.localStorage.getItem('user_email'),
-            classID:this.state.classID
+            classroomID:this.state.classroomID
         }
         // console.log("object is",object);
 
         // api request
-        
-        if(true){
-            // no error in joining class
-            // redirect user
+        axios.post("/classrooms/join",object)
+        .then(response=>{
             this.props.history.push("/page/classrooms");
-        }
-        else{
-            // error in joining class
-            window.alert("error joining class");
-        }
+        })
+        .catch(err=>{
+            console.log(err);
+            window.alert("error in joining classroom");
+        })
     }
 
 
     render(){
-        // console.log("classID is "+this.state.classID);
+        // console.log("classroomID is "+this.state.classroomID);
         return(
             <div className="ion-text-center">
-                <h1>Join Class</h1>
+                <h1>Join Classroom</h1>
                 <br></br>
                 <IonGrid>
                     <IonRow className="ion-justify-content-center">
                         <IonCol sizeXs="12" sizeMd="6">
                             <IonItem>
-                                <IonLabel position="floating">Class ID</IonLabel>
-                                <IonInput value={this.state.classID} onIonChange={(e) => {this.setState({classID:e.detail.value!})} }> </IonInput>
+                                <IonLabel position="floating">Classroom ID</IonLabel>
+                                <IonInput value={this.state.classroomID} onIonChange={(e) => {this.setState({classroomID:e.detail.value!})} }> </IonInput>
                             </IonItem>
                         </IonCol>
                     </IonRow>
@@ -65,10 +64,10 @@ class JoinClass extends Component<Props,State>{
                     </IonRow>
                 </IonGrid>
                 <br></br>
-                <p>Want to create a new class? <Link to="/page/create" className="noUnderline">Create Here</Link></p>
+                <p>Want to create a new classroom? <Link to="/page/create" className="noUnderline">Create Here</Link></p>
             </div>
         );
     }
 }
 
-export default JoinClass;
+export default JoinClassroom;

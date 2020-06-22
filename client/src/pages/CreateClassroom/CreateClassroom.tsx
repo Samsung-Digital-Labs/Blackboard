@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { IonItem, IonLabel, IonInput, IonTextarea, IonGrid, IonCol, IonRow, IonButton } from '@ionic/react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 interface Props{
     history:any
@@ -12,7 +13,7 @@ interface State{
     description:string
 }
 
-class CreateClass extends Component<Props,State>{
+class CreateClassroom extends Component<Props,State>{
     constructor(props:Props){
         super(props);
         this.state={
@@ -23,25 +24,23 @@ class CreateClass extends Component<Props,State>{
     }
 
     create=()=>{
-        const object={
+        const classroom={
             className:this.state.className,
             subject:this.state.subject,
             description:this.state.description,
             email:window.localStorage.getItem('user_email')
         }
-        // console.log("object is",object);
+        // console.log("classroom is",classroom);
 
         // api request
-
-        if(true){
-            // no error in creating class
-            // redirect user
+        axios.post("/classrooms/create",classroom)
+        .then(response=>{
             this.props.history.push("/page/classrooms");
-        }
-        else{
-            // error in creating class
-            window.alert("error in creating class");
-        }
+        })
+        .catch(err=>{
+            console.log(err);
+            window.alert("error in creating classroom");
+        })
     }
 
     render(){
@@ -51,13 +50,13 @@ class CreateClass extends Component<Props,State>{
 
         return(
             <div className="ion-text-center">
-                <h1>Create Class</h1>
+                <h1>Create Classroom</h1>
                 <br></br>
                 <IonGrid>
                     <IonRow className="ion-justify-content-center">
                         <IonCol sizeXs="12" sizeMd="6">
                             <IonItem>
-                                <IonLabel position="floating">Class Name</IonLabel>
+                                <IonLabel position="floating">Classroom Name</IonLabel>
                                 <IonInput onIonChange={(e) => { this.setState({className:e.detail.value!}) }}></IonInput>
                             </IonItem>
                         </IonCol>
@@ -75,7 +74,7 @@ class CreateClass extends Component<Props,State>{
                     <IonRow className="ion-justify-content-center">
                         <IonCol sizeXs="12" sizeMd="6">
                             <IonItem>
-                                <IonTextarea placeholder="Enter class Description" onIonChange={(e) => { this.setState({description:e.detail.value!}) }}></IonTextarea>
+                                <IonTextarea placeholder="Enter classroom Description" onIonChange={(e) => { this.setState({description:e.detail.value!}) }}></IonTextarea>
                             </IonItem>
                         </IonCol>
                     </IonRow>
@@ -90,10 +89,10 @@ class CreateClass extends Component<Props,State>{
                 </IonGrid>
                 
                 <br></br>
-                <p>Want to join an existing class? <Link to="/page/join" className="noUnderline">Join Here</Link></p>
+                <p>Want to join an existing classroom? <Link to="/page/join" className="noUnderline">Join Here</Link></p>
             </div>
         );
     }
 }
 
-export default CreateClass;
+export default CreateClassroom;
