@@ -7,6 +7,7 @@ import CreateClassroom from "../../pages/CreateClassroom/CreateClassroom";
 import Assignments from "../../pages/Assignments/Assignments";
 import Query from "../../pages/Query/Query";
 import Classrooms from "../../pages/Classrooms/Classrooms";
+import Account from "../../pages/Account/Account";
 interface ContainerProps {
   name: string;
 }
@@ -20,6 +21,7 @@ const ExploreContainer: React.FC<ContainerProps> = ({ name }) => {
         <Route exact path="/page/create" component={CreateClassroom} />
         <Route exact path="/page/assignments" component={Assignments} />
         <Route exact path="/page/queries" component={Query} />
+        <Route exact path="/page/account" component={Account} />
       </Switch>
     </IonRouterOutlet>
   );
