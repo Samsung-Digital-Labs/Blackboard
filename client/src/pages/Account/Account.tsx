@@ -28,11 +28,11 @@ const Account: React.FC = () => {
         <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar" />
         <h2>{user_email}</h2>
         <IonList inset>
-          <IonItem onClick={() => clicked("Update Picture")}>
+          <IonItem onClick={() => clicked("Update Picture")} className="pointer">
             Update Picture
           </IonItem>
-          <IonItem onClick={() => setShowAlert(true)}>Change Username</IonItem>
-          <IonItem onClick={() => clicked("Change Password")}>
+          <IonItem onClick={() => setShowAlert(true)} className="pointer">Change Username</IonItem>
+          <IonItem onClick={() => clicked("Change Password")} className="pointer">
             Change Password
           </IonItem>
           <IonItem routerLink="/support" routerDirection="none">

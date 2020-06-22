@@ -149,12 +149,14 @@ const Menu: React.FC<{
           })}
         </IonList>
         <IonList id="labels-list">
-          <IonListHeader>Account</IonListHeader>
-          <IonItem lines="none" detail={false} routerLink = "/page/account">
-            <IonIcon slot="start" ios={personOutline} md={person} />
-            <IonLabel>Account</IonLabel>
-          </IonItem>
-          <IonItem lines="none" detail={false} onClick={logout}>
+          <IonMenuToggle autoHide={false}>
+            <IonListHeader>Account</IonListHeader>
+            <IonItem lines="none" detail={false} routerLink = "/page/account">
+              <IonIcon slot="start" ios={personOutline} md={person} />
+              <IonLabel>Account</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
+          <IonItem lines="none" detail={false} onClick={logout} className="pointer">
             <IonIcon slot="start" ios={logOutOutline} md={logOut} />
             <IonLabel>Logout</IonLabel>
           </IonItem>
