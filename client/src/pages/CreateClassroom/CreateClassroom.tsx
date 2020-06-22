@@ -8,7 +8,7 @@ interface Props{
 };
 
 interface State{
-    className:string,
+    classroomName:string,
     subject:string,
     description:string
 }
@@ -17,7 +17,7 @@ class CreateClassroom extends Component<Props,State>{
     constructor(props:Props){
         super(props);
         this.state={
-            className:'',
+            classroomName:'',
             subject:'',
             description:''
         }
@@ -25,7 +25,7 @@ class CreateClassroom extends Component<Props,State>{
 
     create=()=>{
         const classroom={
-            className:this.state.className,
+            classroomName:this.state.classroomName,
             subject:this.state.subject,
             description:this.state.description,
             email:window.localStorage.getItem('user_email')
@@ -44,7 +44,7 @@ class CreateClassroom extends Component<Props,State>{
     }
 
     render(){
-        // console.log("className is "+this.state.className);
+        // console.log("classroomName is "+this.state.classroomName);
         // console.log("subject is "+this.state.subject);
         // console.log("description is "+this.state.description);
 
@@ -57,7 +57,7 @@ class CreateClassroom extends Component<Props,State>{
                         <IonCol sizeXs="12" sizeMd="6">
                             <IonItem>
                                 <IonLabel position="floating">Classroom Name</IonLabel>
-                                <IonInput onIonChange={(e) => { this.setState({className:e.detail.value!}) }}></IonInput>
+                                <IonInput onIonChange={(e) => { this.setState({classroomName:e.detail.value!}) }}></IonInput>
                             </IonItem>
                         </IonCol>
                     </IonRow>

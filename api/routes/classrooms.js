@@ -6,7 +6,7 @@ const router=express.Router();
 
 router.post('/create',(req,res)=>{
     const classroom=new Classroom({
-        className:req.body.className,
+        classroomName:req.body.classroomName,
         subject:req.body.subject,
         description:req.body.description,
         owner:req.body.email
@@ -17,7 +17,12 @@ router.post('/create',(req,res)=>{
         user.find({email:req.body.email})
         .then(users=>{
             const currUser=users[0];
-            currUser.createdClassrooms.push(data._id);
+            currUser.createdClassrooms.push({
+                classroomID:data._id,
+                classroomName: data.classroomName,
+                subject: data.subject,
+                description: data.description
+            });
 
             currUser.save()
             .then(()=>{
@@ -60,8 +65,8 @@ router.post('/join',(req,res)=>{
             else{
                 const currUser = users[0];
                 for(let i=0;i<currUser.joinedClassrooms.length;i++){
-                    const joinedClassroomID = currUser.joinedClassrooms[i];
-                    if(joinedClassroomID == req.body.classroomID)
+                    const joinedClassroom = currUser.joinedClassrooms[i];
+                    if(joinedClassroom.classroomID == req.body.classroomID)
                     {
                         return res.status(409).json({
                             error:"already joined"
@@ -70,15 +75,20 @@ router.post('/join',(req,res)=>{
                 }
 
                 for(let i=0;i<currUser.createdClassrooms.length;i++){
-                    const createdClassroomID = currUser.createdClassrooms[i];
-                    if(createdClassroomID == req.body.classroomID)
+                    const createdClassroom = currUser.createdClassrooms[i];
+                    if(createdClassroom.classroomID == req.body.classroomID)
                     {
                         return res.status(409).json({
                             error:"already joined"
                         })
                     }
                 }
-                currUser.joinedClassrooms.push(data[0]._id);
+                currUser.joinedClassrooms.push({
+                    classroomID: data[0]._id,
+                    classroomName: data[0].classroomName,
+                    subject: data[0].subject,
+                    description: data[0].description
+                });
                 
                 currUser.save()
                 .then(()=>{

@@ -9,8 +9,12 @@ const userSchema = mongoose.Schema({
     match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
   },
   password: { type: String, required: true },
-  createdClassrooms: [],
-  joinedClassrooms: []
+  createdClassrooms: [
+    { classroomID: mongoose.Schema.Types.ObjectId, classroomName: String, subject: String, description: String}
+  ],
+  joinedClassrooms: [
+    { classroomID: mongoose.Schema.Types.ObjectId, classroomName: String, subject: String, description: String}
+  ]
 });
 
 module.exports = mongoose.model("User", userSchema);
