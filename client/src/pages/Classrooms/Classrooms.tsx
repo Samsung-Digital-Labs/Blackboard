@@ -267,7 +267,7 @@ const Classrooms: React.FC = () => {
 
       <IonToast
         isOpen={showCompleteToast}
-        message="Refresh complete"
+        message="Classrooms updated"
         duration={2000}
         onDidDismiss={() => setShowCompleteToast(false)}
       />

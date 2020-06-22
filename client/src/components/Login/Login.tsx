@@ -38,7 +38,7 @@ class Login extends Component<Props, State> {
   }
 
   login = async (e: React.FormEvent) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     const user = {
       email: this.state.email,
