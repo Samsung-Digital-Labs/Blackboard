@@ -73,8 +73,8 @@ class Login extends Component<Props, State> {
               {/* <h1>Login</h1>
           <br></br> */}
               <IonGrid>
-                <IonRow>
-                  <IonCol size="12">
+              <IonRow className="ion-justify-content-center">
+                  <IonCol sizeXs="12" sizeSm="6">
                     <IonItem>
                       <IonLabel position="floating">Email</IonLabel>
                       <IonInput
@@ -87,8 +87,8 @@ class Login extends Component<Props, State> {
                     </IonItem>
                   </IonCol>
                 </IonRow>
-                <IonRow>
-                  <IonCol size="12">
+                <IonRow className="ion-justify-content-center">
+                  <IonCol sizeXs="12" sizeSm="6">
                     <IonItem>
                       <IonLabel position="floating">Password</IonLabel>
                       <IonInput
@@ -101,10 +101,14 @@ class Login extends Component<Props, State> {
                     </IonItem>
                   </IonCol>
                 </IonRow>
+                <IonRow className="ion-justify-content-center">
+                  <IonCol sizeXs="12" sizeSm="3">
+                    <IonButton expand="block" onClick={this.login}>
+                      Login
+                    </IonButton>
+                  </IonCol>
+                </IonRow>
               </IonGrid>
-              <IonButton expand="block" onClick={this.login}>
-                Login
-              </IonButton>
               <p>
                 Don't have an account?{" "}
                 <Link to="/signup" className="noUnderline">

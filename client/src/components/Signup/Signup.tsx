@@ -83,8 +83,8 @@ class Signup extends Component<Props, State> {
               <h1>Sign up for free today!</h1>
               <br></br>
               <IonGrid>
-                <IonRow>
-                  <IonCol sizeSm="6" sizeXs="12">
+                <IonRow className="ion-justify-content-center">
+                  <IonCol sizeSm="3" sizeXs="12">
                     <IonItem>
                       <IonLabel position="floating">First Name</IonLabel>
                       <IonInput
@@ -95,7 +95,7 @@ class Signup extends Component<Props, State> {
                       ></IonInput>
                     </IonItem>
                   </IonCol>
-                  <IonCol sizeSm="6" sizeXs="12">
+                  <IonCol sizeSm="3" sizeXs="12">
                     <IonItem>
                       <IonLabel position="floating">Last Name</IonLabel>
                       <IonInput
@@ -107,8 +107,8 @@ class Signup extends Component<Props, State> {
                     </IonItem>
                   </IonCol>
                 </IonRow>
-                <IonRow>
-                  <IonCol>
+                <IonRow className="ion-justify-content-center">
+                  <IonCol sizeXs="12" sizeSm="6">
                     <IonItem>
                       <IonLabel position="floating">Email</IonLabel>
                       <IonInput
@@ -121,8 +121,8 @@ class Signup extends Component<Props, State> {
                     </IonItem>
                   </IonCol>
                 </IonRow>
-                <IonRow>
-                  <IonCol>
+                <IonRow className="ion-justify-content-center">
+                  <IonCol sizeXs="12" sizeSm="6">
                     <IonItem>
                       <IonLabel position="floating">Password</IonLabel>
                       <IonInput
@@ -135,16 +135,18 @@ class Signup extends Component<Props, State> {
                     </IonItem>
                   </IonCol>
                 </IonRow>
+                <IonRow className="ion-justify-content-center">
+                  <IonCol sizeXs="12" sizeSm="3">
+                    <IonButton
+                    expand="block"
+                    fill = "outline"
+                    onClick={this.signup}
+                  >
+                      Sign Up
+                    </IonButton>
+                  </IonCol>
+                </IonRow>
               </IonGrid>
-              <br></br>
-              <IonButton
-                expand="block"
-                fill = "outline"
-                onClick={this.signup}
-              >
-                Sign Up
-              </IonButton>
-              <br></br>
               <p>
                 Already have an account?{" "}
                 <Link to="/login" className="noUnderline">
