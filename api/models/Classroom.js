@@ -18,7 +18,17 @@ const classroomSchema=new Schema({
         type:String,
         required:true
     },
-    enrolledStudents:[]
+    enrolledStudents:[],
+    queries:[
+        {
+            postedBy: { type: String, required: true },
+            question: { type: String, required: true },
+            postedDate: { type: Date, default: Date.now },
+            answeredBy: { type: String },
+            answer: { type: String },
+            answeredDate: { type: Date }
+        }
+    ]
 });
 
 

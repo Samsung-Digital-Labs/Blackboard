@@ -4,6 +4,7 @@ const app = express();
 const bodyparser = require("body-parser");
 const userRoute = require("./api/routes/users");
 const classroomRoutes = require("./api/routes/classrooms");
+const queryRoutes = require("./api/routes/queries");
 
 const mongoose = require("mongoose");
 
@@ -40,6 +41,7 @@ app.use((req, res, next) => {
 // Routes
 app.use("/users", userRoute);
 app.use("/classrooms", classroomRoutes);
+app.use("/queries", queryRoutes);
 
 // If request did not match any API
 app.use((req, res, nxt) => {
