@@ -48,9 +48,9 @@ const mapStateToProps = (state: any) => {
 };
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    loadUser: (isUserLoggedIn: boolean) => {
-      dispatch(loadUser(isUserLoggedIn));
-    },
+    // loadUser: (isUserLoggedIn: boolean) => {
+    //   dispatch(loadUser(isUserLoggedIn));
+    // },
     setName: (name: string) => {
       dispatch(setName(name));
     },

@@ -1,10 +1,12 @@
 import * as actionTypes from "./actionTypes";
 
-export function loadUser(isUserLoggedIn: boolean) {
+export function loadUser(isUserLoggedIn: boolean, user: any, authToken: string) {
   return {
     type: actionTypes.LOAD_USER,
     payload: {
+      authToken: authToken,
       isUserLoggedIn: isUserLoggedIn,
+      user:user
     },
   };
 }

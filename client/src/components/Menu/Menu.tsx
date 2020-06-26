@@ -103,11 +103,12 @@ const Menu: React.FC<{
   const location = useLocation();
 
   // User email to display on menu
-  const user_email = localStorage.getItem("user_email");
+  // const user_email = localStorage.getItem("user_email");
 
   const logout = () => {
     localStorage.removeItem("auth_token");
-    localStorage.removeItem("user_email");
+    // localStorage.removeItem("user_email");
+    props.loadUser(false);
     window.location.reload(false);
   };
 
@@ -124,7 +125,7 @@ const Menu: React.FC<{
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>BlackBoard</IonListHeader>
-          <IonNote>{props.user.name}</IonNote>
+          <IonNote>{ (props.user.user?props.user.user.email:null) }</IonNote>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
@@ -193,7 +194,7 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     loadUser: (isUserLoggedIn: boolean) => {
-      dispatch(loadUser(isUserLoggedIn));
+      dispatch(loadUser(isUserLoggedIn,{}, ''));
     },
     setName: (name: string) => {
       dispatch(setName(name));

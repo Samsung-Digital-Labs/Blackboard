@@ -3,8 +3,11 @@ import { IonItem, IonLabel, IonInput, IonTextarea, IonGrid, IonCol, IonRow, IonB
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import {connect} from 'react-redux';
+
 interface Props{
-    history:any
+    history:any,
+    email:string
 };
 
 interface State{
@@ -28,7 +31,7 @@ class CreateClassroom extends Component<Props,State>{
             classroomName:this.state.classroomName,
             subject:this.state.subject,
             description:this.state.description,
-            email:window.localStorage.getItem('user_email')
+            email:this.props.email
         }
         // console.log("classroom is",classroom);
 
@@ -95,4 +98,10 @@ class CreateClassroom extends Component<Props,State>{
     }
 }
 
-export default CreateClassroom;
+const mapStateToProps=(state:any)=>{
+    return{
+        email:(state.userReducer.user?state.userReducer.user.email:'')
+    }
+}
+
+export default connect(mapStateToProps,null)(CreateClassroom);

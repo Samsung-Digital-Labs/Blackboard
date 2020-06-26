@@ -13,14 +13,17 @@ import {
 } from "@ionic/react";
 import "./Account.scss";
 
-const Account: React.FC = () => {
+import {connect} from 'react-redux';
+
+const Account: React.FC<{email:string}> = (props) => {
   const [showAlert, setShowAlert] = useState(false);
 
   const clicked = (text: string) => {
     console.log(`Clicked ${text}`);
   };
 
-  const user_email = localStorage.getItem("user_email");
+  // const user_email = localStorage.getItem("user_email");
+  const user_email=props.email;
 
   return (
     <div id="account-page">
@@ -70,4 +73,10 @@ const Account: React.FC = () => {
   );
 };
 
-export default Account;
+const mapStateToProps=(state:any)=>{
+  return{
+    email:(state.userReducer.user?state.userReducer.user.email:'')
+  }
+}
+
+export default connect(mapStateToProps,null)(Account);

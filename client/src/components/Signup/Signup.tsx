@@ -56,9 +56,9 @@ class Signup extends Component<Props, State> {
           (response: any) => {
             // Store the JWT token in local storage
             localStorage.setItem("auth_token", response.data.token);
-            localStorage.setItem("user_email", response.data.email);
-            window.location.reload(false);
-            // this.props.loadUser(true);
+            // localStorage.setItem("user_email", response.data.email);
+            this.props.loadUser(true, response.data.user, response.data.token);
+            // window.location.reload(false);
           },
           (error) => {
             window.alert("Wrong Credentials");
@@ -169,8 +169,8 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    loadUser: (isUserLoggedIn: boolean) => {
-      dispatch(actions.loadUser(isUserLoggedIn));
+    loadUser: (isUserLoggedIn: boolean, user:any, authToken: string ) => {
+      dispatch(actions.loadUser(isUserLoggedIn, user,  authToken));
     },
   };
 };

@@ -3,12 +3,15 @@ import { IonItem, IonLabel, IonInput, IonGrid, IonCol, IonRow, IonButton } from 
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import {connect} from 'react-redux';
+
 interface State{
     classroomID:string
 };
 
 interface Props{
-    history:any
+    history:any,
+    email:string
 };
 
 class JoinClassroom extends Component<Props,State>{
@@ -22,7 +25,7 @@ class JoinClassroom extends Component<Props,State>{
 
     join=()=>{
         const object={
-            email:window.localStorage.getItem('user_email'),
+            email:this.props.email,
             classroomID:this.state.classroomID
         }
         // console.log("object is",object);
@@ -40,6 +43,7 @@ class JoinClassroom extends Component<Props,State>{
 
 
     render(){
+        // console.log("email",this.props.email)
         // console.log("classroomID is "+this.state.classroomID);
         return(
             <div className="ion-text-center">
@@ -70,4 +74,10 @@ class JoinClassroom extends Component<Props,State>{
     }
 }
 
-export default JoinClassroom;
+const mapStateToProps=(state:any)=>{
+    return{
+        email:(state.userReducer.user?state.userReducer.user.email:'')
+    }
+}
+
+export default connect(mapStateToProps,null)(JoinClassroom);
