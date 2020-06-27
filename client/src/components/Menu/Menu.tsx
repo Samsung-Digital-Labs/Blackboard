@@ -14,7 +14,6 @@ import {
 import React from "react";
 import { useLocation } from "react-router-dom";
 import {
-  bookmarkOutline,
   paperPlaneOutline,
   logOutOutline,
   logOut,
@@ -25,8 +24,6 @@ import {
   fileTrayFullOutline,
   fileTrayFull,
   paperPlane,
-  chatboxEllipses,
-  chatboxEllipsesOutline,
   addCircle,
   addCircleOutline,
   moonOutline,
@@ -105,11 +102,12 @@ const Menu: React.FC<{
   const location = useLocation();
 
   // User email to display on menu
-  const user_email = localStorage.getItem("user_email");
+  // const user_email = localStorage.getItem("user_email");
 
   const logout = () => {
     localStorage.removeItem("auth_token");
-    localStorage.removeItem("user_email");
+    // localStorage.removeItem("user_email");
+    props.loadUser(false);
     window.location.reload(false);
   };
 
@@ -126,7 +124,7 @@ const Menu: React.FC<{
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>BlackBoard</IonListHeader>
-          <IonNote>{user_email}</IonNote>
+          <IonNote>{ (props.user.user?props.user.user.email:null) }</IonNote>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
@@ -151,21 +149,14 @@ const Menu: React.FC<{
           })}
         </IonList>
         <IonList id="labels-list">
-          <IonListHeader>Account</IonListHeader>
           <IonMenuToggle autoHide={false}>
-            <IonItem
-              className={
-                location.pathname === "/page/account" ? "selected" : ""
-              }
-              lines="none"
-              detail={false}
-              routerLink="/page/account"
-            >
+            <IonListHeader>Account</IonListHeader>
+            <IonItem lines="none" detail={false} routerLink = "/page/account">
               <IonIcon slot="start" ios={personOutline} md={person} />
               <IonLabel>Account</IonLabel>
             </IonItem>
           </IonMenuToggle>
-          <IonItem lines="none" detail={false} onClick={logout}>
+          <IonItem lines="none" detail={false} onClick={logout} className="pointer">
             <IonIcon slot="start" ios={logOutOutline} md={logOut} />
             <IonLabel>Logout</IonLabel>
           </IonItem>
@@ -202,7 +193,7 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     loadUser: (isUserLoggedIn: boolean) => {
-      dispatch(loadUser(isUserLoggedIn));
+      dispatch(loadUser(isUserLoggedIn,{}, ''));
     },
     setName: (name: string) => {
       dispatch(setName(name));

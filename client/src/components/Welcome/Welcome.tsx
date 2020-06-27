@@ -24,9 +24,9 @@ import "./Welcome.css";
 const Welcome: React.FC<{ isUserLoggedIn: boolean; history: any }> = (
   props
 ) => {
-  if (localStorage.getItem("auth_token") !== null) {
-    return <Redirect to="/page/classrooms"></Redirect>;
-  }
+  // if (localStorage.getItem("auth_token") !== null) {
+  //   return <Redirect to="/page/classrooms"></Redirect>;
+  // }
   return (
     <IonApp>
       <IonContent className = "welcome">

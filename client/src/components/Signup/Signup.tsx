@@ -56,9 +56,9 @@ class Signup extends Component<Props, State> {
           (response: any) => {
             // Store the JWT token in local storage
             localStorage.setItem("auth_token", response.data.token);
-            localStorage.setItem("user_email", response.data.email);
-            window.location.reload(false);
-            // this.props.loadUser(true);
+            // localStorage.setItem("user_email", response.data.email);
+            this.props.loadUser(true, response.data.user, response.data.token);
+            this.props.history.push("/page/classrooms", { direction: "none" });
           },
           (error) => {
             window.alert("Wrong Credentials");
@@ -72,90 +72,87 @@ class Signup extends Component<Props, State> {
   };
 
   render() {
-    // console.log("isUserLoggedIn",this.props.isUserLoggedIn);
-    if (localStorage.getItem("auth_token") !== null) {
-      return <Redirect to="/page/classrooms"></Redirect>;
-    } else {
-      return (
-        <IonPage>
-          <IonContent>
-            <div className="ion-text-center">
-              <h1>Sign up for free today!</h1>
-              <br></br>
-              <IonGrid>
-                <IonRow>
-                  <IonCol sizeSm="6" sizeXs="12">
-                    <IonItem>
-                      <IonLabel position="floating">First Name</IonLabel>
-                      <IonInput
-                        value={this.state.firstName}
-                        onIonChange={(e) => {
-                          this.setState({ firstName: e.detail.value! });
-                        }}
-                      ></IonInput>
-                    </IonItem>
-                  </IonCol>
-                  <IonCol sizeSm="6" sizeXs="12">
-                    <IonItem>
-                      <IonLabel position="floating">Last Name</IonLabel>
-                      <IonInput
-                        value={this.state.lastName}
-                        onIonChange={(e) => {
-                          this.setState({ lastName: e.detail.value! });
-                        }}
-                      ></IonInput>
-                    </IonItem>
-                  </IonCol>
-                </IonRow>
-                <IonRow>
-                  <IonCol>
-                    <IonItem>
-                      <IonLabel position="floating">Email</IonLabel>
-                      <IonInput
-                        type="email"
-                        value={this.state.email}
-                        onIonChange={(e) => {
-                          this.setState({ email: e.detail.value! });
-                        }}
-                      ></IonInput>
-                    </IonItem>
-                  </IonCol>
-                </IonRow>
-                <IonRow>
-                  <IonCol>
-                    <IonItem>
-                      <IonLabel position="floating">Password</IonLabel>
-                      <IonInput
-                        type="password"
-                        value={this.state.password}
-                        onIonChange={(e) => {
-                          this.setState({ password: e.detail.value! });
-                        }}
-                      ></IonInput>
-                    </IonItem>
-                  </IonCol>
-                </IonRow>
-              </IonGrid>
-              <br></br>
-              <IonButton
-                expand="block"
-                fill = "outline"
-                onClick={this.signup}
-              >
-                Sign Up
-              </IonButton>
-              <br></br>
-              <p>
-                Already have an account?{" "}
-                <Link to="/login" className="noUnderline">
-                  Login
-                </Link>
-              </p>
-            </div>
-          </IonContent>
-        </IonPage>
-      );
-    }
+    return (
+      <IonPage>
+        <IonContent>
+          <div className="ion-text-center">
+            <h1>Sign up for free today!</h1>
+            <br></br>
+            <IonGrid>
+              <IonRow className="ion-justify-content-center">
+                <IonCol sizeSm="3" sizeXs="12">
+                  <IonItem>
+                    <IonLabel position="floating">First Name</IonLabel>
+                    <IonInput
+                      value={this.state.firstName}
+                      onIonChange={(e) => {
+                        this.setState({ firstName: e.detail.value! });
+                      }}
+                    ></IonInput>
+                  </IonItem>
+                </IonCol>
+                <IonCol sizeSm="3" sizeXs="12">
+                  <IonItem>
+                    <IonLabel position="floating">Last Name</IonLabel>
+                    <IonInput
+                      value={this.state.lastName}
+                      onIonChange={(e) => {
+                        this.setState({ lastName: e.detail.value! });
+                      }}
+                    ></IonInput>
+                  </IonItem>
+                </IonCol>
+              </IonRow>
+              <IonRow className="ion-justify-content-center">
+                <IonCol sizeXs="12" sizeSm="6">
+                  <IonItem>
+                    <IonLabel position="floating">Email</IonLabel>
+                    <IonInput
+                      type="email"
+                      value={this.state.email}
+                      onIonChange={(e) => {
+                        this.setState({ email: e.detail.value! });
+                      }}
+                    ></IonInput>
+                  </IonItem>
+                </IonCol>
+              </IonRow>
+              <IonRow className="ion-justify-content-center">
+                <IonCol sizeXs="12" sizeSm="6">
+                  <IonItem>
+                    <IonLabel position="floating">Password</IonLabel>
+                    <IonInput
+                      type="password"
+                      value={this.state.password}
+                      onIonChange={(e) => {
+                        this.setState({ password: e.detail.value! });
+                      }}
+                    ></IonInput>
+                  </IonItem>
+                </IonCol>
+              </IonRow>
+              <IonRow className="ion-justify-content-center">
+                <IonCol sizeXs="12" sizeSm="3">
+                  <IonButton
+                    expand="block"
+                    fill="outline"
+                    onClick={this.signup}
+                  >
+                    Sign Up
+                  </IonButton>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
+            <p>
+              Already have an account?{" "}
+              <Link to="/login" className="noUnderline">
+                Login
+              </Link>
+            </p>
+          </div>
+        </IonContent>
+      </IonPage>
+    );
   }
 }
 
@@ -167,8 +164,8 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    loadUser: (isUserLoggedIn: boolean) => {
-      dispatch(actions.loadUser(isUserLoggedIn));
+    loadUser: (isUserLoggedIn: boolean, user: any, authToken: string) => {
+      dispatch(actions.loadUser(isUserLoggedIn, user, authToken));
     },
   };
 };

@@ -22,6 +22,8 @@ router.post("/signup", (req, res, nxt) => {
           } else {
             const user = new User({
               _id: new mongoose.Types.ObjectId(),
+              firstName: req.body.firstName,
+              lastName: req.body.lastName,
               email: req.body.email,
               password: hash,
             });
@@ -75,7 +77,14 @@ router.post("/login", (req, res, nxt) => {
 
           return res.status(200).json({
             message: "User logged in",
-            email: user[0].email,
+            user:{
+              userID: user[0]._id,
+              firstName: user[0].firstName,
+              lastName: user[0].lastName,
+              email: user[0].email,
+              createdClassrooms: user[0].createdClassrooms,
+              joinedClassrooms: user[0].joinedClassrooms
+            },
             token: token,
           });
         } else {

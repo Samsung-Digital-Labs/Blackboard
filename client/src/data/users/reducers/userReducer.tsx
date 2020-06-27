@@ -13,6 +13,8 @@ const userReducer = (
       return {
         ...state,
         isUserLoggedIn: action.payload.isUserLoggedIn,
+        authToken: action.payload.authToken,
+        user: action.payload.user
       };
     case actionTypes.DARK_MODE:
       return {

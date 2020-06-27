@@ -13,14 +13,17 @@ import {
 } from "@ionic/react";
 import "./Account.scss";
 
-const Account: React.FC = () => {
+import {connect} from 'react-redux';
+
+const Account: React.FC<{email:string}> = (props) => {
   const [showAlert, setShowAlert] = useState(false);
 
   const clicked = (text: string) => {
     console.log(`Clicked ${text}`);
   };
 
-  const user_email = localStorage.getItem("user_email");
+  // const user_email = localStorage.getItem("user_email");
+  const user_email=props.email;
 
   return (
     <div id="account-page">
@@ -28,11 +31,11 @@ const Account: React.FC = () => {
         <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar" />
         <h2>{user_email}</h2>
         <IonList inset>
-          <IonItem onClick={() => clicked("Update Picture")}>
+          <IonItem onClick={() => clicked("Update Picture")} className="pointer">
             Update Picture
           </IonItem>
-          <IonItem onClick={() => setShowAlert(true)}>Change Username</IonItem>
-          <IonItem onClick={() => clicked("Change Password")}>
+          <IonItem onClick={() => setShowAlert(true)} className="pointer">Change Username</IonItem>
+          <IonItem onClick={() => clicked("Change Password")} className="pointer">
             Change Password
           </IonItem>
           <IonItem routerLink="/support" routerDirection="none">
@@ -70,4 +73,10 @@ const Account: React.FC = () => {
   );
 };
 
-export default Account;
+const mapStateToProps=(state:any)=>{
+  return{
+    email:(state.userReducer.user?state.userReducer.user.email:'')
+  }
+}
+
+export default connect(mapStateToProps,null)(Account);

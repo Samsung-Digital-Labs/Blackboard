@@ -3,12 +3,15 @@ import { IonItem, IonLabel, IonInput, IonTextarea, IonGrid, IonCol, IonRow, IonB
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import {connect} from 'react-redux';
+
 interface Props{
-    history:any
+    history:any,
+    email:string
 };
 
 interface State{
-    className:string,
+    classroomName:string,
     subject:string,
     description:string
 }
@@ -17,7 +20,7 @@ class CreateClassroom extends Component<Props,State>{
     constructor(props:Props){
         super(props);
         this.state={
-            className:'',
+            classroomName:'',
             subject:'',
             description:''
         }
@@ -25,10 +28,10 @@ class CreateClassroom extends Component<Props,State>{
 
     create=()=>{
         const classroom={
-            className:this.state.className,
+            classroomName:this.state.classroomName,
             subject:this.state.subject,
             description:this.state.description,
-            email:window.localStorage.getItem('user_email')
+            email:this.props.email
         }
         // console.log("classroom is",classroom);
 
@@ -44,7 +47,7 @@ class CreateClassroom extends Component<Props,State>{
     }
 
     render(){
-        // console.log("className is "+this.state.className);
+        // console.log("classroomName is "+this.state.classroomName);
         // console.log("subject is "+this.state.subject);
         // console.log("description is "+this.state.description);
 
@@ -57,7 +60,7 @@ class CreateClassroom extends Component<Props,State>{
                         <IonCol sizeXs="12" sizeMd="6">
                             <IonItem>
                                 <IonLabel position="floating">Classroom Name</IonLabel>
-                                <IonInput onIonChange={(e) => { this.setState({className:e.detail.value!}) }}></IonInput>
+                                <IonInput onIonChange={(e) => { this.setState({classroomName:e.detail.value!}) }}></IonInput>
                             </IonItem>
                         </IonCol>
                     </IonRow>
@@ -95,4 +98,10 @@ class CreateClassroom extends Component<Props,State>{
     }
 }
 
-export default CreateClassroom;
+const mapStateToProps=(state:any)=>{
+    return{
+        email:(state.userReducer.user?state.userReducer.user.email:'')
+    }
+}
+
+export default connect(mapStateToProps,null)(CreateClassroom);
