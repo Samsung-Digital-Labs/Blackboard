@@ -37,8 +37,7 @@ class Login extends Component<Props, State> {
     };
   }
 
-  login = async (e: React.FormEvent) => {
-    // e.preventDefault();
+  login = (e: React.FormEvent) => {
 
     const user = {
       email: this.state.email,
@@ -50,8 +49,8 @@ class Login extends Component<Props, State> {
       (response: any) => {
         // Store the JWT token in local storage
         localStorage.setItem("auth_token", response.data.token);
-        // localStorage.setItem("user_email", response.data.user.email);
         this.props.loadUser(true, response.data.user, response.data.token);
+        this.props.history.push('/page/classrooms', {direction: 'none'});
       },
       (error) => {
         window.alert("Wrong Credentials");
@@ -60,9 +59,6 @@ class Login extends Component<Props, State> {
   };
 
   render() {
-    if (this.props.isUserLoggedIn) {
-      return <Redirect to="/page/classrooms"></Redirect>;
-    } else {
       return (
         <IonPage>
           <IonContent>
@@ -70,8 +66,6 @@ class Login extends Component<Props, State> {
               <div className="login-logo">
                 <img src="assets/img/logo.png" alt="Blackboard logo" />
               </div>
-              {/* <h1>Login</h1>
-          <br></br> */}
               <IonGrid>
               <IonRow className="ion-justify-content-center">
                   <IonCol sizeXs="12" sizeSm="6">
@@ -103,7 +97,7 @@ class Login extends Component<Props, State> {
                 </IonRow>
                 <IonRow className="ion-justify-content-center">
                   <IonCol sizeXs="12" sizeSm="3">
-                    <IonButton expand="block" onClick={this.login}>
+                    <IonButton expand="block"  onClick={this.login}>
                       Login
                     </IonButton>
                   </IonCol>
@@ -120,7 +114,7 @@ class Login extends Component<Props, State> {
         </IonPage>
       );
     }
-  }
+  // }
 }
 const mapStateToProps = (state: any) => {
   return {

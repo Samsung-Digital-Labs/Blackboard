@@ -14,7 +14,6 @@ import {
 import React from "react";
 import { useLocation } from "react-router-dom";
 import {
-  bookmarkOutline,
   paperPlaneOutline,
   logOutOutline,
   logOut,
@@ -25,13 +24,13 @@ import {
   fileTrayFullOutline,
   fileTrayFull,
   paperPlane,
-  chatboxEllipses,
-  chatboxEllipsesOutline,
   addCircle,
   addCircleOutline,
   moonOutline,
   personOutline,
   person,
+  clipboardOutline,
+  clipboard,
 } from "ionicons/icons";
 import "./Menu.css";
 
@@ -79,10 +78,10 @@ const appPages: AppPage[] = [
     mdIcon: fileTrayFull,
   },
   {
-    title: "Chat",
-    url: "/page/chat",
-    iosIcon: chatboxEllipsesOutline,
-    mdIcon: chatboxEllipses,
+    title: "Attendance",
+    url: "/page/attendance",
+    iosIcon: clipboardOutline,
+    mdIcon: clipboard,
   },
   {
     title: "Queries",
