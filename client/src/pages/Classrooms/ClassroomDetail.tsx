@@ -83,7 +83,7 @@ const ClassroomDetail: React.FC = () => {
         }
       }
     ]);
-    setActionSheetHeader(`Share ${Classroom.name}`);
+    setActionSheetHeader(`Contact ${Classroom.name}`);
     setShowActionSheet(true);
   }
 

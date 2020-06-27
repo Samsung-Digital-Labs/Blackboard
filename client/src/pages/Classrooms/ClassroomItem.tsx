@@ -58,6 +58,12 @@ const ClassroomItem: React.FC<ClassroomItemProps> = ({ classroom }) => {
                 <h3>About {classroom.name}</h3>
               </IonLabel>
             </IonItem>
+            <IonItem detail={false} routerLink={`/page/classrooms/${classroom.id}`}>
+              <IonLabel>
+                <h3>Leave {classroom.name}'s class</h3>
+              </IonLabel>
+            </IonItem>
+
           </IonList>
         </IonCardContent>
       </IonCard>

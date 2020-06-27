@@ -10,8 +10,8 @@ const mongoose = require("mongoose");
 mongoose.connect(
   "mongodb+srv://aadhar:NBhKqjWVJ1zn4Ajq@cluster0-uwdpi.mongodb.net/test?retryWrites=true&w=majority",
   {
-    useNewUrlParser: true,
     useUnifiedTopology: true,
+    useNewUrlParser: true,
   }
 );
 

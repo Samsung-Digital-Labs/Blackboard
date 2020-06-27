@@ -32,6 +32,8 @@ import {
   moonOutline,
   personOutline,
   person,
+  clipboardOutline,
+  clipboard,
 } from "ionicons/icons";
 import "./Menu.css";
 
@@ -79,10 +81,10 @@ const appPages: AppPage[] = [
     mdIcon: fileTrayFull,
   },
   {
-    title: "Chat",
-    url: "/page/chat",
-    iosIcon: chatboxEllipsesOutline,
-    mdIcon: chatboxEllipses,
+    title: "Attendance",
+    url: "/page/attendance",
+    iosIcon: clipboardOutline,
+    mdIcon: clipboard,
   },
   {
     title: "Queries",
@@ -124,7 +126,7 @@ const Menu: React.FC<{
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>BlackBoard</IonListHeader>
-          <IonNote>{props.user.name}</IonNote>
+          <IonNote>{user_email}</IonNote>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
@@ -150,10 +152,19 @@ const Menu: React.FC<{
         </IonList>
         <IonList id="labels-list">
           <IonListHeader>Account</IonListHeader>
-          <IonItem lines="none" detail={false} routerLink = "/page/account">
-            <IonIcon slot="start" ios={personOutline} md={person} />
-            <IonLabel>Account</IonLabel>
-          </IonItem>
+          <IonMenuToggle autoHide={false}>
+            <IonItem
+              className={
+                location.pathname === "/page/account" ? "selected" : ""
+              }
+              lines="none"
+              detail={false}
+              routerLink="/page/account"
+            >
+              <IonIcon slot="start" ios={personOutline} md={person} />
+              <IonLabel>Account</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
           <IonItem lines="none" detail={false} onClick={logout}>
             <IonIcon slot="start" ios={logOutOutline} md={logOut} />
             <IonLabel>Logout</IonLabel>

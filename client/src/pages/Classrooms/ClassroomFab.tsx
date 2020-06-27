@@ -1,4 +1,10 @@
-import { IonFab, IonFabButton, IonIcon, IonFabList } from "@ionic/react";
+import {
+  IonFab,
+  IonFabButton,
+  IonIcon,
+  IonFabList,
+  IonItem,
+} from "@ionic/react";
 import { addOutline, addCircle, paperPlane } from "ionicons/icons";
 import React from "react";
 
@@ -10,17 +16,10 @@ const ClassroomFab: React.FC = () => {
           <IonIcon icon={addOutline} />
         </IonFabButton>
         <IonFabList side="top">
-          <IonFabButton
-            color="vimeo"
-            href="/page/create"
-          >
+          <IonFabButton routerLink="/page/create">
             <IonIcon icon={addCircle} />
-            {/* Create */}
           </IonFabButton>
-          <IonFabButton
-            color="instagram"
-            href="/page/join"
-          >
+          <IonFabButton routerLink="/page/join">
             <IonIcon icon={paperPlane} />
           </IonFabButton>
         </IonFabList>
