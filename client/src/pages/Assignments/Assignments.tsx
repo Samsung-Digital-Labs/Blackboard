@@ -1,60 +1,26 @@
-import React, { Component } from 'react';
-import { IonItem, IonLabel, IonInput, IonTextarea, IonGrid, IonCol, IonRow, IonButton } from '@ionic/react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { IonItem, IonLabel, IonReorder, IonReorderGroup, IonContent } from '@ionic/react';
+import { ItemReorderEventDetail } from '@ionic/core';
 
-interface Props{
-    history:any
-};
-
-interface State{
-    className:string,
-    subject:string,
-    description:string
+function doReorder(event: CustomEvent<ItemReorderEventDetail>) {
+  event.detail.complete();
 }
 
-class Assignments extends Component<Props,State>{
-    constructor(props:Props){
-        super(props);
-        this.state={
-            className:'',
-            subject:'',
-            description:''
-        }
-    }
-
-    create=()=>{
-        const object={
-            className:this.state.className,
-            subject:this.state.subject,
-            description:this.state.description,
-            email:window.localStorage.getItem('user_email')
-        }
-        // console.log("object is",object);
-
-        // api request
-
-        if(true){
-            // no error in creating class
-            // redirect user
-            this.props.history.push("/page/classrooms");
-        }
-        else{
-            // error in creating class
-            window.alert("error in creating class");
-        }
-    }
-
-    render(){
-        // console.log("className is "+this.state.className);
-        // console.log("subject is "+this.state.subject);
-        // console.log("description is "+this.state.description);
-
-        return(
-            <div className="ion-text-center">
-                Assignments
-            </div>
-        );
-    }
-}
+const Assignments: React.FC = () => (
+  <IonContent>
+    {/*-- The reorder gesture is disabled by default, enable it to drag and drop items --*/}
+    <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
+      {/*-- Default reorder icon, end aligned items --*/}
+      <IonItem>
+        <IonLabel>Item 1</IonLabel>
+        <IonReorder slot="end" />
+      </IonItem>
+      <IonItem>
+        <IonLabel>Item 2</IonLabel>
+        <IonReorder slot="end" />
+      </IonItem>
+    </IonReorderGroup>
+  </IonContent>
+);
 
 export default Assignments;

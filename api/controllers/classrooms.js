@@ -23,12 +23,11 @@ exports.getAllCreatedClassrooms = (req, res, nxt) => {
     });
 };
 
-
 exports.getAllEnrolledClassrooms = (req, res, nxt) => {
   user
     .findById(req.params.userID)
-    .select('joinedClassrooms')
-    .populate('joinedClassrooms')
+    .select("joinedClassrooms")
+    .populate("joinedClassrooms")
     .exec()
     .then((rooms) => {
       res.status(200).json(rooms);
@@ -40,7 +39,6 @@ exports.getAllEnrolledClassrooms = (req, res, nxt) => {
       });
     });
 };
-
 
 exports.createClassroom = (req, res) => {
   const classroom = new Classroom({
