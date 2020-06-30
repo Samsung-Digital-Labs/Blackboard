@@ -16,8 +16,12 @@ import {
 } from "@ionic/react";
 import ClassroomItem from "./ClassroomItem";
 import "./Classrooms.scss";
-import React, { Component, FC, useState, useRef } from "react";
+import React, { Component, FC, useState, useRef, useEffect } from "react";
 import ClassroomFab from "./ClassroomFab";
+
+import {connect} from 'react-redux';
+import * as actions from '../../data/classrooms/actions/actions';
+
 
 var classrooms = [
   {
@@ -234,13 +238,30 @@ var enrolledClassrooms = [
   },
 ];
 
-const Classrooms: React.FC = () => {
+interface Props{
+  loadMyClassrooms:any,
+  loadEnrolledClassrooms:any,
+  myClassrooms:any,
+  enrolledClassrooms:any,
+  userID:string,
+}
+
+const Classrooms: React.FC<Props> = (props) => {
   const [segment, setSegment] = useState<"enrolled" | "my">("enrolled");
   const ionRefresherRef = useRef<HTMLIonRefresherElement>(null);
   const [showCompleteToast, setShowCompleteToast] = useState(false);
 
+  useEffect(()=>{
+    const userID=props.userID;
+    props.loadEnrolledClassrooms(userID);
+    props.loadMyClassrooms(userID);
+  },[])
+
   const doRefresh = () => {
-    enrolledClassrooms = classrooms;
+    const userID=props.userID;
+    props.loadEnrolledClassrooms(userID);
+    props.loadMyClassrooms(userID);
+
     setTimeout(() => {
       ionRefresherRef.current!.complete();
       setShowCompleteToast(true);
@@ -276,11 +297,14 @@ const Classrooms: React.FC = () => {
       {segment === "enrolled" && (
         <IonGrid fixed>
           <IonRow>
-            {enrolledClassrooms.map((classroom) => (
-              <IonCol size="12" size-md="6" key={classroom.id}>
-                <ClassroomItem key={classroom.id} classroom={classroom} />
+            {
+            (props.enrolledClassrooms && props.enrolledClassrooms.map)?
+            props.enrolledClassrooms.map((classroom:any) => (
+              <IonCol size="12" size-md="6" key={classroom._id}>
+                <ClassroomItem key={classroom._id} classroom={classroom} />
               </IonCol>
-            ))}
+            )):<h1>You are not enrolled in any classroom</h1>
+          }
           </IonRow>
         </IonGrid>
       )}
@@ -289,11 +313,14 @@ const Classrooms: React.FC = () => {
       {segment === "my" && (
         <IonGrid fixed>
           <IonRow>
-            {myClassrooms.map((classroom) => (
-              <IonCol size="12" size-md="6" key={classroom.id}>
-                <ClassroomItem key={classroom.id} classroom={classroom} />
+            {
+            (props.myClassrooms && props.myClassrooms.map)?
+            props.myClassrooms.map((classroom:any) => (
+              <IonCol size="12" size-md="6" key={classroom._id}>
+                <ClassroomItem key={classroom._id} classroom={classroom} />
               </IonCol>
-            ))}
+            )):<h1>You have not created any classroom</h1>
+          }
           </IonRow>
         </IonGrid>
       )}
@@ -303,4 +330,23 @@ const Classrooms: React.FC = () => {
   );
 };
 
-export default Classrooms;
+const mapStateToProps=(state:any)=>{
+  return{
+    myClassrooms:state.classroomReducer.myClassrooms,
+    enrolledClassrooms:state.classroomReducer.enrolledClassrooms,
+    userID:state.userReducer.user.userID
+  }
+}
+
+const mapDispatchToProps=(dispatch:any)=>{
+  return{
+    loadMyClassrooms:(userID:string)=>{
+      dispatch(actions.loadMyClassrooms(userID))
+    },
+    loadEnrolledClassrooms:(userID:string)=>{
+      dispatch(actions.loadEnrolledClassrooms(userID));
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Classrooms);
