@@ -127,4 +127,39 @@ router.post('/join',(req,res)=>{
 });
 
 
+router.put('/announcement',(req,res)=>{
+
+    Classroom.find({_id:req.body.classroomID})
+    .then(data=>{
+        if(data.length===0){
+            return res.status(404).json({
+                error: "classroom does not exist"
+            })
+        }
+        const classroom=data[0];
+        classroom.announcements.push({
+            announcement:req.body.announcement,
+            postedBy:req.body.firstName+" "+req.body.lastName
+        })
+
+        classroom.save()
+        .then(()=>{
+            return res.status(200).json({
+                message: "announcement posted"
+            })
+        })
+        .catch(err=>{
+            return res.status(500).json({
+                error:err
+            })
+        })
+    })
+    .catch(err=>{
+        return res.status(500).json({
+            error:err
+        })
+    })
+})
+
+
 module.exports = router;

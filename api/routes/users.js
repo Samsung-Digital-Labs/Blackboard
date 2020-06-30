@@ -100,6 +100,83 @@ router.post("/login", (req, res, nxt) => {
     });
 });
 
+router.put("/updatename",(req,res)=>{
+
+  User.find({email:req.body.email})
+  .then(data=>{
+    if(data.length===0){
+      return res.status(404).json({
+        error:"user not found"
+      })
+    }
+
+    const user=data[0];
+    user.firstName=req.body.firstName;
+    user.lastName=req.body.lastName;
+
+    user.save()
+    .then(()=>{
+      res.status(200).json({
+        message:"name updated"
+      })
+    })
+    .catch(err=>{
+      res.status(500).json({
+        error:err
+      })
+    })
+  })
+  .catch(err=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+})
+
+
+router.put('/updatepassword',(req,res)=>{
+
+  User.find({email:req.body.email})
+  .then(data=>{
+    if(data.length===0){
+      return res.status(404).json({
+        error:"user not found"
+      })
+    }
+
+    const user=data[0];
+    const password=req.body.password;
+
+    bcrypt.hash(password, 10, (err,hash)=>{
+      if (err) {
+        return res.status(500).json({ error: err });
+      }
+      else{
+        const hashedPassword=hash;
+        user.password=hashedPassword;
+
+        user.save()
+        .then(()=>{
+          res.status(200).json({
+            message:"password updated"
+          })
+        })
+        .catch(err=>{
+          res.status(500).json({
+            error:err
+          })
+        })
+      }
+    })
+  })
+  .catch(err=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+})
+
+
 router.delete("/:userID", (req, res, nxt) => {
   User.remove({ _id: req.param.userID })
     .exec()

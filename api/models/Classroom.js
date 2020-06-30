@@ -28,6 +28,13 @@ const classroomSchema=new Schema({
             answer: { type: String },
             answeredDate: { type: Date }
         }
+    ],
+    announcements:[
+        {
+            announcement: { type:String, required:true },
+            postedBy: { type:String, required:true },
+            postedDate: { type: Date, default: Date.now }
+        }
     ]
 });
 
