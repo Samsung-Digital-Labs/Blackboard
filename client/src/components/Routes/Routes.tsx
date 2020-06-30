@@ -11,6 +11,7 @@ import { IonSplitPane, IonRouterOutlet } from "@ionic/react";
 import Menu from "../Menu/Menu";
 import PrivateRoute from "./PrivateRoute";
 import ClassroomDetail from "../../pages/Classrooms/ClassroomDetail";
+import Assignments from "../../pages/Assignments/Assignments";
 
 const Routes: React.FC = () => {
   return (
@@ -22,6 +23,8 @@ const Routes: React.FC = () => {
             <Route path="/" component={Welcome} exact />
             <Route path="/signup" component={Signup} exact />
             <Route path="/login" component={Login} exact />
+            <Route path="/assignments" component={Assignments} exact />
+
             <PrivateRoute
               path="/page/classrooms/:id"
               component={ClassroomDetail}
