@@ -17,7 +17,12 @@ const classroomSchema = new Schema({
     required: true,
   },
   phone: { type: String },
-  enrolledStudents: [],
+  enrolledStudents: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
   queries: [
     {
       postedBy: { type: String, required: true },

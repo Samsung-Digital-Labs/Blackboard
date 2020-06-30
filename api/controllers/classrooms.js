@@ -3,13 +3,19 @@ const Classroom = require("../models/Classroom");
 const user = require("../models/user");
 const mongoose = require("mongoose");
 
-exports.getAllClassrooms = (req, res, nxt) => {
-  Classroom.find({ teacher: req.params.userID })
+exports.getAllCreatedClassrooms = (req, res, nxt) => {
+  user
+    .findById(req.params.userID)
     .exec()
-    .then((docs) => {
-      res.status(200).json(docs);
+    .then((teacher) => {
+      Classroom.find({ teacher: req.params.userID })
+        .populate("teacher", "firstName lastName email")
+        .exec()
+        .then((classroom) => {
+          res.status(200).json(classroom);
+        });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(404).json({
         message: "teacher not found",
         error: err,
@@ -68,76 +74,53 @@ exports.createClassroom = (req, res) => {
 };
 
 exports.joinClassroom = (req, res) => {
-  user
-    .find({ email: req.body.email })
-    .then((users) => {
-      Classroom.find({ _id: req.body.classroomID })
-        .then((data) => {
-          // console.log(data);
-          if (data.length === 0) {
-            return res.status(404).json({
-              error: "classroom does not exist",
-            });
-          } else {
-            const currUser = users[0];
-            for (let i = 0; i < currUser.joinedClassrooms.length; i++) {
-              const joinedClassroom = currUser.joinedClassrooms[i];
-              if (joinedClassroom.classroomID == req.body.classroomID) {
-                return res.status(409).json({
-                  error: "already joined",
-                });
-              }
-            }
+  // First find the classroom if it
+  // exists along with its teachers ID
+  Classroom.findById(req.body.classroomID)
+    .populate("teacher", "_id")
+    .exec()
+    .then((classroom) => {
+      // If teachers ID and student to join is same
+      // then throw an error
 
-            for (let i = 0; i < currUser.createdClassrooms.length; i++) {
-              const createdClassroom = currUser.createdClassrooms[i];
-              if (createdClassroom.classroomID == req.body.classroomID) {
-                return res.status(409).json({
-                  error: "already joined",
-                });
-              }
-            }
-            currUser.joinedClassrooms.push({
-              classroomID: data[0]._id,
-              classroomName: data[0].classroomName,
-              subject: data[0].subject,
-              description: data[0].description,
-            });
-
-            currUser
-              .save()
+      if (classroom.teacher._id == req.body.userID) {
+        return res
+          .status(409)
+          .json({ error: "You cannot join your own classroom" });
+      } else {
+        // Add userID to classroom.enrolledStudents
+        Classroom.updateOne(
+          { _id: req.body.classroomID },
+          { $push: { enrolledStudents: req.body.userID } }
+        )
+          .exec()
+          .then(() => {
+            // Add classroom ID to user.joinedClassrooms
+            user
+              .updateOne(
+                { _id: req.body.userID },
+                { $push: { joinedClassrooms: classroom._id } }
+              )
+              .exec()
               .then(() => {
-                const currClassroom = data[0];
-                currClassroom.enrolledStudents.push(currUser.email);
-
-                currClassroom
-                  .save()
-                  .then(() => {
-                    return res.status(200).json({
-                      message: "classroom joined",
-                    });
-                  })
-                  .catch((err) => {
-                    return res.status(500).json({
-                      error: err,
-                    });
-                  });
+                return res
+                  .status(200)
+                  .json({ message: "Classroom Joined" });
               })
               .catch((err) => {
-                return res.status(500).json({
-                  error: err,
-                });
+                return res.status(500).json({ error: err });
               });
-          }
-        })
-        .catch((err) => {
-          return res.status(500).json({
-            error: err,
+          })
+          .catch((err) => {
+            return res.status(500).json({ error: err });
           });
-        });
+      }
+
+      // return res.status(200).json({ message: "Classroom Joined" });
     })
     .catch((err) => {
-      return res.status(500).json({
+      return res.status(404).json({
+        message: "Classroom Doesn't exist",
         error: err,
       });
     });
