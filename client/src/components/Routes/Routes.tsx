@@ -20,7 +20,7 @@ const Routes: React.FC = () => {
         <IonRouterOutlet id="main">
           <Switch>
           <Route path="/" component={Welcome} exact />
-          <Route path="/signup" component={Signup} exact />
+          <Route path="/signup" render={() => <Signup />} exact />
           <Route path="/login" component={Login} exact />
           <PrivateRoute path="/page/classrooms/:id" component={ClassroomDetail} exact />
           <PrivateRoute path="/page/:name" component={Page} exact />

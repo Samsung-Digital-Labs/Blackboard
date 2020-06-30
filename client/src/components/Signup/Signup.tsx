@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 interface Props {
-  history: any;
+  history?: any;
   isUserLoggedIn: boolean;
   loadUser: any;
 }
