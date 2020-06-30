@@ -35,7 +35,17 @@ const ClassroomDetail: React.FC = () => {
     location: "Everywhere",
     email: "burt@example.com",
     phone: "+1-541-754-3010",
-    id: "1"
+    id: "1",
+
+
+    _id:"",
+    classroomName:"",
+    subject:"",
+    description:"",
+    enrolledStudents:[],
+    teacher:"",
+    queries:[],
+    announcements:[]
   };
   console.log(Classroom);
   const [showActionSheet, setShowActionSheet] = useState(false);

@@ -25,17 +25,17 @@ const ClassroomItem: React.FC<ClassroomItemProps> = ({ classroom }) => {
             detail={false}
             lines="none"
             className="classroom-item"
-            routerLink={`/page/classrooms/${classroom.id}`}
+            routerLink={`/page/classrooms/${classroom._id}`}
           >
             <IonAvatar slot="start">
               <img
-                src={process.env.PUBLIC_URL + classroom.profilePic}
+                src="https://www.gravatar.com/avatar?d=mm&s=140"
                 alt="Speaker profile pic"
               />
             </IonAvatar>
             <IonLabel>
-              <h2>{classroom.name}</h2>
-              <p>{classroom.title}</p>
+              <h2>{classroom.classroomName}</h2>
+              <p>{classroom.subject}</p>
             </IonLabel>
           </IonItem>
         </IonCardHeader>
@@ -53,14 +53,14 @@ const ClassroomItem: React.FC<ClassroomItemProps> = ({ classroom }) => {
                 </IonLabel>
               </IonItem>
             ))} */}
-            <IonItem detail={false} routerLink={`/page/classrooms/${classroom.id}`}>
+            <IonItem detail={false}>
               <IonLabel>
-                <h3>About {classroom.name}</h3>
+                <h3>{classroom.description}</h3>
               </IonLabel>
             </IonItem>
-            <IonItem detail={false} routerLink={`/page/classrooms/${classroom.id}`}>
+            <IonItem detail={false}>
               <IonLabel>
-                <h3>Leave {classroom.name}'s class</h3>
+                <h3>Leave</h3>
               </IonLabel>
             </IonItem>
 
