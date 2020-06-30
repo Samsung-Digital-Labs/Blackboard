@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 interface Props {
-  history?: any;
+  history: any;
   isUserLoggedIn: boolean;
   loadUser: any;
 }
@@ -56,9 +56,8 @@ class Signup extends Component<Props, State> {
           (response: any) => {
             // Store the JWT token in local storage
             localStorage.setItem("auth_token", response.data.token);
-            // localStorage.setItem("user_email", response.data.email);
             this.props.loadUser(true, response.data.user, response.data.token);
-            this.props.history.push("/page/classrooms", { direction: "none" });
+            this.props.history.push('/page/classrooms', {direction: 'none'});
           },
           (error) => {
             window.alert("Wrong Credentials");

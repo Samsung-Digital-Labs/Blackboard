@@ -1,48 +1,49 @@
-const express=require('express');
-const Classroom = require('../models/Classroom');
-const user = require('../models/user');
-
+const express = require("express");
+const Classroom = require("../models/Classroom");
+const user = require("../models/user");
+const mongoose = require("mongoose");
 
 exports.createClassroom = (req, res) => {
   const classroom = new Classroom({
-    classroomName: req.body.classroomName,
+    _id: mongoose.Types.ObjectId(),
     subject: req.body.subject,
     description: req.body.description,
-    owner: req.body.email,
+    teacher: req.body.userID,
   });
 
   classroom
     .save()
-    .then((data) => {
-      user
-        .find({ email: req.body.email })
-        .then((users) => {
-          const currUser = users[0];
-          currUser.createdClassrooms.push({
-            classroomID: data._id,
-            classroomName: data.classroomName,
-            subject: data.subject,
-            description: data.description,
-          });
+    .then((result) => {
+      res.status(201).json(result);
+      // user
+      //   .find({ email: req.body.email })
+      //   .then((users) => {
+      //     const currUser = users[0];
+      //     currUser.createdClassrooms.push({
+      //       classroomID: data._id,
+      //       classroomName: data.classroomName,
+      //       subject: data.subject,
+      //       description: data.description,
+      //     });
 
-          currUser
-            .save()
-            .then(() => {
-              return res.status(200).json({
-                message: "classroom created",
-              });
-            })
-            .catch((err) => {
-              return res.status(500).json({
-                error: err,
-              });
-            });
-        })
-        .catch((err) => {
-          return res.status(500).json({
-            error: err,
-          });
-        });
+      //     currUser
+      //       .save()
+      //       .then(() => {
+      //         return res.status(200).json({
+      //           message: "classroom created",
+      //         });
+      //       })
+      //       .catch((err) => {
+      //         return res.status(500).json({
+      //           error: err,
+      //         });
+      //       });
+      //   })
+      //   .catch((err) => {
+      //     return res.status(500).json({
+      //       error: err,
+      //     });
+      //   });
     })
     .catch((err) => {
       return res.status(500).json({

@@ -19,11 +19,15 @@ const Routes: React.FC = () => {
         <Menu />
         <IonRouterOutlet id="main">
           <Switch>
-          <Route path="/" component={Welcome} exact />
-          <Route path="/signup" render={() => <Signup />} exact />
-          <Route path="/login" component={Login} exact />
-          <PrivateRoute path="/page/classrooms/:id" component={ClassroomDetail} exact />
-          <PrivateRoute path="/page/:name" component={Page} exact />
+            <Route path="/" component={Welcome} exact />
+            <Route path="/signup" component={Signup} exact />
+            <Route path="/login" component={Login} exact />
+            <PrivateRoute
+              path="/page/classrooms/:id"
+              component={ClassroomDetail}
+              exact
+            />
+            <PrivateRoute path="/page/:name" component={Page} exact />
           </Switch>
         </IonRouterOutlet>
       </IonSplitPane>
