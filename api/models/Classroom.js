@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const classroomSchema = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
+  classroomName: {
+    type: String,
+    required: true,
+  },
   subject: {
     type: String,
     required: true,

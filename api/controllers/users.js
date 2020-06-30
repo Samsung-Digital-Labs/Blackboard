@@ -80,8 +80,6 @@ exports.createUser = (req, res, nxt) => {
                 firstName: user[0].firstName,
                 lastName: user[0].lastName,
                 email: user[0].email,
-                createdClassrooms: user[0].createdClassrooms,
-                joinedClassrooms: user[0].joinedClassrooms
               },
               token: token,
             });

@@ -45,6 +45,7 @@ exports.getAllEnrolledClassrooms = (req, res, nxt) => {
 exports.createClassroom = (req, res) => {
   const classroom = new Classroom({
     _id: mongoose.Types.ObjectId(),
+    classroomName: req.body.classroomName,
     subject: req.body.subject,
     description: req.body.description,
     teacher: req.body.userID,
