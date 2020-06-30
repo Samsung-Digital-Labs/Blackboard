@@ -3,7 +3,7 @@ const classroomController = require('../controllers/classrooms')
 const router=express.Router();
 
 // Route to get all the classrooms of one user
-// router.get('/all/:id', classroomController.getAllClassrooms);
+router.get('/created/:userID', classroomController.getAllClassrooms);
 
 // Route to create an classroom
 router.post('/create', classroomController.createClassroom);

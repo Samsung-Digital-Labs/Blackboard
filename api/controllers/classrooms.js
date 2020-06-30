@@ -3,12 +3,27 @@ const Classroom = require("../models/Classroom");
 const user = require("../models/user");
 const mongoose = require("mongoose");
 
+exports.getAllClassrooms = (req, res, nxt) => {
+  Classroom.find({ teacher: req.params.userID })
+    .exec()
+    .then((docs) => {
+      res.status(200).json(docs);
+    })
+    .catch(err => {
+      res.status(404).json({
+        message: "teacher not found",
+        error: err,
+      });
+    });
+};
+
 exports.createClassroom = (req, res) => {
   const classroom = new Classroom({
     _id: mongoose.Types.ObjectId(),
     subject: req.body.subject,
     description: req.body.description,
     teacher: req.body.userID,
+    phone: req.body.phone,
   });
 
   classroom
