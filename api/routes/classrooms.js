@@ -5,6 +5,9 @@ const router=express.Router();
 // Route to get all the classrooms of one user
 router.get('/created/:userID', classroomController.getAllCreatedClassrooms);
 
+// Route to get all the classrooms of one user
+router.get('/enrolled/:userID', classroomController.getAllEnrolledClassrooms);
+
 // Route to create an classroom
 router.post('/create', classroomController.createClassroom);
 

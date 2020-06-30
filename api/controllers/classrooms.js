@@ -23,6 +23,25 @@ exports.getAllCreatedClassrooms = (req, res, nxt) => {
     });
 };
 
+
+exports.getAllEnrolledClassrooms = (req, res, nxt) => {
+  user
+    .findById(req.params.userID)
+    .select('joinedClassrooms')
+    .populate('joinedClassrooms')
+    .exec()
+    .then((rooms) => {
+      res.status(200).json(rooms);
+    })
+    .catch((err) => {
+      res.status(404).json({
+        message: "User not found",
+        error: err,
+      });
+    });
+};
+
+
 exports.createClassroom = (req, res) => {
   const classroom = new Classroom({
     _id: mongoose.Types.ObjectId(),
@@ -57,7 +76,7 @@ exports.createClassroom = (req, res) => {
       //       .catch((err) => {
       //         return res.status(500).json({
       //           error: err,
-      //         });
+      //         });s
       //       });
       //   })
       //   .catch((err) => {
@@ -91,7 +110,7 @@ exports.joinClassroom = (req, res) => {
         // Add userID to classroom.enrolledStudents
         Classroom.updateOne(
           { _id: req.body.classroomID },
-          { $push: { enrolledStudents: req.body.userID } }
+          { $addToSet: { enrolledStudents: req.body.userID } }
         )
           .exec()
           .then(() => {
@@ -99,15 +118,14 @@ exports.joinClassroom = (req, res) => {
             user
               .updateOne(
                 { _id: req.body.userID },
-                { $push: { joinedClassrooms: classroom._id } }
+                { $addToSet: { joinedClassrooms: req.body.classroomID } }
               )
               .exec()
               .then(() => {
-                return res
-                  .status(200)
-                  .json({ message: "Classroom Joined" });
+                return res.status(200).json({ message: "Classroom Joined" });
               })
               .catch((err) => {
+                done;
                 return res.status(500).json({ error: err });
               });
           })
@@ -115,8 +133,6 @@ exports.joinClassroom = (req, res) => {
             return res.status(500).json({ error: err });
           });
       }
-
-      // return res.status(200).json({ message: "Classroom Joined" });
     })
     .catch((err) => {
       return res.status(404).json({
