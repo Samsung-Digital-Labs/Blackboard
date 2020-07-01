@@ -33,7 +33,6 @@ class CreateClassroom extends Component<Props,State>{
             description:this.state.description,
             email:this.props.email
         }
-        // console.log("classroom is",classroom);
 
         // api request
         axios.post("/classrooms/create",classroom)

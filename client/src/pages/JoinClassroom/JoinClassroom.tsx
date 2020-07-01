@@ -11,7 +11,7 @@ interface State{
 
 interface Props{
     history:any,
-    email:string
+    userID:string
 };
 
 class JoinClassroom extends Component<Props,State>{
@@ -25,13 +25,12 @@ class JoinClassroom extends Component<Props,State>{
 
     join=()=>{
         const object={
-            email:this.props.email,
+            userID:this.props.userID,
             classroomID:this.state.classroomID
         }
-        // console.log("object is",object);
 
         // api request
-        axios.post("/classrooms/join",object)
+        axios.put("/classrooms/join",object)
         .then(response=>{
             this.props.history.push("/page/classrooms");
         })
@@ -76,7 +75,7 @@ class JoinClassroom extends Component<Props,State>{
 
 const mapStateToProps=(state:any)=>{
     return{
-        email:(state.userReducer.user?state.userReducer.user.email:'')
+        userID:(state.userReducer.user?state.userReducer.user.userID:'')
     }
 }
 
