@@ -9,6 +9,7 @@ import {
   IonList,
 } from "@ionic/react";
 import { Classroom } from "../../models/Classroom";
+import { Link } from "react-router-dom";
 
 interface ClassroomItemProps {
   classroom: Classroom;
@@ -16,16 +17,20 @@ interface ClassroomItemProps {
 }
 
 const ClassroomItem: React.FC<ClassroomItemProps> = ({ classroom }) => {
+  const location={
+    pathname:`/page/classrooms/${classroom._id}`,
+    classroom:classroom
+  }
   return (
     <>
       <IonCard className="classroom-card">
         <IonCardHeader>
+          <Link to={location} className="noUnderline">
           <IonItem
             button
             detail={false}
             lines="none"
             className="classroom-item"
-            routerLink={`/page/classrooms/${classroom._id}`}
           >
             <IonAvatar slot="start">
               <img
@@ -38,6 +43,7 @@ const ClassroomItem: React.FC<ClassroomItemProps> = ({ classroom }) => {
               <p>{classroom.subject}</p>
             </IonLabel>
           </IonItem>
+          </Link>        
         </IonCardHeader>
 
         <IonCardContent>

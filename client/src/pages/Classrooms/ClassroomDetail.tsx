@@ -11,6 +11,7 @@ import { callOutline, callSharp, logoTwitter, logoGithub, logoInstagram, shareOu
 // import * as selectors from '../data/selectors';
 
 import { Classroom } from '../../models/Classroom';
+import StudentsEnrolled from './StudentsEnrolled/StudentsEnrolled';
 
 
 interface OwnProps extends RouteComponentProps {
@@ -23,31 +24,34 @@ interface DispatchProps {};
 
 interface ClassroomDetailProps extends OwnProps, StateProps, DispatchProps {};
 
-const ClassroomDetail: React.FC = () => {
-  const Classroom =   {
-    name: "Burt Bear",
-    profilePic: "/assets/img/speakers/bear.jpg",
-    instagram: "ionicframework",
-    twitter: "ionicframework",
-    about:
-      "Burt is a Bear. Burt's interests include poetry, dashing space heroes, and lions.",
-    title: "Software Engineer",
-    location: "Everywhere",
-    email: "burt@example.com",
-    phone: "+1-541-754-3010",
-    id: "1",
+const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
+  // console.log("params",props.match.params);
+  // console.log("classroom",props.location.classroom);
+  // const Classroom =   {
+  //   name: "Burt Bear",
+  //   profilePic: "/assets/img/speakers/bear.jpg",
+  //   instagram: "ionicframework",
+  //   twitter: "ionicframework",
+  //   about:
+  //     "Burt is a Bear. Burt's interests include poetry, dashing space heroes, and lions.",
+  //   title: "Software Engineer",
+  //   location: "Everywhere",
+  //   email: "burt@example.com",
+  //   phone: "+1-541-754-3010",
+  //   id: "1",
 
 
-    _id:"",
-    classroomName:"",
-    subject:"",
-    description:"",
-    enrolledStudents:[],
-    teacher:"",
-    queries:[],
-    announcements:[]
-  };
-  console.log(Classroom);
+  //   _id:"",
+  //   classroomName:"",
+  //   subject:"",
+  //   description:"",
+  //   enrolledStudents:[],
+  //   teacher:"",
+  //   queries:[],
+  //   announcements:[]
+  // };
+  const classroom=props.location.classroom;
+  console.log(classroom);
   const [showActionSheet, setShowActionSheet] = useState(false);
   const [actionSheetButtons, setActionSheetButtons] = useState<ActionSheetButton[]>([]);
   const [actionSheetHeader, setActionSheetHeader] = useState('');
@@ -101,7 +105,7 @@ const ClassroomDetail: React.FC = () => {
     window.open(url, '_blank');
   }
 
-  if (!Classroom) {
+  if (!classroom) {
     return <div>Classroom not found</div>
   }
 
@@ -114,10 +118,10 @@ const ClassroomDetail: React.FC = () => {
               <IonBackButton defaultHref="/page/classrooms" />
             </IonButtons>
             <IonButtons slot="end">
-              <IonButton onClick={() => openContact(Classroom)}>
+              <IonButton onClick={() => openContact(classroom)}>
                 <IonIcon slot="icon-only" ios={callOutline} md={callSharp}></IonIcon>
               </IonButton>
-              <IonButton onClick={() => openClassroomShare(Classroom)}>
+              <IonButton onClick={() => openClassroomShare(classroom)}>
                 <IonIcon slot="icon-only" ios={shareOutline} md={shareSharp}></IonIcon>
               </IonButton>
             </IonButtons>
@@ -125,16 +129,17 @@ const ClassroomDetail: React.FC = () => {
         </IonHeader>
 
         <div className="Classroom-background">
-          <img src={Classroom.profilePic} alt={Classroom.name}/>
-          <h2>{Classroom.name}</h2>
+          <img src={'https://www.gravatar.com/avatar?d=mm&s=140'} alt={classroom.name}/>
+          <h2>{classroom.classroomName}</h2>
         </div>
 
         <div className="ion-padding Classroom-detail">
-          <p>{Classroom.about} Say hello on social media!</p>
+          <p>{classroom.subject}</p>
+          <p>{classroom.description}</p>
 
           <hr/>
 
-          <IonChip color="twitter" onClick={() => openExternalUrl(`https://twitter.com/${Classroom.twitter}`)}>
+          <IonChip color="twitter" onClick={() => openExternalUrl(`https://twitter.com/${classroom.twitter}`)}>
             <IonIcon icon={logoTwitter}></IonIcon>
             <IonLabel>Twitter</IonLabel>
           </IonChip>
@@ -148,6 +153,8 @@ const ClassroomDetail: React.FC = () => {
             <IonIcon icon={logoInstagram}></IonIcon>
             <IonLabel>Instagram</IonLabel>
           </IonChip>
+
+          <StudentsEnrolled studentList={classroom.enrolledStudents}></StudentsEnrolled>
         </div>
       </IonContent>
       <IonActionSheet

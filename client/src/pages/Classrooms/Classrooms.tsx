@@ -296,14 +296,16 @@ const Classrooms: React.FC<Props> = (props) => {
       {segment === "enrolled" && (
         <IonGrid fixed>
           <IonRow>
-            {props.enrolledClassrooms && props.enrolledClassrooms.map ? (
+            {props.enrolledClassrooms && props.enrolledClassrooms.map && props.enrolledClassrooms.length? (
               props.enrolledClassrooms.map((classroom: any) => (
                 <IonCol size="12" size-md="6" key={classroom._id}>
                   <ClassroomItem key={classroom._id} classroom={classroom} />
                 </IonCol>
               ))
             ) : (
-              <h1>You are not enrolled in any classroom</h1>
+              <IonCol>
+                <p className="ion-text-center">You are not enrolled in any classroom</p>
+              </IonCol>
             )}
           </IonRow>
         </IonGrid>
@@ -313,14 +315,16 @@ const Classrooms: React.FC<Props> = (props) => {
       {segment === "my" && (
         <IonGrid fixed>
           <IonRow>
-            {props.myClassrooms && props.myClassrooms.map ? (
+            {props.myClassrooms && props.myClassrooms.map && props.myClassrooms.length? (
               props.myClassrooms.map((classroom: any) => (
                 <IonCol size="12" size-md="6" key={classroom._id}>
                   <ClassroomItem key={classroom._id} classroom={classroom} />
                 </IonCol>
               ))
             ) : (
-              <h1>You have not created any classroom</h1>
+              <IonCol>
+                <p className="ion-text-center">You have not created any classroom</p>
+              </IonCol>
             )}
           </IonRow>
         </IonGrid>
@@ -335,7 +339,7 @@ const mapStateToProps = (state: any) => {
   return {
     myClassrooms: state.classroomReducer.myClassrooms,
     enrolledClassrooms: state.classroomReducer.enrolledClassrooms,
-    userID: state.userReducer.user.userID,
+    userID: (state.userReducer.user?state.userReducer.user.userID:''),
   };
 };
 
