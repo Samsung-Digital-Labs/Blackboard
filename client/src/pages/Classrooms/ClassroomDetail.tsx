@@ -135,8 +135,9 @@ const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
         </div>
 
         <div className="ion-padding Classroom-detail">
-          <p>{classroom.subject}</p>
-          <p>{classroom.description}</p>
+          <p>Subject: {classroom.subject}</p>
+          <p>Teacher: {classroom.teacher.firstName+" "+classroom.teacher.lastName}</p>
+          <p>Description: {classroom.description}</p>
 
           <hr/>
 

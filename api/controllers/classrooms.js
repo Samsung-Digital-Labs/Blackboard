@@ -37,6 +37,14 @@ exports.getAllEnrolledClassrooms = (req, res, nxt) => {
         select:"firstName lastName email"
       }
     })
+    .populate({
+      path:"joinedClassrooms",
+      populate:{
+        path:"teacher",
+        model:"User",
+        select:"firstName lastName email"
+      }
+    })
     .exec()
     .then((rooms) => {
       res.status(200).json(rooms);
