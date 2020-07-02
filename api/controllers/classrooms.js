@@ -10,6 +10,7 @@ exports.getAllCreatedClassrooms = (req, res, nxt) => {
     .then((teacher) => {
       Classroom.find({ teacher: req.params.userID })
         .populate("teacher", "firstName lastName email")
+        .populate("enrolledStudents","firstName lastName email")
         .exec()
         .then((classroom) => {
           res.status(200).json(classroom);
@@ -28,6 +29,14 @@ exports.getAllEnrolledClassrooms = (req, res, nxt) => {
     .findById(req.params.userID)
     .select("joinedClassrooms")
     .populate("joinedClassrooms")
+    .populate({
+      path:"joinedClassrooms",
+      populate:{
+        path:"enrolledStudents",
+        model:"User",
+        select:"firstName lastName email"
+      }
+    })
     .exec()
     .then((rooms) => {
       res.status(200).json(rooms);

@@ -17,15 +17,15 @@ interface ClassroomItemProps {
 }
 
 const ClassroomItem: React.FC<ClassroomItemProps> = ({ classroom }) => {
-  const object={
+  const location={
     pathname:`/page/classrooms/${classroom._id}`,
-    param1:{classroom}
-  };
+    classroom:classroom
+  }
   return (
     <>
       <IonCard className="classroom-card">
         <IonCardHeader>
-          <Link to={object}>
+          <Link to={location} className="noUnderline">
           <IonItem
             button
             detail={false}
@@ -43,7 +43,7 @@ const ClassroomItem: React.FC<ClassroomItemProps> = ({ classroom }) => {
               <p>{classroom.subject}</p>
             </IonLabel>
           </IonItem>
-          </Link>
+          </Link>        
         </IonCardHeader>
 
         <IonCardContent>
