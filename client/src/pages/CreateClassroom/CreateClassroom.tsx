@@ -63,9 +63,7 @@ class CreateClassroom extends Component<Props, State> {
 
     return (
       <IonContent className="ion-text-center">
-        <h1>Create Classroom</h1>
-        <br></br>
-        <IonGrid>
+        <h1>Create Classroom</h1>        <IonGrid>
           <IonRow className="ion-justify-content-center">
             <IonCol sizeXs="12" sizeMd="6">
               <IonItem>
@@ -78,7 +76,6 @@ class CreateClassroom extends Component<Props, State> {
               </IonItem>
             </IonCol>
           </IonRow>
-          <br></br>
           <IonRow className="ion-justify-content-center">
             <IonCol sizeXs="12" sizeMd="6">
               <IonItem>
@@ -103,7 +100,6 @@ class CreateClassroom extends Component<Props, State> {
               </IonItem>
             </IonCol>
           </IonRow>
-          <br></br>
           <IonRow className="ion-justify-content-center">
             <IonCol sizeXs="12" sizeMd="6">
               <IonItem>
@@ -116,7 +112,6 @@ class CreateClassroom extends Component<Props, State> {
               </IonItem>
             </IonCol>
           </IonRow>
-          <br></br>
           <IonRow className="ion-justify-content-center">
             <IonCol sizeXs="12" sizeMd="3">
               <IonButton size="large" expand="full" onClick={this.create}>
@@ -125,8 +120,6 @@ class CreateClassroom extends Component<Props, State> {
             </IonCol>
           </IonRow>
         </IonGrid>
-
-        <br></br>
         <p>
           Want to join an existing classroom?{" "}
           <Link to="/page/join" className="noUnderline">

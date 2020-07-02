@@ -14,7 +14,7 @@ import { Classroom } from '../../models/Classroom';
 
 
 interface OwnProps extends RouteComponentProps {
-  Classroom?: Classroom;
+  param1: Classroom;
 };
 
 interface StateProps {};
@@ -23,7 +23,7 @@ interface DispatchProps {};
 
 interface ClassroomDetailProps extends OwnProps, StateProps, DispatchProps {};
 
-const ClassroomDetail: React.FC = () => {
+const ClassroomDetail: React.FC<ClassroomDetailProps> = (x) => {
   const Classroom =   {
     name: "Burt Bear",
     profilePic: "/assets/img/speakers/bear.jpg",
@@ -47,7 +47,7 @@ const ClassroomDetail: React.FC = () => {
     queries:[],
     announcements:[]
   };
-  console.log(Classroom);
+  console.log(x.match.params);
   const [showActionSheet, setShowActionSheet] = useState(false);
   const [actionSheetButtons, setActionSheetButtons] = useState<ActionSheetButton[]>([]);
   const [actionSheetHeader, setActionSheetHeader] = useState('');
@@ -108,6 +108,7 @@ const ClassroomDetail: React.FC = () => {
   return (
     <IonPage id="Classroom-detail">
       <IonContent>
+        {console.log()}
         <IonHeader className="ion-no-border">
           <IonToolbar>
             <IonButtons slot="start">

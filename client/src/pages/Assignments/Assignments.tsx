@@ -1,6 +1,7 @@
 import React from 'react';
 import { IonItem, IonLabel, IonReorder, IonReorderGroup, IonContent } from '@ionic/react';
 import { ItemReorderEventDetail } from '@ionic/core';
+import SearchBar from './searchBar';
 
 function doReorder(event: CustomEvent<ItemReorderEventDetail>) {
   event.detail.complete();
@@ -8,6 +9,8 @@ function doReorder(event: CustomEvent<ItemReorderEventDetail>) {
 
 const Assignments: React.FC = () => (
   <IonContent>
+
+    {/* <SearchBar></SearchBar> */}
     {/*-- The reorder gesture is disabled by default, enable it to drag and drop items --*/}
     <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
       {/*-- Default reorder icon, end aligned items --*/}
