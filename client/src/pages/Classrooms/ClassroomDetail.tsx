@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import './ClassroomDetail.scss';
 
 import { ActionSheetButton } from '@ionic/core';
-import { IonActionSheet, IonChip, IonIcon, IonHeader, IonLabel, IonToolbar, IonButtons, IonContent, IonButton, IonBackButton, IonPage } from '@ionic/react'
+import { IonActionSheet, IonChip, IonIcon, IonHeader, IonLabel, IonToolbar, IonButtons, IonContent, IonButton, IonBackButton, IonPage, IonModal, IonTextarea, IonGrid, IonRow, IonCol } from '@ionic/react'
 import { callOutline, callSharp, logoTwitter, logoGithub, logoInstagram, shareOutline, shareSharp } from 'ionicons/icons';
 
 // import { connect } from '../data/connect';
@@ -12,6 +12,7 @@ import { callOutline, callSharp, logoTwitter, logoGithub, logoInstagram, shareOu
 
 import { Classroom } from '../../models/Classroom';
 import StudentsEnrolled from './StudentsEnrolled/StudentsEnrolled';
+import axios from 'axios';
 
 
 interface OwnProps extends RouteComponentProps {
@@ -55,6 +56,26 @@ const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
   const [showActionSheet, setShowActionSheet] = useState(false);
   const [actionSheetButtons, setActionSheetButtons] = useState<ActionSheetButton[]>([]);
   const [actionSheetHeader, setActionSheetHeader] = useState('');
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [text, setText] = useState<string>('');
+
+  const postAnnouncement = () => {
+      const announcement = {
+          announcement: text,
+          postedBy: classroom.teacher._id,
+          classroomID: classroom._id
+      }
+      // console.log("anouncement is ",announcement);
+      axios.put('/classrooms/announcement', announcement)
+      .then(response=>{
+          window.alert("announcement posted");
+          setText('');
+          setShowModal(false);
+      })
+      .catch(err=>{
+          window.alert("error in posting announcement");
+      })
+  }
 
   function openClassroomShare(Classroom: Classroom) {
     setActionSheetButtons([
@@ -155,9 +176,16 @@ const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
             <IonIcon icon={logoInstagram}></IonIcon>
             <IonLabel>Instagram</IonLabel>
           </IonChip>
-
-          <StudentsEnrolled studentList={classroom.enrolledStudents}></StudentsEnrolled>
         </div>
+        <br></br>
+        <IonGrid>
+          <IonRow className="ion-justify-content-center">
+            <IonCol size="12" sizeSm="6">
+              <IonButton onClick={() => setShowModal(true)} expand="block">Post Announcement</IonButton>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+        <StudentsEnrolled studentList={classroom.enrolledStudents}></StudentsEnrolled>
       </IonContent>
       <IonActionSheet
         isOpen={showActionSheet}
@@ -165,6 +193,14 @@ const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
         onDidDismiss={() => setShowActionSheet(false)}
         buttons={actionSheetButtons}
       />
+
+        <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+            <h1 className="ion-text-center">Post Announcement</h1>
+            <br></br>
+            <IonTextarea placeholder="Enter announcement here" value={text} onIonChange={e => setText(e.detail.value!)}></IonTextarea>
+            <IonButton onClick={postAnnouncement}>Post</IonButton>
+            <IonButton onClick={() => setShowModal(false)}>Cancel</IonButton>
+        </IonModal>
     </IonPage>
   );
 };

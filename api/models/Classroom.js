@@ -40,7 +40,7 @@ const classroomSchema = new Schema({
   announcements: [
     {
       announcement: { type: String, required: true },
-      postedBy: { type: String, required: true },
+      postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
       postedDate: { type: Date, default: Date.now },
     },
   ],
