@@ -37,6 +37,14 @@ exports.getAllEnrolledClassrooms = (req, res, nxt) => {
         select:"firstName lastName email"
       }
     })
+    .populate({
+      path:"joinedClassrooms",
+      populate:{
+        path:"teacher",
+        model:"User",
+        select:"firstName lastName email"
+      }
+    })
     .exec()
     .then((rooms) => {
       res.status(200).json(rooms);
@@ -151,35 +159,21 @@ exports.joinClassroom = (req, res) => {
 };
 
 exports.postAnnouncement = (req, res) => {
-  Classroom.find({ _id: req.body.classroomID })
-    .then((data) => {
-      if (data.length === 0) {
-        return res.status(404).json({
-          error: "classroom does not exist",
-        });
-      }
-      const classroom = data[0];
-      classroom.announcements.push({
-        announcement: req.body.announcement,
-        postedBy: req.body.firstName + " " + req.body.lastName,
-      });
 
-      classroom
-        .save()
-        .then(() => {
-          return res.status(200).json({
-            message: "announcement posted",
-          });
-        })
-        .catch((err) => {
-          return res.status(500).json({
-            error: err,
-          });
-        });
-    })
-    .catch((err) => {
-      return res.status(500).json({
-        error: err,
-      });
+  const announcement={
+    announcement: req.body.announcement,
+    postedBy: req.body.userID
+  }
+
+  Classroom.updateOne({ _id: req.body.classroomID }, { $push: { announcements: announcement } } )
+  .then(data=>{
+    res.status(200).json({
+      message: "announcement posted"
     });
+  })
+  .catch(err=>{
+    return res.status(500).json({
+      error:err
+    })
+  })
 };
