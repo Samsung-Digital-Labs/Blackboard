@@ -1,36 +1,54 @@
-import React, { useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonFooter, IonButton, IonMenuButton } from '@ionic/react';
+import React, { useState } from "react";
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonSearchbar,
+  IonFooter,
+  IonButton,
+  IonMenuButton,
+  IonButtons,
+  IonIcon,
+} from "@ionic/react";
+import { search } from "ionicons/icons";
+import "./searchbar.scss"
 
- const SearchBar: React.FC = () => {
-  const [searchText, setSearchText] = useState('');
+const SearchBar: React.FC = () => {
+  const [searchText, setSearchText] = useState("");
+  const [showSearchbar, setShowSearchbar] = useState<boolean>(false);
+
   return (
     <>
-        {/* <IonHeader translucent = {true}>
-            <IonToolbar>
-                {!showSearchBar &&
-                    <IonButton slot = "start">
-                        <IonMenuButton />
-                    </IonButton>
-                }
-          {!ios && !showSearchbar &&
-            <IonTitle>Schedule</IonTitle>
-          }
-          {showSearchbar &&
-            <IonSearchbar showCancelButton="always" placeholder="Search" onIonChange={(e: CustomEvent) => setSearchText(e.detail.value)} onIonCancel={() => setShowSearchbar(false)}></IonSearchbar>
-          }
-
+      <IonHeader translucent={true}>
+        <IonToolbar>
+          {!showSearchbar && (
+            <IonButtons slot="start">
+              <IonMenuButton />
+            </IonButtons>
+          )}
+          {!showSearchbar && <IonTitle>assignments</IonTitle>}
+          {showSearchbar && (
+            <IonSearchbar id = "noShadow"
+              showCancelButton="always"
+              placeholder="Search"
+              autocomplete = "on"
+              onIonChange={(e: CustomEvent) => setSearchText(e.detail.value)}
+              onIonCancel={() => setShowSearchbar(false)}
+            ></IonSearchbar>
+          )}
           <IonButtons slot="end">
-            {!ios && !showSearchbar &&
+            {!showSearchbar && (
               <IonButton onClick={() => setShowSearchbar(true)}>
                 <IonIcon slot="icon-only" icon={search}></IonIcon>
               </IonButton>
-            }
-
-            </IonToolbar>
-        </IonHeader> */}
+            )}
+          </IonButtons>
+        </IonToolbar>
+      </IonHeader>
     </>
   );
 };
-
 
 export default SearchBar;
