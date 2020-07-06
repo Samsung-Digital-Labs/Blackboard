@@ -13,6 +13,7 @@ import { callOutline, callSharp, logoTwitter, logoGithub, logoInstagram, shareOu
 import { Classroom } from '../../models/Classroom';
 import StudentsEnrolled from './StudentsEnrolled/StudentsEnrolled';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 interface OwnProps extends RouteComponentProps {
@@ -62,7 +63,7 @@ const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
   const postAnnouncement = () => {
       const announcement = {
           announcement: text,
-          postedBy: classroom.teacher._id,
+          userID: classroom.teacher._id,
           classroomID: classroom._id
       }
       // console.log("anouncement is ",announcement);
@@ -183,6 +184,11 @@ const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
             <IonCol size="12" sizeSm="6">
               <IonButton onClick={() => setShowModal(true)} expand="block">Post Announcement</IonButton>
             </IonCol>
+            <IonCol size="12" sizeSm="6">
+              <Link to={`/announcements/${classroom._id}`} className="noUnderline">
+                <IonButton expand="block">View Announcements</IonButton>
+              </Link>
+            </IonCol>
           </IonRow>
         </IonGrid>
         <StudentsEnrolled studentList={classroom.enrolledStudents}></StudentsEnrolled>
@@ -197,9 +203,12 @@ const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
         <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
             <h1 className="ion-text-center">Post Announcement</h1>
             <br></br>
-            <IonTextarea placeholder="Enter announcement here" value={text} onIonChange={e => setText(e.detail.value!)}></IonTextarea>
+            <IonTextarea placeholder="Enter announcement here" value={text} rows={10} onIonChange={e => setText(e.detail.value!)}></IonTextarea>
             <IonButton onClick={postAnnouncement}>Post</IonButton>
-            <IonButton onClick={() => setShowModal(false)}>Cancel</IonButton>
+            <IonButton onClick={() => {
+              setText('');
+              setShowModal(false)
+              }}>Cancel</IonButton>
         </IonModal>
     </IonPage>
   );

@@ -12,6 +12,7 @@ import Menu from "../Menu/Menu";
 import PrivateRoute from "./PrivateRoute";
 import ClassroomDetail from "../../pages/Classrooms/ClassroomDetail";
 import Assignments from "../../pages/Assignments/Assignments";
+import Announcements from "../../pages/Classrooms/Announcements/Announcements";
 
 const Routes: React.FC = () => {
   return (
@@ -24,6 +25,7 @@ const Routes: React.FC = () => {
             <Route path="/signup" component={Signup} exact />
             <Route path="/login" component={Login} exact />
             <Route path="/assignments" component={Assignments} exact />
+            <Route path="/announcements/:classroomID" component={Announcements} exact></Route>
 
             <PrivateRoute
               path="/page/classrooms/:id"

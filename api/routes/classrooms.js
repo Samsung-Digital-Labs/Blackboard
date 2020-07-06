@@ -17,4 +17,10 @@ router.put('/join', classroomController.joinClassroom);
 // Route to post an announcement
 router.put('/announcement', classroomController.postAnnouncement);
 
+// Route to get all announcements of a classroom
+router.get('/getAllAnnouncements/:classroomID', classroomController.getAllAnnouncements);
+
+// Route to remove announcement
+router.delete('/removeAnnouncement/:classroomID/:announcementID', classroomController.removeAnnouncement);
+
 module.exports = router;
