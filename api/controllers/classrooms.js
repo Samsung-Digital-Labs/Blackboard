@@ -177,3 +177,41 @@ exports.postAnnouncement = (req, res) => {
     })
   })
 };
+
+
+exports.getAllAnnouncements = (req, res) => {
+  const classroomID = req.params.classroomID;
+  Classroom.findById( classroomID )
+  .select("announcements")
+  .populate({
+    path:"announcements",
+    populate:{
+      path:"postedBy",
+      select:"firstName lastName"
+    }
+  })
+  .then(data=>{
+    return res.status(200).json(data);
+  })
+  .catch(err=>{
+    res.status(404).json({
+      error:"Classroom not found"
+    })
+  })
+}
+
+
+exports.removeAnnouncement = (req, res) =>{
+  const {classroomID, announcementID} = req.params;
+  Classroom.updateOne({ _id: classroomID }, { $pull : { announcements: { _id: announcementID } }})
+  .then(data=>{
+    return res.json({
+      message:"Announcement removed"
+    })
+  })
+  .catch(err=>{
+    res.status(404).json({
+      error:"Classroom not found"
+    })
+  })
+}
