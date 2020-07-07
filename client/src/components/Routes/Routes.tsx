@@ -24,9 +24,8 @@ const Routes: React.FC = () => {
             <Route path="/" component={Welcome} exact />
             <Route path="/signup" component={Signup} exact />
             <Route path="/login" component={Login} exact />
-            <Route path="/assignments" component={Assignments} exact />
+            <Route path="/page/assignments" component={Assignments} exact />
             <Route path="/announcements/:classroomID" component={Announcements} exact></Route>
-
             <PrivateRoute
               path="/page/classrooms/:id"
               component={ClassroomDetail}

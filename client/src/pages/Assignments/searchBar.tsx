@@ -22,7 +22,7 @@ const SearchBar: React.FC = () => {
   return (
     <>
       <IonHeader translucent={true}>
-        <IonToolbar>
+        <IonToolbar color = "primary">
           {!showSearchbar && (
             <IonButtons slot="start">
               <IonMenuButton />
@@ -31,6 +31,7 @@ const SearchBar: React.FC = () => {
           {!showSearchbar && <IonTitle>assignments</IonTitle>}
           {showSearchbar && (
             <IonSearchbar id = "noShadow"
+            color = "primary"
               showCancelButton="always"
               placeholder="Search"
               autocomplete = "on"
