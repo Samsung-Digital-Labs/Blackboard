@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   IonItem,
   IonLabel,
@@ -6,6 +6,9 @@ import {
   IonReorderGroup,
   IonContent,
   IonItemDivider,
+  IonItemSliding,
+  IonItemOptions,
+  IonItemOption,
 } from "@ionic/react";
 import { ItemReorderEventDetail } from "@ionic/core";
 import SearchBar from "./searchBar";
@@ -158,28 +161,47 @@ const assignments = [
   },
 ];
 
-const Assignments: React.FC = () => (
-  <>
-    <SearchBar></SearchBar>
-    <IonContent>
-      <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
-        {assignments.map((assignment) => (
-          <IonItem>
-            <div className="verticalLine" style = {{background: assignment.color}}></div>
-            <IonLabel>
-              <h3>{assignment.name}</h3>
-              <p>
-                {assignment.timeStart} &mdash;&nbsp;
-                {assignment.timeStart} &mdash;&nbsp;
-                {assignment.clasroom}
-              </p>
-            </IonLabel>
-            <IonReorder slot="end" />
-          </IonItem>
-        ))}
-      </IonReorderGroup>
-    </IonContent>
-  </>
-);
+const Assignments: React.FC = () => {
+  const ionItemSlidingRef = useRef<HTMLIonItemSlidingElement>(null);
+
+  return (
+    <>
+      <SearchBar></SearchBar>
+      <IonContent>
+        <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
+          {assignments.map((assignment) => (
+            <IonItemSliding ref={ionItemSlidingRef}>
+              <IonItem>
+                <div
+                  className="verticalLine"
+                  style={{ background: assignment.color }}
+                ></div>
+                <IonLabel>
+                  <h3>{assignment.name}</h3>
+                  <p>
+                    {assignment.timeStart} &mdash;&nbsp;
+                    {assignment.timeStart} &mdash;&nbsp;
+                    {assignment.clasroom}
+                  </p>
+                </IonLabel>
+                <IonReorder slot="end" />
+              </IonItem>
+              <IonItemOptions side = "start">
+                <IonItemOption
+                  style={{
+                    background: assignment.color,
+                  }}
+                  // onClick={() => submit()}
+                >
+                  SUBMIT
+                </IonItemOption>
+              </IonItemOptions>
+            </IonItemSliding>
+          ))}
+        </IonReorderGroup>
+      </IonContent>
+    </>
+  );
+};
 
 export default Assignments;
