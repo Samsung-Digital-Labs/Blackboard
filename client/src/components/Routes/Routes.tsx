@@ -13,6 +13,7 @@ import PrivateRoute from "./PrivateRoute";
 import ClassroomDetail from "../../pages/Classrooms/ClassroomDetail";
 import Assignments from "../../pages/Assignments/Assignments";
 import Announcements from "../../pages/Classrooms/Announcements/Announcements";
+import AssignmentDetail from "../../pages/Assignments/AssignmentDetails";
 
 const Routes: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const Routes: React.FC = () => {
             <Route path="/signup" component={Signup} exact />
             <Route path="/login" component={Login} exact />
             <Route path="/page/assignments" component={Assignments} exact />
+            <Route path="/page/assignments/:AssignmentID" component={AssignmentDetail} exact />
             <Route path="/announcements/:classroomID" component={Announcements} exact></Route>
             <PrivateRoute
               path="/page/classrooms/:id"

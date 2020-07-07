@@ -2,7 +2,7 @@ export default interface Assignment {
     id: string,
     name: string, 
     date: Date,
-    classroom: string,
+    classroom: any,
     description: string,
     timeStart: string,
     timeEnd: string,

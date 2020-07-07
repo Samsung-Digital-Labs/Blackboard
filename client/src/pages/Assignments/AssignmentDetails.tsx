@@ -28,21 +28,22 @@ interface DispatchProps {}
 
 type AssignmentDetailProps = OwnProps & StateProps & DispatchProps;
 
-const AssignmentDetail: React.FC<AssignmentDetailProps> = ({ assignment }) => {
-  if (!assignment) {
+const AssignmentDetail: React.FC<{match: any, location: any}> = (props) => {
+  if (!props) {
     return <div>Assignment not found</div>;
   }
 
+  const assignment = props.location.assignment;
   return (
     <IonPage id="assignment-detail-page">
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar color = "primary">
           <IonButtons slot="start">
             <IonBackButton defaultHref="/tabs/schedule"></IonBackButton>
           </IonButtons>
           <IonButtons slot="end">
             <IonButton 
-            // onClick={() => toggleFavorite()}
+            // onClick={() => toggle Favorite()}
             >
             {/* Is bookmarked to be checked here */}
               {true ? (
@@ -98,4 +99,4 @@ const AssignmentDetail: React.FC<AssignmentDetailProps> = ({ assignment }) => {
   );
 };
 
-export default AssignmentDetail;
+export default React.memo(AssignmentDetail);

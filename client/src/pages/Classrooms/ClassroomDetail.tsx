@@ -53,7 +53,7 @@ const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
   //   announcements:[]
   // };
   const classroom=props.location.classroom;
-  console.log(classroom);
+  // console.log(classroom);
   const [showActionSheet, setShowActionSheet] = useState(false);
   const [actionSheetButtons, setActionSheetButtons] = useState<ActionSheetButton[]>([]);
   const [actionSheetHeader, setActionSheetHeader] = useState('');
