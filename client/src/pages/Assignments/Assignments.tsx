@@ -5,7 +5,6 @@ import {
   IonReorder,
   IonReorderGroup,
   IonContent,
-  IonItemDivider,
   IonItemSliding,
   IonItemOptions,
   IonItemOption,
@@ -24,7 +23,7 @@ const assignments = [
     date: "25-07-2020",
     description:
       "Mobile devices and browsers are now advanced enough that developers can build native-quality mobile apps using open web technologies like HTML5, Javascript, and CSS. In this talk, we’ll provide background on why and how we created Ionic, the design decisions made as we integrated Ionic with Angular, and the performance considerations for mobile platforms that our team had to overcome. We’ll also review new and upcoming Ionic features, and talk about the hidden powers and benefits of combining mobile app development and Angular.",
-    clasroom: ["Ted Turtle"],
+    classroom: ["Ted Turtle"],
     timeStart: "9:30 am",
     timeEnd: "9:45 am",
     color: "red",
@@ -35,7 +34,7 @@ const assignments = [
     date: "25-07-2020ive Ballroom",
     description:
       "Mobile devices and browsers are now advanced enough that developers can build native-quality mobile apps using open web technologies like HTML5, Javascript, and CSS. In this talk, we’ll provide background on why and how we created Ionic, the design decisions made as we integrated Ionic with Angular, and the performance considerations for mobile platforms that our team had to overcome. We’ll also review new and upcoming Ionic features, and talk about the hidden powers and benefits of combining mobile app development and Angular.",
-    clasroom: ["Rachel Rabbit"],
+    classroom: ["Rachel Rabbit"],
     timeStart: "9:45 am",
     timeEnd: "10:00 am",
     tracks: ["Tooling"],
@@ -47,7 +46,7 @@ const assignments = [
     date: "25-07-2020",
     description:
       "Mobile devices and browsers are now advanced enough that developers can build native-quality mobile apps using open web technologies like HTML5, Javascript, and CSS. In this talk, we’ll provide background on why and how we created Ionic, the design decisions made as we integrated Ionic with Angular, and the performance considerations for mobile platforms that our team had to overcome. We’ll also review new and upcoming Ionic features, and talk about the hidden powers and benefits of combining mobile app development and Angular.",
-    clasroom: ["Ellie Elephant"],
+    classroom: ["Ellie Elephant"],
     timeStart: "9:15 am",
     timeEnd: "9:30 am",
     tracks: ["Ionic"],
@@ -59,7 +58,7 @@ const assignments = [
     date: "25-07-2020",
     description:
       "Mobile devices and browsers are now advanced enough that developers can build native-quality mobile apps using open web technologies like HTML5, Javascript, and CSS. In this talk, we’ll provide background on why and how we created Ionic, the design decisions made as we integrated Ionic with Angular, and the performance considerations for mobile platforms that our team had to overcome. We’ll also review new and upcoming Ionic features, and talk about the hidden powers and benefits of combining mobile app development and Angular.",
-    clasroom: ["Ted Turtle"],
+    classroom: ["Ted Turtle"],
     timeStart: "9:30 am",
     timeEnd: "9:45 am",
     color: "red",
@@ -70,7 +69,7 @@ const assignments = [
     date: "25-07-2020ive Ballroom",
     description:
       "Mobile devices and browsers are now advanced enough that developers can build native-quality mobile apps using open web technologies like HTML5, Javascript, and CSS. In this talk, we’ll provide background on why and how we created Ionic, the design decisions made as we integrated Ionic with Angular, and the performance considerations for mobile platforms that our team had to overcome. We’ll also review new and upcoming Ionic features, and talk about the hidden powers and benefits of combining mobile app development and Angular.",
-    clasroom: ["Rachel Rabbit"],
+    classroom: ["Rachel Rabbit"],
     timeStart: "9:45 am",
     timeEnd: "10:00 am",
     tracks: ["Tooling"],
@@ -82,7 +81,7 @@ const assignments = [
     date: "25-07-2020",
     description:
       "Mobile devices and browsers are now advanced enough that developers can build native-quality mobile apps using open web technologies like HTML5, Javascript, and CSS. In this talk, we’ll provide background on why and how we created Ionic, the design decisions made as we integrated Ionic with Angular, and the performance considerations for mobile platforms that our team had to overcome. We’ll also review new and upcoming Ionic features, and talk about the hidden powers and benefits of combining mobile app development and Angular.",
-    clasroom: ["Ellie Elephant"],
+    classroom: ["Ellie Elephant"],
     timeStart: "9:15 am",
     timeEnd: "9:30 am",
     tracks: ["Ionic"],
@@ -94,7 +93,7 @@ const assignments = [
     date: "25-07-2020",
     description:
       "Mobile devices and browsers are now advanced enough that developers can build native-quality mobile apps using open web technologies like HTML5, Javascript, and CSS. In this talk, we’ll provide background on why and how we created Ionic, the design decisions made as we integrated Ionic with Angular, and the performance considerations for mobile platforms that our team had to overcome. We’ll also review new and upcoming Ionic features, and talk about the hidden powers and benefits of combining mobile app development and Angular.",
-    clasroom: ["Ted Turtle"],
+    classroom: ["Ted Turtle"],
     timeStart: "9:30 am",
     timeEnd: "9:45 am",
     color: "red",
@@ -105,7 +104,7 @@ const assignments = [
     date: "25-07-2020ive Ballroom",
     description:
       "Mobile devices and browsers are now advanced enough that developers can build native-quality mobile apps using open web technologies like HTML5, Javascript, and CSS. In this talk, we’ll provide background on why and how we created Ionic, the design decisions made as we integrated Ionic with Angular, and the performance considerations for mobile platforms that our team had to overcome. We’ll also review new and upcoming Ionic features, and talk about the hidden powers and benefits of combining mobile app development and Angular.",
-    clasroom: ["Rachel Rabbit"],
+    classroom: ["Rachel Rabbit"],
     timeStart: "9:45 am",
     timeEnd: "10:00 am",
     tracks: ["Tooling"],
@@ -117,7 +116,7 @@ const assignments = [
     date: "25-07-2020",
     description:
       "Mobile devices and browsers are now advanced enough that developers can build native-quality mobile apps using open web technologies like HTML5, Javascript, and CSS. In this talk, we’ll provide background on why and how we created Ionic, the design decisions made as we integrated Ionic with Angular, and the performance considerations for mobile platforms that our team had to overcome. We’ll also review new and upcoming Ionic features, and talk about the hidden powers and benefits of combining mobile app development and Angular.",
-    clasroom: ["Ellie Elephant"],
+    classroom: ["Ellie Elephant"],
     timeStart: "9:15 am",
     timeEnd: "9:30 am",
     tracks: ["Ionic"],
@@ -129,7 +128,7 @@ const assignments = [
     date: "25-07-2020",
     description:
       "Mobile devices and browsers are now advanced enough that developers can build native-quality mobile apps using open web technologies like HTML5, Javascript, and CSS. In this talk, we’ll provide background on why and how we created Ionic, the design decisions made as we integrated Ionic with Angular, and the performance considerations for mobile platforms that our team had to overcome. We’ll also review new and upcoming Ionic features, and talk about the hidden powers and benefits of combining mobile app development and Angular.",
-    clasroom: ["Ted Turtle"],
+    classroom: ["Ted Turtle"],
     timeStart: "9:30 am",
     timeEnd: "9:45 am",
     color: "red",
@@ -140,7 +139,7 @@ const assignments = [
     date: "25-07-2020ive Ballroom",
     description:
       "Mobile devices and browsers are now advanced enough that developers can build native-quality mobile apps using open web technologies like HTML5, Javascript, and CSS. In this talk, we’ll provide background on why and how we created Ionic, the design decisions made as we integrated Ionic with Angular, and the performance considerations for mobile platforms that our team had to overcome. We’ll also review new and upcoming Ionic features, and talk about the hidden powers and benefits of combining mobile app development and Angular.",
-    clasroom: ["Rachel Rabbit"],
+    classroom: ["Rachel Rabbit"],
     timeStart: "9:45 am",
     timeEnd: "10:00 am",
     tracks: ["Tooling"],
@@ -152,7 +151,7 @@ const assignments = [
     date: "25-07-2020",
     description:
       "Mobile devices and browsers are now advanced enough that developers can build native-quality mobile apps using open web technologies like HTML5, Javascript, and CSS. In this talk, we’ll provide background on why and how we created Ionic, the design decisions made as we integrated Ionic with Angular, and the performance considerations for mobile platforms that our team had to overcome. We’ll also review new and upcoming Ionic features, and talk about the hidden powers and benefits of combining mobile app development and Angular.",
-    clasroom: ["Ellie Elephant"],
+    classroom: ["Ellie Elephant"],
     timeStart: "9:15 am",
     timeEnd: "9:30 am",
     tracks: ["Ionic"],
@@ -171,7 +170,7 @@ const Assignments: React.FC = () => {
         <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
           {assignments.map((assignment) => (
             <IonItemSliding ref={ionItemSlidingRef}>
-              <IonItem>
+              <IonItem routerLink = {`/page/assignments/${assignment.id}`}>
                 <div
                   className="verticalLine"
                   style={{ background: assignment.color }}
@@ -181,7 +180,7 @@ const Assignments: React.FC = () => {
                   <p>
                     {assignment.timeStart} &mdash;&nbsp;
                     {assignment.timeStart} &mdash;&nbsp;
-                    {assignment.clasroom}
+                    {assignment.classroom}
                   </p>
                 </IonLabel>
                 <IonReorder slot="end" />
@@ -191,9 +190,9 @@ const Assignments: React.FC = () => {
                   style={{
                     background: assignment.color,
                   }}
-                  // onClick={() => submit()}
+                  // onClick={() => Bookmark()}
                 >
-                  SUBMIT
+                  Bookmark
                 </IonItemOption>
               </IonItemOptions>
             </IonItemSliding>
