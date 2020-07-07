@@ -167,16 +167,16 @@ const Assignments: React.FC = () => {
         <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
           {assignments.map((assignment) => (
             <IonItemSliding ref={ionItemSlidingRef}>
-              <Link to={location}>
+              <Link to={location} className="noUnderline">
                 <IonItem
-                //routerLink = {`/page/assignments/${assignment.id}`}
+                // routerLink = {`/page/assignments/${assignment.id}`}
                 >
                   <div
                     className="verticalLine"
                     style={{ background: assignment.color }}
                   ></div>
                   <IonLabel>
-                    <h3>{assignment.name}</h3>
+                    <h2>{assignment.name}</h2>
                     <p>
                       {assignment.timeStart} &mdash;&nbsp;
                       {assignment.timeStart} &mdash;&nbsp;

@@ -134,7 +134,6 @@ const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
   return (
     <IonPage id="Classroom-detail">
       <IonContent>
-        {console.log()}
         <IonHeader className="ion-no-border">
           <IonToolbar>
             <IonButtons slot="start">

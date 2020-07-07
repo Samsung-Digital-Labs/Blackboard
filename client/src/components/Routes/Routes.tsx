@@ -14,6 +14,7 @@ import ClassroomDetail from "../../pages/Classrooms/ClassroomDetail";
 import Assignments from "../../pages/Assignments/Assignments";
 import Announcements from "../../pages/Classrooms/Announcements/Announcements";
 import AssignmentDetail from "../../pages/Assignments/AssignmentDetails";
+import Classrooms from "../../pages/Classrooms/Classrooms";
 
 const Routes: React.FC = () => {
   return (
@@ -25,14 +26,23 @@ const Routes: React.FC = () => {
             <Route path="/" component={Welcome} exact />
             <Route path="/signup" component={Signup} exact />
             <Route path="/login" component={Login} exact />
-            <Route path="/page/assignments" component={Assignments} exact />
-            <Route path="/page/assignments/:AssignmentID" component={AssignmentDetail} exact />
-            <Route path="/announcements/:classroomID" component={Announcements} exact></Route>
             <PrivateRoute
               path="/page/classrooms/:id"
               component={ClassroomDetail}
               exact
             />
+            <Route
+              path="/page/assignments/:AssignmentID"
+              component={AssignmentDetail}
+              exact
+            />
+            <Route path="/page/assignments" component={Assignments} exact />
+            {/* <Route path="/page/classrooms" component={Classrooms} exact /> */}
+            <Route
+              path="/announcements/:classroomID"
+              component={Announcements}
+              exact
+            ></Route>
             <PrivateRoute path="/page/:name" component={Page} exact />
           </Switch>
         </IonRouterOutlet>

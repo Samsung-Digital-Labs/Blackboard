@@ -14,7 +14,8 @@ import "./Page.css";
 
 const Page: React.FC = () => {
   const { name } = useParams<{ name: string }>();
-
+  if (name === "assignments")
+    return(null);
   return (
     <IonPage>
       {/* Header and menu button */}

@@ -28,7 +28,7 @@ interface DispatchProps {}
 
 type AssignmentDetailProps = OwnProps & StateProps & DispatchProps;
 
-const AssignmentDetail: React.FC<{match: any, location: any}> = (props) => {
+const AssignmentDetail: React.FC<{ match: any; location: any }> = (props) => {
   if (!props) {
     return <div>Assignment not found</div>;
   }
@@ -37,22 +37,22 @@ const AssignmentDetail: React.FC<{match: any, location: any}> = (props) => {
   return (
     <IonPage id="assignment-detail-page">
       <IonHeader>
-        <IonToolbar color = "primary">
+        <IonToolbar color="primary">
           <IonButtons slot="start">
             <IonBackButton defaultHref="/tabs/schedule"></IonBackButton>
           </IonButtons>
           <IonButtons slot="end">
-            <IonButton 
+            <IonButton
             // onClick={() => toggle Favorite()}
             >
-            {/* Is bookmarked to be checked here */}
+              {/* Is bookmarked to be checked here */}
               {true ? (
                 <IonIcon slot="icon-only" icon={star}></IonIcon>
               ) : (
                 <IonIcon slot="icon-only" icon={starOutline}></IonIcon>
               )}
             </IonButton>
-            <IonButton 
+            <IonButton
             // onClick={() => shareSession}
             >
               <IonIcon slot="icon-only" icon={share}></IonIcon>
@@ -63,7 +63,7 @@ const AssignmentDetail: React.FC<{match: any, location: any}> = (props) => {
       <IonContent>
         <div className="ion-padding">
           <h1>{assignment.name}</h1>
-          <span>{assignment.classroom}</span>
+          <span style = {{color: assignment.color}}>{assignment.classroom}</span>
           <p>{assignment.description}</p>
           <IonText color="medium">
             {assignment.timeStart} &ndash; {assignment.timeEnd}
@@ -72,17 +72,17 @@ const AssignmentDetail: React.FC<{match: any, location: any}> = (props) => {
           </IonText>
         </div>
         <IonList>
-          <IonItem onClick={() => ("watch")} button>
+          <IonItem onClick={() => "watch"} button>
             <IonLabel color="primary">Watch</IonLabel>
           </IonItem>
-          <IonItem onClick={() => ("add to calendar")} button>
+          <IonItem onClick={() => "add to calendar"} button>
             <IonLabel color="primary">Add to Calendar</IonLabel>
           </IonItem>
-          <IonItem onClick={() => ("mark as unwatched")} button>
+          <IonItem onClick={() => "mark as unwatched"} button>
             <IonLabel color="primary">Mark as Unwatched</IonLabel>
           </IonItem>
-          <IonItem onClick={() => ("download video")} button>
-            <IonLabel color="primary">Download Video</IonLabel>
+          <IonItem onClick={() => "download video"} button>
+            <IonLabel color="primary">Download Contents</IonLabel>
             <IonIcon
               slot="end"
               color="primary"
@@ -90,7 +90,7 @@ const AssignmentDetail: React.FC<{match: any, location: any}> = (props) => {
               icon={cloudDownload}
             ></IonIcon>
           </IonItem>
-          <IonItem onClick={() => ("leave feedback")} button>
+          <IonItem onClick={() => "leave feedback"} button>
             <IonLabel color="primary">Leave Feedback</IonLabel>
           </IonItem>
         </IonList>
@@ -99,4 +99,4 @@ const AssignmentDetail: React.FC<{match: any, location: any}> = (props) => {
   );
 };
 
-export default React.memo(AssignmentDetail);
+export default AssignmentDetail;
