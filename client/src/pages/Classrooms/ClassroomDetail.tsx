@@ -1,32 +1,60 @@
-import React, { useState } from 'react';
-import { RouteComponentProps } from 'react-router';
+import React, { useState } from "react";
+import { RouteComponentProps } from "react-router";
 
-import './ClassroomDetail.scss';
+import "./ClassroomDetail.scss";
 
-import { ActionSheetButton } from '@ionic/core';
-import { IonActionSheet, IonChip, IonIcon, IonHeader, IonLabel, IonToolbar, IonButtons, IonContent, IonButton, IonBackButton, IonPage, IonModal, IonTextarea, IonGrid, IonRow, IonCol } from '@ionic/react'
-import { callOutline, callSharp, logoTwitter, logoGithub, logoInstagram, shareOutline, shareSharp } from 'ionicons/icons';
+import { ActionSheetButton } from "@ionic/core";
+import {
+  IonActionSheet,
+  IonChip,
+  IonIcon,
+  IonHeader,
+  IonLabel,
+  IonToolbar,
+  IonButtons,
+  IonContent,
+  IonButton,
+  IonBackButton,
+  IonPage,
+  IonModal,
+  IonTextarea,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonItem,
+} from "@ionic/react";
+import {
+  callOutline,
+  callSharp,
+  logoTwitter,
+  logoGithub,
+  logoInstagram,
+  shareOutline,
+  shareSharp,
+  clipboard,
+  notifications,
+  volumeHigh,
+} from "ionicons/icons";
 
 // import { connect } from '../data/connect';
 // import * as selectors from '../data/selectors';
 
-import { Classroom } from '../../models/Classroom';
-import StudentsEnrolled from './StudentsEnrolled/StudentsEnrolled';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-
+import { Classroom } from "../../models/Classroom";
+import StudentsEnrolled from "./StudentsEnrolled/StudentsEnrolled";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 interface OwnProps extends RouteComponentProps {
   param1: Classroom;
-};
+}
 
-interface StateProps {};
+interface StateProps {}
 
-interface DispatchProps {};
+interface DispatchProps {}
 
-interface ClassroomDetailProps extends OwnProps, StateProps, DispatchProps {};
+interface ClassroomDetailProps extends OwnProps, StateProps, DispatchProps {}
 
-const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
+const ClassroomDetail: React.FC<{ match: any; location: any }> = (props) => {
   // console.log("params",props.match.params);
   // console.log("classroom",props.location.classroom);
   // const Classroom =   {
@@ -42,7 +70,6 @@ const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
   //   phone: "+1-541-754-3010",
   //   id: "1",
 
-
   //   _id:"",
   //   classroomName:"",
   //   subject:"",
@@ -52,53 +79,56 @@ const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
   //   queries:[],
   //   announcements:[]
   // };
-  const classroom=props.location.classroom;
+  const classroom = props.location.classroom;
   // console.log(classroom);
   const [showActionSheet, setShowActionSheet] = useState(false);
-  const [actionSheetButtons, setActionSheetButtons] = useState<ActionSheetButton[]>([]);
-  const [actionSheetHeader, setActionSheetHeader] = useState('');
+  const [actionSheetButtons, setActionSheetButtons] = useState<
+    ActionSheetButton[]
+  >([]);
+  const [actionSheetHeader, setActionSheetHeader] = useState("");
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [text, setText] = useState<string>('');
+  const [text, setText] = useState<string>("");
 
   const postAnnouncement = () => {
-      const announcement = {
-          announcement: text,
-          userID: classroom.teacher._id,
-          classroomID: classroom._id
-      }
-      // console.log("anouncement is ",announcement);
-      axios.put('/classrooms/announcement', announcement)
-      .then(response=>{
-          window.alert("announcement posted");
-          setText('');
-          setShowModal(false);
+    const announcement = {
+      announcement: text,
+      userID: classroom.teacher._id,
+      classroomID: classroom._id,
+    };
+    // console.log("anouncement is ",announcement);
+    axios
+      .put("/classrooms/announcement", announcement)
+      .then((response) => {
+        window.alert("announcement posted");
+        setText("");
+        setShowModal(false);
       })
-      .catch(err=>{
-          window.alert("error in posting announcement");
-      })
-  }
+      .catch((err) => {
+        window.alert("error in posting announcement");
+      });
+  };
 
   function openClassroomShare(Classroom: Classroom) {
     setActionSheetButtons([
       {
-        text: 'Copy Link',
+        text: "Copy Link",
         handler: () => {
-          console.log('Copy Link clicked');
-        }
+          console.log("Copy Link clicked");
+        },
       },
       {
-        text: 'Share via ...',
+        text: "Share via ...",
         handler: () => {
-          console.log('Share via clicked');
-        }
+          console.log("Share via clicked");
+        },
       },
       {
-        text: 'Cancel',
-        role: 'cancel',
+        text: "Cancel",
+        role: "cancel",
         handler: () => {
-          console.log('Cancel clicked');
-        }
-      }
+          console.log("Cancel clicked");
+        },
+      },
     ]);
     setActionSheetHeader(`Share ${Classroom.name}`);
     setShowActionSheet(true);
@@ -109,26 +139,26 @@ const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
       {
         text: `Email ( ${Classroom.email} )`,
         handler: () => {
-          window.open('mailto:' + Classroom.email);
-        }
+          window.open("mailto:" + Classroom.email);
+        },
       },
       {
         text: `Call ( ${Classroom.phone} )`,
         handler: () => {
-          window.open('tel:' + Classroom.phone);
-        }
-      }
+          window.open("tel:" + Classroom.phone);
+        },
+      },
     ]);
     setActionSheetHeader(`Contact ${Classroom.name}`);
     setShowActionSheet(true);
   }
 
   function openExternalUrl(url: string) {
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   }
 
   if (!classroom) {
-    return <div>Classroom not found</div>
+    return <div>Classroom not found</div>;
   }
 
   return (
@@ -141,56 +171,88 @@ const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
             </IonButtons>
             <IonButtons slot="end">
               <IonButton onClick={() => openContact(classroom)}>
-                <IonIcon slot="icon-only" ios={callOutline} md={callSharp}></IonIcon>
+                <IonIcon
+                  slot="icon-only"
+                  ios={callOutline}
+                  md={callSharp}
+                ></IonIcon>
               </IonButton>
               <IonButton onClick={() => openClassroomShare(classroom)}>
-                <IonIcon slot="icon-only" ios={shareOutline} md={shareSharp}></IonIcon>
+                <IonIcon
+                  slot="icon-only"
+                  ios={shareOutline}
+                  md={shareSharp}
+                ></IonIcon>
               </IonButton>
             </IonButtons>
           </IonToolbar>
         </IonHeader>
 
         <div className="Classroom-background">
-          <img src={'https://www.gravatar.com/avatar?d=mm&s=140'} alt={classroom.name}/>
+          <img
+            src={"https://www.gravatar.com/avatar?d=mm&s=140"}
+            alt={classroom.name}
+          />
           <h2>{classroom.classroomName}</h2>
         </div>
 
         <div className="ion-padding Classroom-detail">
           <p>Subject: {classroom.subject}</p>
-          <p>Teacher: {classroom.teacher.firstName+" "+classroom.teacher.lastName}</p>
+          <p>
+            Teacher:{" "}
+            {classroom.teacher.firstName + " " + classroom.teacher.lastName}
+          </p>
           <p>Description: {classroom.description}</p>
 
-          <hr/>
+          <hr />
 
-          <IonChip color="twitter" onClick={() => openExternalUrl(`https://twitter.com/${classroom.twitter}`)}>
-            <IonIcon icon={logoTwitter}></IonIcon>
-            <IonLabel>Twitter</IonLabel>
+          <IonChip color="tertiary" onClick={() => setShowModal(true)}>
+            <IonIcon icon={volumeHigh}></IonIcon>
+            <IonLabel>Post</IonLabel>
           </IonChip>
 
-          <IonChip color="dark" onClick={() => openExternalUrl('https://github.com/ionic-team/ionic')}>
-            <IonIcon icon={logoGithub}></IonIcon>
-            <IonLabel>GitHub</IonLabel>
-          </IonChip>
-
-          <IonChip color="instagram" onClick={() => openExternalUrl('https://instagram.com/ionicframework')}>
-            <IonIcon icon={logoInstagram}></IonIcon>
-            <IonLabel>Instagram</IonLabel>
+          <Link to={`/announcements/${classroom._id}`} className="noUnderline">
+            <IonChip
+              color="success"
+              onClick={() =>
+                openExternalUrl("https://github.com/ionic-team/ionic")
+              }
+            >
+              <IonIcon icon={notifications}></IonIcon>
+              <IonLabel>Announcements</IonLabel>
+            </IonChip>
+          </Link>
+          <IonChip
+            color="secondary"
+            onClick={() =>
+              openExternalUrl("https://instagram.com/ionicframework")
+            }
+          >
+            <IonIcon icon={clipboard}></IonIcon>
+            <IonLabel>Attendance</IonLabel>
           </IonChip>
         </div>
-        <br></br>
+        {/* <br></br>
         <IonGrid>
           <IonRow className="ion-justify-content-center">
             <IonCol size="12" sizeSm="6">
-              <IonButton onClick={() => setShowModal(true)} expand="block">Post Announcement</IonButton>
+              <IonButton onClick={() => setShowModal(true)} expand="block">
+                Post Announcement
+              </IonButton>
             </IonCol>
             <IonCol size="12" sizeSm="6">
-              <Link to={`/announcements/${classroom._id}`} className="noUnderline">
+              <Link
+                to={`/announcements/${classroom._id}`}
+                className="noUnderline"
+              >
                 <IonButton expand="block">View Announcements</IonButton>
               </Link>
             </IonCol>
           </IonRow>
-        </IonGrid>
-        <StudentsEnrolled studentList={classroom.enrolledStudents}></StudentsEnrolled>
+        </IonGrid> */}
+        <StudentsEnrolled
+          studentList={classroom.enrolledStudents}
+        ></StudentsEnrolled>
       </IonContent>
       <IonActionSheet
         isOpen={showActionSheet}
@@ -199,16 +261,25 @@ const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
         buttons={actionSheetButtons}
       />
 
-        <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
-            <h1 className="ion-text-center">Post Announcement</h1>
-            <br></br>
-            <IonTextarea placeholder="Enter announcement here" value={text} rows={10} onIonChange={e => setText(e.detail.value!)}></IonTextarea>
-            <IonButton onClick={postAnnouncement}>Post</IonButton>
-            <IonButton onClick={() => {
-              setText('');
-              setShowModal(false)
-              }}>Cancel</IonButton>
-        </IonModal>
+      <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+        <h1 className="ion-text-center">Post Announcement</h1>
+        <br></br>
+        <IonTextarea
+          placeholder="Enter announcement here"
+          value={text}
+          rows={10}
+          onIonChange={(e) => setText(e.detail.value!)}
+        ></IonTextarea>
+        <IonButton onClick={postAnnouncement}>Post</IonButton>
+        <IonButton
+          onClick={() => {
+            setText("");
+            setShowModal(false);
+          }}
+        >
+          Cancel
+        </IonButton>
+      </IonModal>
     </IonPage>
   );
 };
