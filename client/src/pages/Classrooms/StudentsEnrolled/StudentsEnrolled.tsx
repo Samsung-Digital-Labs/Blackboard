@@ -39,6 +39,6 @@ const StudentsEnrolled: React.FC<{students:any, classroomID: string}> = ({ stude
             </IonGrid>
         </Fragment>
     );
-}
+};
 
 export default StudentsEnrolled;

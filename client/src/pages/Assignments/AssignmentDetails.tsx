@@ -73,13 +73,13 @@ const AssignmentDetail: React.FC<{ match: any; location: any }> = (props) => {
         </div>
         <IonList>
           <IonItem onClick={() => "watch"} button>
-            <IonLabel color="primary">Watch</IonLabel>
+            <IonLabel color="primary">Submit</IonLabel>
           </IonItem>
           <IonItem onClick={() => "add to calendar"} button>
             <IonLabel color="primary">Add to Calendar</IonLabel>
           </IonItem>
           <IonItem onClick={() => "mark as unwatched"} button>
-            <IonLabel color="primary">Mark as Unwatched</IonLabel>
+            <IonLabel color="primary">Mark as done</IonLabel>
           </IonItem>
           <IonItem onClick={() => "download video"} button>
             <IonLabel color="primary">Download Contents</IonLabel>
