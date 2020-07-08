@@ -201,7 +201,7 @@ exports.getAllAnnouncements = (req, res) => {
 }
 
 
-exports.removeAnnouncement = (req, res) =>{
+exports.removeAnnouncement = (req, res) => {
   const {classroomID, announcementID} = req.params;
   Classroom.updateOne({ _id: classroomID }, { $pull : { announcements: { _id: announcementID } }})
   .then(data=>{
@@ -212,6 +212,29 @@ exports.removeAnnouncement = (req, res) =>{
   .catch(err=>{
     res.status(404).json({
       error:"Classroom not found"
+    })
+  })
+}
+
+exports.removeStudent = (req,res) => {
+  const {classroomID, studentID} = req.params;
+  Classroom.updateOne({ _id: classroomID }, { $pull : { enrolledStudents: studentID } } )
+  .then(data=>{
+    user.updateOne({ _id: studentID }, { $pull: { joinedClassrooms : classroomID } })
+    .then(data=>{
+      return res.status(200).json({
+        message:"student removed from classroom"
+      })
+    })
+    .catch(err=>{
+      return res.status(500).json({
+        error:err
+      })
+    })
+  })
+  .catch(err=>{
+    return res.status(500).json({
+      error:err
     })
   })
 }

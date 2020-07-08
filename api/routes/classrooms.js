@@ -23,4 +23,7 @@ router.get('/getAllAnnouncements/:classroomID', classroomController.getAllAnnoun
 // Route to remove announcement
 router.delete('/removeAnnouncement/:classroomID/:announcementID', classroomController.removeAnnouncement);
 
+// Route to remove a student from classroom
+router.delete('/removeStudent/:classroomID/:studentID', classroomController.removeStudent);
+
 module.exports = router;

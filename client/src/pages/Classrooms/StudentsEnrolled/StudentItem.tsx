@@ -1,11 +1,25 @@
 import React,{Fragment} from 'react';
 import { IonCard, IonCardHeader, IonItem, IonAvatar, IonLabel, IonChip, IonCardContent } from '@ionic/react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-const StudentItem:React.FC<{student:any}> = ({ student }) => {
+const StudentItem:React.FC<{student:any, classroomID: string, removeStudentFromList:any}> = ({ student, classroomID, removeStudentFromList }) => {
 
     const remove=()=>{
-        console.log("remove clicked");
+        const answer=window.confirm(`are you sure you want to remove ${student.firstName} ${student.lastName}?`);
+        if(answer){
+            axios.delete(`/classrooms/removeStudent/${classroomID}/${student._id}`)
+            .then(response => {
+                removeStudentFromList(student._id);
+                window.alert(`${student.firstName} ${student.lastName} was removed from classroom`);
+            })
+            .catch(err=>{
+                window.alert('error in removing student');
+            })
+        }
+        else{
+            return;
+        }
     }
 
     return(

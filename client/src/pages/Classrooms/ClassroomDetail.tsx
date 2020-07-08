@@ -14,6 +14,7 @@ import { Classroom } from '../../models/Classroom';
 import StudentsEnrolled from './StudentsEnrolled/StudentsEnrolled';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Classrooms from './Classrooms';
 
 
 interface OwnProps extends RouteComponentProps {
@@ -190,7 +191,7 @@ const ClassroomDetail: React.FC<{ match: any, location: any }> = (props) => {
             </IonCol>
           </IonRow>
         </IonGrid>
-        <StudentsEnrolled studentList={classroom.enrolledStudents}></StudentsEnrolled>
+        <StudentsEnrolled students={classroom.enrolledStudents} classroomID={classroom._id}></StudentsEnrolled>
       </IonContent>
       <IonActionSheet
         isOpen={showActionSheet}
