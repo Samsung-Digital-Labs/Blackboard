@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   IonContent,
   IonHeader,
@@ -15,10 +15,22 @@ import {
 import { search } from "ionicons/icons";
 import "./searchbar.scss"
 
-const SearchBar: React.FC = () => {
+const SearchBar: React.FC = ({ tasks, setLocation }) => {
   const [searchText, setSearchText] = useState("");
   const [showSearchbar, setShowSearchbar] = useState<boolean>(false);
+  const [options, setOptions] = useState([]);
+  
+  useEffect(() => {
+   const opt = tasks;
+   setOptions(opt);
+  },[]);
 
+  const setAssignment = (a ,i) => {
+    setSearchText(a.name);
+    setShowSearchbar(false);
+    //console.log(searchText);
+    setLocation(a,i);
+  }
   return (
     <>
       <IonHeader translucent={true}>
@@ -35,10 +47,26 @@ const SearchBar: React.FC = () => {
               showCancelButton="always"
               placeholder="Search"
               autocomplete = "on"
+              value = {searchText}
               onIonChange={(e: CustomEvent) => setSearchText(e.detail.value)}
               onIonCancel={() => setShowSearchbar(false)}
             ></IonSearchbar>
           )}
+          {showSearchbar && (
+            <div>
+              {options.filter(({ name }) => name.substr(0,searchText.length) === searchText)
+                .map((a , i) => {
+                return <div
+                  onClick = {() => setAssignment(a,i)}
+                  key = {i}
+                  tabIndex = "0"
+                  >
+                  <span>{a.name}</span>
+                </div>
+              })}
+            </div>
+            )
+          }
           <IonButtons slot="end">
             {!showSearchbar && (
               <IonButton onClick={() => setShowSearchbar(true)}>

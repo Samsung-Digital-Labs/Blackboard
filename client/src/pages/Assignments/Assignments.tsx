@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
   IonItem,
   IonLabel,
@@ -154,15 +154,26 @@ const assignments: Assignment[] = [
 ];
 
 const Assignments: React.FC = () => {
+  const [location , setLocation ] = useState({});
   const ionItemSlidingRef = useRef<HTMLIonItemSlidingElement>(null);
-  const location = {
+
+  /*const location = {
     pathname: `/page/assignments/${assignments[0].id}`,
     assignment: assignments[0],
-  };
+  };*/
+
+  //Set route location from search bar
+  const handleLocation = (data, i) => {
+    const loc = {
+      pathname: `/page/assignments/${assignments[i].id}`,
+      assignment: data,
+    }
+    setLocation(loc);
+  }
 
   return (
     <>
-      <SearchBar></SearchBar>
+      <SearchBar tasks = {assignments} setLocation = {(data , i) => { handleLocation(data, i)}}/>
       <IonContent>
         <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
           {assignments.map((assignment) => (
