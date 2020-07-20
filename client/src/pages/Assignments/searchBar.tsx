@@ -15,7 +15,7 @@ import {
 import { search } from "ionicons/icons";
 import "./searchbar.scss"
 
-const SearchBar: React.FC = ({ tasks, setLocation }) => {
+const SearchBar: React.FC<{ tasks:any, setLocation:any }> = ({ tasks, setLocation }) => {
   const [searchText, setSearchText] = useState("");
   const [showSearchbar, setShowSearchbar] = useState<boolean>(false);
   const [options, setOptions] = useState([]);
@@ -25,7 +25,7 @@ const SearchBar: React.FC = ({ tasks, setLocation }) => {
    setOptions(opt);
   },[]);
 
-  const setAssignment = (a ,i) => {
+  const setAssignment = (a:any ,i:any) => {
     setSearchText(a.name);
     setShowSearchbar(false);
     //console.log(searchText);
@@ -54,12 +54,12 @@ const SearchBar: React.FC = ({ tasks, setLocation }) => {
           )}
           {showSearchbar && (
             <div>
-              {options.filter(({ name }) => name.substr(0,searchText.length) === searchText)
-                .map((a , i) => {
+              {options.filter(( option:any ) => option.name.substr(0,searchText.length) === searchText)
+                .map((a:any , i:any) => {
                 return <div
                   onClick = {() => setAssignment(a,i)}
                   key = {i}
-                  tabIndex = "0"
+                  tabIndex = {0}
                   >
                   <span>{a.name}</span>
                 </div>

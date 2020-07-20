@@ -163,7 +163,7 @@ const Assignments: React.FC = () => {
   };*/
 
   //Set route location from search bar
-  const handleLocation = (data, i) => {
+  const handleLocation = (data:any, i:any) => {
     const loc = {
       pathname: `/page/assignments/${assignments[i].id}`,
       assignment: data,
@@ -173,7 +173,7 @@ const Assignments: React.FC = () => {
 
   return (
     <>
-      <SearchBar tasks = {assignments} setLocation = {(data , i) => { handleLocation(data, i)}}/>
+      <SearchBar tasks = {assignments} setLocation = {(data:any , i:any) => { handleLocation(data, i)}}/>
       <IonContent>
         <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
           {assignments.map((assignment) => (
