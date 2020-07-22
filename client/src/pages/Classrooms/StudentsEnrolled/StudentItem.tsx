@@ -1,5 +1,5 @@
 import React,{Fragment} from 'react';
-import { IonCard, IonCardHeader, IonItem, IonAvatar, IonLabel, IonChip, IonCardContent, IonList } from '@ionic/react';
+import { IonCard, IonCardHeader, IonItem, IonAvatar, IonLabel, IonChip, IonCardContent } from '@ionic/react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -24,11 +24,11 @@ const StudentItem:React.FC<{student:any, classroomID: string, removeStudentFromL
 
     return(
         <Fragment>
-            <IonList>
+            <IonCard>
                 <IonCardContent>
                 <IonItem
-                    // detail={false}
-                    // lines="none"
+                    detail={false}
+                    lines="none"
                 >
                     <IonAvatar slot="start">
                     <img
@@ -43,7 +43,7 @@ const StudentItem:React.FC<{student:any, classroomID: string, removeStudentFromL
                     </IonLabel>
                 </IonItem>       
                 </IonCardContent>
-            </IonList>
+            </IonCard>
         </Fragment>
     );
 }

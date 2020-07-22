@@ -31,6 +31,8 @@ import {
   person,
   clipboardOutline,
   clipboard,
+  libraryOutline,
+  library,
 } from "ionicons/icons";
 import "./Menu.css";
 
@@ -78,10 +80,10 @@ const appPages: AppPage[] = [
     mdIcon: fileTrayFull,
   },
   {
-    title: "Attendance",
-    url: "/page/attendance",
-    iosIcon: clipboardOutline,
-    mdIcon: clipboard,
+    title: "Resouces",
+    url: "/page/resources",
+    iosIcon: libraryOutline,
+    mdIcon: library,
   },
   {
     title: "Queries",

@@ -81,21 +81,19 @@ const ClassroomDetail: React.FC<{ match: any; location: any }> = (props) => {
       {
         text: "Copy Link",
         handler: () => {
-          console.log("Copy Link clicked");
           navigator.clipboard.writeText(Classroom._id);
+          window.alert("Classroom ID copied to cliboard");
         },
       },
       {
         text: "Share via ...",
         handler: () => {
-          console.log("Share via clicked");
         },
       },
       {
         text: "Cancel",
         role: "cancel",
         handler: () => {
-          console.log("Cancel clicked");
         },
       },
     ]);

@@ -46,8 +46,8 @@ class JoinClassroom extends Component<Props,State>{
         // console.log("classroomID is "+this.state.classroomID);
         return(
             <div className="ion-text-center">
-                <h1>Join Classroom</h1>
-                <br></br>
+                {/* <h1>Join Classroom</h1> */}
+                {/* <br></br> */}
                 <IonGrid>
                     <IonRow className="ion-justify-content-center">
                         <IonCol sizeXs="12" sizeMd="6">

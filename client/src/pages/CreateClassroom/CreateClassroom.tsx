@@ -9,6 +9,7 @@ import {
   IonRow,
   IonButton,
   IonContent,
+  IonToast,
 } from "@ionic/react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -38,6 +39,7 @@ class CreateClassroom extends Component<Props, State> {
     };
   }
 
+
   create = () => {
     const classroom = {
       classroomName: this.state.classroomName,
@@ -51,6 +53,8 @@ class CreateClassroom extends Component<Props, State> {
     axios
       .post("/classrooms/create", classroom)
       .then((response) => {
+        navigator.clipboard.writeText(response.data["_id"]);
+        window.alert("Copied classroom ID to clibboard")
         this.props.history.push("/page/classrooms");
       })
       .catch((err) => {
@@ -60,10 +64,10 @@ class CreateClassroom extends Component<Props, State> {
   };
 
   render() {
-
     return (
       <IonContent className="ion-text-center">
-        <h1>Create Classroom</h1>        <IonGrid>
+        {/* <h1>Create Classroom</h1>{" "} */}
+        <IonGrid>
           <IonRow className="ion-justify-content-center">
             <IonCol sizeXs="12" sizeMd="6">
               <IonItem>
@@ -126,6 +130,7 @@ class CreateClassroom extends Component<Props, State> {
             Join Here
           </Link>
         </p>
+
       </IonContent>
     );
   }

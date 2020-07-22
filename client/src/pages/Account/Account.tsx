@@ -124,7 +124,8 @@ const Account: React.FC<Props> = (props) => {
               //   setPassword(data.password);
               const user={
                 email:user_email,
-                password:data.password
+                password:data.currentPassword,
+                newPassword:data.NewPassword
               }
 
               axios.put('/users/updatepassword',user)
@@ -132,7 +133,7 @@ const Account: React.FC<Props> = (props) => {
                 window.alert("password updated successfully");
               })
               .catch(err=>{
-                window.alert("error in updating password");
+                window.alert("Wrong Password!!");
               })
             },
           },
@@ -140,9 +141,15 @@ const Account: React.FC<Props> = (props) => {
         inputs={[
           {
             type: "password",
-            name: "password",
+            name: "currentPassword",
             value: '',
-            placeholder: "password",
+            placeholder: "Current Password",
+          },
+          {
+            type: "password",
+            name: "NewPassword",
+            value: '',
+            placeholder: "New Password",
           },
         ]}
         onDidDismiss={() => setShowAlert2(false)}

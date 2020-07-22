@@ -13,28 +13,31 @@ import {
   IonIcon,
 } from "@ionic/react";
 import { search } from "ionicons/icons";
-import "./searchbar.scss"
+import "./searchbar.scss";
 
-const SearchBar: React.FC<{ tasks:any, setLocation:any }> = ({ tasks, setLocation }) => {
+const SearchBar: React.FC<{ tasks: any; setLocation: any }> = ({
+  tasks,
+  setLocation,
+}) => {
   const [searchText, setSearchText] = useState("");
   const [showSearchbar, setShowSearchbar] = useState<boolean>(false);
   const [options, setOptions] = useState([]);
-  
-  useEffect(() => {
-   const opt = tasks;
-   setOptions(opt);
-  },[]);
 
-  const setAssignment = (a:any ,i:any) => {
+  useEffect(() => {
+    const opt = tasks;
+    setOptions(opt);
+  }, []);
+
+  const setAssignment = (a: any, i: any) => {
     setSearchText(a.name);
-    setShowSearchbar(false);
+    setShowSearchbar(false); 
     //console.log(searchText);
-    setLocation(a,i);
-  }
+    setLocation(a, i);
+  };
   return (
     <>
       <IonHeader translucent={true}>
-        <IonToolbar color = "primary">
+        <IonToolbar color="primary">
           {!showSearchbar && (
             <IonButtons slot="start">
               <IonMenuButton />
@@ -42,31 +45,37 @@ const SearchBar: React.FC<{ tasks:any, setLocation:any }> = ({ tasks, setLocatio
           )}
           {!showSearchbar && <IonTitle>assignments</IonTitle>}
           {showSearchbar && (
-            <IonSearchbar id = "noShadow"
-            color = "primary"
+            <IonSearchbar
+              id="noShadow"
+              color="primary"
               showCancelButton="always"
               placeholder="Search"
-              autocomplete = "on"
-              value = {searchText}
+              autocomplete="on"
+              value={searchText}
               onIonChange={(e: CustomEvent) => setSearchText(e.detail.value)}
               onIonCancel={() => setShowSearchbar(false)}
             ></IonSearchbar>
           )}
-          {showSearchbar && (
+          {/* {showSearchbar && (
             <div>
-              {options.filter(( option:any ) => option.name.substr(0,searchText.length) === searchText)
-                .map((a:any , i:any) => {
-                return <div
-                  onClick = {() => setAssignment(a,i)}
-                  key = {i}
-                  tabIndex = {0}
-                  >
-                  <span>{a.name}</span>
-                </div>
-              })}
+              {options
+                .filter(
+                  (option: any) =>
+                    option.name.substr(0, searchText.length) === searchText
+                )
+                .map((a: any, i: any) => {
+                  return (
+                    <div
+                      onClick={() => setAssignment(a, i)}
+                      key={i}
+                      tabIndex={0}
+                    >
+                      <span>{a.name}</span>
+                    </div>
+                  );
+                })}
             </div>
-            )
-          }
+          )} */}
           <IonButtons slot="end">
             {!showSearchbar && (
               <IonButton onClick={() => setShowSearchbar(true)}>
