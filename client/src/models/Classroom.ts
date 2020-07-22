@@ -4,7 +4,7 @@ export interface Classroom {
   subject: string,
   description: string,
   enrolledStudents: any,
-  teacher: string,
+  teacher: any,
   queries: any,
   announcements: any,
 

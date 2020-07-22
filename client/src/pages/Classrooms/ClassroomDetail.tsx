@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { RouteComponentProps } from "react-router";
+import { Clipboard } from "@ionic-native/clipboard/ngx";
 
 import "./ClassroomDetail.scss";
 
@@ -18,17 +19,10 @@ import {
   IonPage,
   IonModal,
   IonTextarea,
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonItem,
 } from "@ionic/react";
 import {
   callOutline,
   callSharp,
-  logoTwitter,
-  logoGithub,
-  logoInstagram,
   shareOutline,
   shareSharp,
   clipboard,
@@ -39,11 +33,10 @@ import {
 // import { connect } from '../data/connect';
 // import * as selectors from '../data/selectors';
 
-import { Classroom } from '../../models/Classroom';
-import StudentsEnrolled from './StudentsEnrolled/StudentsEnrolled';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-
+import { Classroom } from "../../models/Classroom";
+import StudentsEnrolled from "./StudentsEnrolled/StudentsEnrolled";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 interface OwnProps extends RouteComponentProps {
   param1: Classroom;
@@ -53,35 +46,9 @@ interface StateProps {}
 
 interface DispatchProps {}
 
-interface ClassroomDetailProps extends OwnProps, StateProps, DispatchProps {}
-
 const ClassroomDetail: React.FC<{ match: any; location: any }> = (props) => {
-  // console.log("params",props.match.params);
-  // console.log("classroom",props.location.classroom);
-  // const Classroom =   {
-  //   name: "Burt Bear",
-  //   profilePic: "/assets/img/speakers/bear.jpg",
-  //   instagram: "ionicframework",
-  //   twitter: "ionicframework",
-  //   about:
-  //     "Burt is a Bear. Burt's interests include poetry, dashing space heroes, and lions.",
-  //   title: "Software Engineer",
-  //   location: "Everywhere",
-  //   email: "burt@example.com",
-  //   phone: "+1-541-754-3010",
-  //   id: "1",
-
-  //   _id:"",
-  //   classroomName:"",
-  //   subject:"",
-  //   description:"",
-  //   enrolledStudents:[],
-  //   teacher:"",
-  //   queries:[],
-  //   announcements:[]
-  // };
   const classroom = props.location.classroom;
-  // console.log(classroom);
+  console.log(classroom);
   const [showActionSheet, setShowActionSheet] = useState(false);
   const [actionSheetButtons, setActionSheetButtons] = useState<
     ActionSheetButton[]
@@ -99,12 +66,12 @@ const ClassroomDetail: React.FC<{ match: any; location: any }> = (props) => {
     // console.log("anouncement is ",announcement);
     axios
       .put("/classrooms/announcement", announcement)
-      .then((response) => {
+      .then(() => {
         window.alert("announcement posted");
         setText("");
         setShowModal(false);
       })
-      .catch((err) => {
+      .catch(() => {
         window.alert("error in posting announcement");
       });
   };
@@ -115,6 +82,7 @@ const ClassroomDetail: React.FC<{ match: any; location: any }> = (props) => {
         text: "Copy Link",
         handler: () => {
           console.log("Copy Link clicked");
+          navigator.clipboard.writeText(Classroom._id);
         },
       },
       {
@@ -131,16 +99,16 @@ const ClassroomDetail: React.FC<{ match: any; location: any }> = (props) => {
         },
       },
     ]);
-    setActionSheetHeader(`Share ${Classroom.name}`);
+    setActionSheetHeader(`Share ${Classroom.classroomName}`);
     setShowActionSheet(true);
   }
 
   function openContact(Classroom: Classroom) {
     setActionSheetButtons([
       {
-        text: `Email ( ${Classroom.email} )`,
+        text: `Email ( ${Classroom.teacher.email} )`,
         handler: () => {
-          window.open("mailto:" + Classroom.email);
+          window.open("mailto:" + Classroom.teacher.email);
         },
       },
       {
@@ -150,7 +118,7 @@ const ClassroomDetail: React.FC<{ match: any; location: any }> = (props) => {
         },
       },
     ]);
-    setActionSheetHeader(`Contact ${Classroom.name}`);
+    setActionSheetHeader(`Contact ${Classroom.teacher.firstName}`);
     setShowActionSheet(true);
   }
 
@@ -213,9 +181,7 @@ const ClassroomDetail: React.FC<{ match: any; location: any }> = (props) => {
           </IonChip>
 
           <Link to={`/announcements/${classroom._id}`} className="noUnderline">
-            <IonChip
-              color="success"
-            >
+            <IonChip color="success">
               <IonIcon icon={notifications}></IonIcon>
               <IonLabel>Announcements</IonLabel>
             </IonChip>
@@ -230,7 +196,10 @@ const ClassroomDetail: React.FC<{ match: any; location: any }> = (props) => {
             <IonLabel>Attendance</IonLabel>
           </IonChip>
         </div>
-        <StudentsEnrolled students={classroom.enrolledStudents} classroomID={classroom._id}></StudentsEnrolled>
+        <StudentsEnrolled
+          students={classroom.enrolledStudents}
+          classroomID={classroom._id}
+        ></StudentsEnrolled>
       </IonContent>
       <IonActionSheet
         isOpen={showActionSheet}

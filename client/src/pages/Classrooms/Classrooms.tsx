@@ -269,17 +269,17 @@ const Classrooms: React.FC<Props> = (props) => {
 
   return (
     <IonContent fullscreen={true} id="classroom-list">
-        <IonSegment
-          value={segment}
-          onIonChange={(e) => setSegment(e.detail.value as any)}
-        >
-          <IonSegmentButton value="enrolled">
-            <IonLabel>Enrolled</IonLabel>
-          </IonSegmentButton>
-          <IonSegmentButton value="my">
-            <IonLabel>My Rooms</IonLabel>
-          </IonSegmentButton>
-        </IonSegment>
+      <IonSegment
+        value={segment}
+        onIonChange={(e) => setSegment(e.detail.value as any)}
+      >
+        <IonSegmentButton value="enrolled">
+          <IonLabel>Enrolled</IonLabel>
+        </IonSegmentButton>
+        <IonSegmentButton value="my">
+          <IonLabel>My Rooms</IonLabel>
+        </IonSegmentButton>
+      </IonSegment>
       <IonRefresher slot="fixed" ref={ionRefresherRef} onIonRefresh={doRefresh}>
         <IonRefresherContent />
       </IonRefresher>
