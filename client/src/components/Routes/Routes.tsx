@@ -22,7 +22,7 @@ const Routes: React.FC = () => {
       <IonSplitPane contentId="main">
         <Menu />
         <IonRouterOutlet id="main">
-          <Switch>
+          {/* <Switch> */}
             <Route path="/" component={Welcome} exact />
             <Route path="/signup" component={Signup} exact />
             <Route path="/login" component={Login} exact />
@@ -36,15 +36,13 @@ const Routes: React.FC = () => {
               component={AssignmentDetail}
               exact
             />
-            <Route path="/page/assignments" component={Assignments} exact />
-            {/* <Route path="/page/classrooms" component={Classrooms} exact /> */}
             <Route
               path="/announcements/:classroomID"
               component={Announcements}
               exact
             ></Route>
             <PrivateRoute path="/page/:name" component={Page} exact />
-          </Switch>
+          {/* </Switch> */}
         </IonRouterOutlet>
       </IonSplitPane>
     </IonReactRouter>

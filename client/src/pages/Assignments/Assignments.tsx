@@ -154,7 +154,7 @@ const assignments: Assignment[] = [
 ];
 
 const Assignments: React.FC = () => {
-  const [location , setLocation ] = useState({});
+  const [location, setLocation] = useState({});
   const ionItemSlidingRef = useRef<HTMLIonItemSlidingElement>(null);
 
   /*const location = {
@@ -163,17 +163,22 @@ const Assignments: React.FC = () => {
   };*/
 
   //Set route location from search bar
-  const handleLocation = (data:any, i:any) => {
+  const handleLocation = (data: any, i: any) => {
     const loc = {
       pathname: `/page/assignments/${assignments[i].id}`,
       assignment: data,
-    }
+    };
     setLocation(loc);
-  }
+  };
 
   return (
     <>
-      <SearchBar tasks = {assignments} setLocation = {(data:any , i:any) => { handleLocation(data, i)}}/>
+      <SearchBar
+        tasks={assignments}
+        setLocation={(data: any, i: any) => {
+          handleLocation(data, i);
+        }}
+      />
       <IonContent>
         <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
           {assignments.map((assignment) => (

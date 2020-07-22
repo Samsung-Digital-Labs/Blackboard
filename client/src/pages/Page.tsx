@@ -14,19 +14,19 @@ import "./Page.css";
 
 const Page: React.FC = () => {
   const { name } = useParams<{ name: string }>();
-  if (name === "assignments")
-    return(null);
   return (
     <IonPage>
       {/* Header and menu button */}
-      <IonHeader>
-        <IonToolbar color = "primary">
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>{name}</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      {name !== "assignments" && (
+        <IonHeader>
+          <IonToolbar color="primary">
+            <IonButtons slot="start">
+              <IonMenuButton />
+            </IonButtons>
+            <IonTitle>{name}</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+      )}
 
       {/* Contains the actual content */}
       <IonContent>
