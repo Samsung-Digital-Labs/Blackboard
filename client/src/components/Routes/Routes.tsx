@@ -36,8 +36,6 @@ const Routes: React.FC = () => {
               component={AssignmentDetail}
               exact
             />
-            <Route path="/page/assignments" component={Assignments} exact />
-            {/* <Route path="/page/classrooms" component={Classrooms} exact /> */}
             <Route
               path="/announcements/:classroomID"
               component={Announcements}
