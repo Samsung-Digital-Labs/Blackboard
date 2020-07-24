@@ -78,6 +78,12 @@ const Account: React.FC<Props> = (props) => {
                 firstName:data.firstName,
                 lastName:data.lastName
               }
+              
+              if(!user.firstName || !user.lastName)
+              {
+                window.alert("please enter all fields");
+                return;
+              }
 
               axios.put('/users/updatename',user)
               .then(response=>{
@@ -126,6 +132,12 @@ const Account: React.FC<Props> = (props) => {
                 email:user_email,
                 password:data.currentPassword,
                 newPassword:data.NewPassword
+              }
+
+              if(!user.password || !user.newPassword)
+              {
+                window.alert("please enter all fields");
+                return;
               }
 
               axios.put('/users/updatepassword',user)

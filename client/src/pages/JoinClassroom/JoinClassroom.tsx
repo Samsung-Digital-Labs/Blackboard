@@ -29,6 +29,12 @@ class JoinClassroom extends Component<Props,State>{
             classroomID:this.state.classroomID
         }
 
+        if(!this.state.classroomID)
+        {
+            window.alert("please enter classroom ID");
+            return;
+        }
+        
         // api request
         axios.put("/classrooms/join",object)
         .then(response=>{

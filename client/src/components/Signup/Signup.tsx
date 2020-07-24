@@ -48,6 +48,12 @@ class Signup extends Component<Props, State> {
       password: this.state.password,
     };
 
+    if(!this.state.firstName || !this.state.lastName || !this.state.email || !this.state.password)
+    {
+      window.alert("please enter all fields");
+      return;
+    }
+
     // API post request to create an account
     axios.post("/users/signup", user).then(
       (response) => {

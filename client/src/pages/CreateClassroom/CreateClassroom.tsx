@@ -49,6 +49,12 @@ class CreateClassroom extends Component<Props, State> {
       phone: this.state.phone,
     };
 
+    if(!this.state.classroomName || !this.state.subject)
+    {
+      window.alert("classroom name and subject are mandatory fields!");
+      return;
+    }
+
     // api request
     axios
       .post("/classrooms/create", classroom)

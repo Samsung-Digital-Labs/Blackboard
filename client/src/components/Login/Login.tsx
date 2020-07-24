@@ -44,6 +44,11 @@ class Login extends Component<Props, State> {
       password: this.state.password,
     };
 
+    if(!this.state.email || !this.state.password){
+      window.alert("please enter all fields");
+      return;
+    }
+
     // API request
     axios.post("/users/login", user).then(
       (response: any) => {

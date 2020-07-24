@@ -63,6 +63,13 @@ const ClassroomDetail: React.FC<{ match: any; location: any }> = (props) => {
       userID: classroom.teacher._id,
       classroomID: classroom._id,
     };
+
+    if(!announcement.announcement)
+    {
+      window.alert("please enter announcement");
+      return;
+    }
+
     // console.log("anouncement is ",announcement);
     axios
       .put("/classrooms/announcement", announcement)
